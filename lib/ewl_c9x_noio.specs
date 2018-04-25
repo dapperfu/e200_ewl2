@@ -1,0 +1,7 @@
+%rename cpp_unique_options old_cpp_unique_options
+
+*cpp_unique_options:
+%(old_cpp_unique_options) -nostdinc -include lib_c99.prefix
+
+*link_gcc_c_sequence:
+--start-group -lc99 -lm -lgcc -lrt --end-group
