@@ -22,29 +22,27 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 
-int_t _EWL_CDECL (wmemcmp)(const wchar_t * src1, const wchar_t * src2, size_t n)
-{
-	uint_t diff = 0u;
+int_t _EWL_CDECL(wmemcmp)(const wchar_t *src1, const wchar_t *src2, size_t n) {
+  uint_t diff = 0u;
 
-	while (n) {
-		MISRA_EXCEPTION_RULE_10_1()
-		diff = (*src1 - *src2);
-		if (diff) {
-			break;
-		}
-		src1++;
-		src2++;
-		n--;
-	}
+  while (n) {
+    MISRA_EXCEPTION_RULE_10_1()
+    diff = (*src1 - *src2);
+    if (diff) {
+      break;
+    }
+    src1++;
+    src2++;
+    n--;
+  }
 
-	return (int_t)diff;
+  return (int_t)diff;
 }
 
 #endif /* #if _EWL_WIDE_CHAR */
-

@@ -10,9 +10,9 @@
 
 #include <valarray>
 
-#ifndef _EWL_NO_CPP_NAMESPACE 
-	using std::valarray;
-	using std::slice;
-	using std::gslice;
-#endif  // _EWL_NO_CPP_NAMESPACE
-#endif  // _VALARRAY_H
+#ifndef _EWL_NO_CPP_NAMESPACE
+using std::gslice;
+using std::slice;
+using std::valarray;
+#endif // _EWL_NO_CPP_NAMESPACE
+#endif // _VALARRAY_H

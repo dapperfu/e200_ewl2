@@ -25,21 +25,21 @@
 #include <ewl_t.h>
 
 #if defined(__m56800__)
-	#include <dsp/m56800_math.h>
+#include <dsp/m56800_math.h>
 #elif defined(__m56800E__)
-	#include <dsc/dsc_math.h>
+#include <dsc/dsc_math.h>
 #elif defined(__arm) || defined(__arm__)
-	#include <arm/math.ARM.h>
+#include <arm/math.ARM.h>
 #elif defined(__POWERPC__)
-	#include <pa/math.ppc.h>
-#elif __dest_os ==  __emb_coldfire
-	#include <coldfire/math.cf.h>
+#include <pa/math.ppc.h>
+#elif __dest_os == __emb_coldfire
+#include <coldfire/math.cf.h>
 #elif defined(__STARCORE__)
-	# include <sc/math_StarCore.h>
+#include <sc/math_StarCore.h>
 #elif defined(__HC12__)
-	# include <s12z/math.s12z.h>
+#include <s12z/math.s12z.h>
 #else
-	#error "Unsupported platform"
+#error "Unsupported platform"
 #endif
 
 #endif /* _EWL_MATH_CONFIG_H */

@@ -15,28 +15,27 @@
 #include <wchar_t.h>
 
 #ifdef __CWCC__
-	#if __CWCC__ >= 0x3200
-		#pragma implements_std_header("wctype.h")
-	#endif /* __CWCC__ >= 0x3200 */
+#if __CWCC__ >= 0x3200
+#pragma implements_std_header("wctype.h")
+#endif /* __CWCC__ >= 0x3200 */
 #endif /* __CWCC__ */
 
 _EWL_BEGIN_NAMESPACE_STD
 _EWL_BEGIN_EXTERN_C
 
-
 #if !defined(_AEABI_PORTABILITY_LEVEL) || _AEABI_PORTABILITY_LEVEL == 0
 
-	typedef wchar_t wctrans_t;
+typedef wchar_t wctrans_t;
 
 #else
 
-	#define _AEABI_PORTABLE 1
-	typedef void * wctrans_t;
+#define _AEABI_PORTABLE 1
+typedef void *wctrans_t;
 
 #endif
 
-	_EWL_IMP_EXP_C    wint_t _EWL_CDECL	towctrans(wint_t , wctrans_t ) _EWL_CANT_THROW;
-	_EWL_IMP_EXP_C wctrans_t _EWL_CDECL	wctrans(const char *) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C wint_t _EWL_CDECL towctrans(wint_t, wctrans_t) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C wctrans_t _EWL_CDECL wctrans(const char *) _EWL_CANT_THROW;
 
 _EWL_END_EXTERN_C
 _EWL_END_NAMESPACE_STD

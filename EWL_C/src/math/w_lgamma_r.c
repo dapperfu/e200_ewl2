@@ -22,25 +22,28 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL lgamma_r(f64_t x, int32_t *signgamp) /* wrapper lgamma_r */
+f64_t _EWL_MATH_CDECL lgamma_r(f64_t x,
+                               int32_t *signgamp) /* wrapper lgamma_r */
 #else
-	f64_t lgamma_r(x,signgamp)              /* wrapper lgamma_r */
-        f64_t x; int32_t *signgamp;
+f64_t lgamma_r(x, signgamp) /* wrapper lgamma_r */
+    f64_t x;
+int32_t *signgamp;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_lgamma_r(x,signgamp);
+  return __ieee754_lgamma_r(x, signgamp);
 #else
-        f64_t y;
-        y = __ieee754_lgamma_r(x,signgamp);
-        if(_LIB_VERSION == _IEEE_) return y;
-        if(!isfinite(y)&&isfinite(x)) {
-            if(floor(x)==x&&x<=0.0)
-                return __kernel_standard(x,x,15); /* lgamma pole */
-            else
-                return __kernel_standard(x,x,14); /* lgamma overflow */
-        } else
-            return y;
+  f64_t y;
+  y = __ieee754_lgamma_r(x, signgamp);
+  if (_LIB_VERSION == _IEEE_)
+    return y;
+  if (!isfinite(y) && isfinite(x)) {
+    if (floor(x) == x && x <= 0.0)
+      return __kernel_standard(x, x, 15); /* lgamma pole */
+    else
+      return __kernel_standard(x, x, 14); /* lgamma overflow */
+  } else
+    return y;
 #endif
 }
 

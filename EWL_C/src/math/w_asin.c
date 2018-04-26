@@ -24,22 +24,23 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL asin(f64_t x)		/* wrapper asin */
+f64_t _EWL_MATH_CDECL asin(f64_t x) /* wrapper asin */
 #else
-	f64_t asin(x)			/* wrapper asin */
-	f64_t x;
+f64_t asin(x) /* wrapper asin */
+    f64_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_asin(x);
+  return __ieee754_asin(x);
 #else
-	f64_t z;
-	z = __ieee754_asin(x);
-	if(_LIB_VERSION == _IEEE_ || isnan(x)) return z;
-	if(fabs(x)>1.0) {
-	        return __kernel_standard(x,x,2); /* asin(|x|>1) */
-	} else
-	    return z;
+  f64_t z;
+  z = __ieee754_asin(x);
+  if (_LIB_VERSION == _IEEE_ || isnan(x))
+    return z;
+  if (fabs(x) > 1.0) {
+    return __kernel_standard(x, x, 2); /* asin(|x|>1) */
+  } else
+    return z;
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

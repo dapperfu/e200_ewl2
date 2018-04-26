@@ -12,40 +12,40 @@
 
 namespace std {
 
-	using ::size_t;
+using ::size_t;
 
 #if _EWL_CLOCK_T_AVAILABLE
-	using ::clock_t;
+using ::clock_t;
 #endif /* _EWL_CLOCK_T_AVAILABLE */
 
 #if _EWL_TIME_T_AVAILABLE
-	using ::time_t;
+using ::time_t;
 #endif /* _EWL_TIME_T_AVAILABLE */
 
 #if _EWL_FLOATING_POINT
-	using ::difftime;
+using ::difftime;
 #endif /* _EWL_FLOATING_POINT */
 
 #if _EWL_OS_TIME_SUPPORT
-	using ::tm;
-	using ::clock;
-	using ::gmtime;
-	using ::time;
-	using ::asctime;
-	using ::ctime;
-	using ::localtime;
-	using ::mktime;
-	using ::strftime;
+using ::asctime;
+using ::clock;
+using ::ctime;
+using ::gmtime;
+using ::localtime;
+using ::mktime;
+using ::strftime;
+using ::time;
+using ::tm;
 
 #if defined(__STDC_WANT_LIB_EXT1__) && __STDC_WANT_LIB_EXT1__
-	using ::errno_t;
-	using ::rsize_t;
-	using ::asctime_s;
-	using ::ctime_s;
-	using ::gmtime_s;
-	using ::localtime_s;
-#endif /* __STDC_WANT_LIB_EXT1__ */	
-	
+using ::asctime_s;
+using ::ctime_s;
+using ::errno_t;
+using ::gmtime_s;
+using ::localtime_s;
+using ::rsize_t;
+#endif /* __STDC_WANT_LIB_EXT1__ */
+
 #endif /* _EWL_OS_TIME_SUPPORT */
 
 } /* namespace std */

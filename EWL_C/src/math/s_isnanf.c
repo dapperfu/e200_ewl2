@@ -30,16 +30,15 @@ __RCSID("$NetBSD: s_isnanf.c,v 1.5 1997/10/09 11:32:30 lukem Exp $");
  */
 
 #ifdef __STDC__
-	int_t isnanf(f32_t x)
+int_t isnanf(f32_t x)
 #else
-	int_t isnanf(x)
-	f32_t x;
+int_t isnanf(x) f32_t x;
 #endif
 {
-	uint32_t ix;
-	GET_FLOAT_UWORD(ix,x);
-	ix &= 0x7fffffffUL;
-	ix = (0x7f800000UL - ix)>>31;
-	return (int_t)ix;
+  uint32_t ix;
+  GET_FLOAT_UWORD(ix, x);
+  ix &= 0x7fffffffUL;
+  ix = (0x7f800000UL - ix) >> 31;
+  return (int_t)ix;
 }
 #endif /* _EWL_FLOATING_POINT  */

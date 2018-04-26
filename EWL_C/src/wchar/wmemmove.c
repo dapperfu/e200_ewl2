@@ -23,16 +23,14 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 
-wchar_t * _EWL_CDECL (wmemmove)(wchar_t * dst, const wchar_t * src, size_t n)
-{
-	return memmove(dst, src, n * sizeof(wchar_t));
+wchar_t *_EWL_CDECL(wmemmove)(wchar_t *dst, const wchar_t *src, size_t n) {
+  return memmove(dst, src, n * sizeof(wchar_t));
 }
 
 #endif /* #if _EWL_WIDE_CHAR */
-

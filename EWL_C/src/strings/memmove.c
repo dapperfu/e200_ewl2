@@ -21,88 +21,80 @@ _MISRA_RESTORE()
 #define __STDC_WANT_LIB_EXT1__ 1
 
 #include <ewl_misra_types.h>
-#include <string.h>
 #include <mem_funcs.h>
+#include <string.h>
 
 #if !_EMBEDDED_WARRIOR_MEMFUNCS
 
-void * (memmove)(void * dst, const void * src, size_t n)
-{
-	const	char_t * p;
-			char_t * q;
-			MISRA_EXCEPTION_RULE_11_3()
-			int_t	rev = ((uint32_t) src < (uint32_t) dst);
+void *(memmove)(void *dst, const void *src, size_t n) {
+  const char_t *p;
+  char_t *q;
+  MISRA_EXCEPTION_RULE_11_3()
+  int_t rev = ((uint32_t)src < (uint32_t)dst);
 
-		#if !defined(__MIPS__) \
-		    && !defined(__SH__) \
-		    && !defined(__MCORE__) \
-		    && !defined(__COLDFIRE__) \
-		    && !defined(__HC12__) \
-		    && !defined(__arm) \
-		    && !defined(__arm__) \
-		    && !defined(__m56800__) \
-		    && !defined(__m56800E__)
+#if !defined(__MIPS__) && !defined(__SH__) && !defined(__MCORE__) &&           \
+    !defined(__COLDFIRE__) && !defined(__HC12__) && !defined(__arm) &&         \
+    !defined(__arm__) && !defined(__m56800__) && !defined(__m56800E__)
 
-			if (n >= (size_t)_EWL_LONG_COPY_MIN) {
-				MISRA_EXCEPTION_RULE_11_3()
-				MISRA_EXCEPTION_RULE_12_7()
-				if ((((int_t) dst ^ (int_t) src)) & 3) {
-					if (!rev) {
-						__copy_longs_unaligned(dst, src, n);
-					} else {
-						__copy_longs_rev_unaligned(dst, src, n);
-					}
-				} else {
-					if (!rev) {
-						__copy_longs_aligned(dst, src, n);
-					} else {
-						__copy_longs_rev_aligned(dst, src, n);
-					}
-				}
-	
-				MISRA_EXCEPTION_RULE_14_7()
-				return(dst);
-			}
+  if (n >= (size_t)_EWL_LONG_COPY_MIN) {
+    MISRA_EXCEPTION_RULE_11_3()
+    MISRA_EXCEPTION_RULE_12_7()
+    if ((((int_t)dst ^ (int_t)src)) & 3) {
+      if (!rev) {
+        __copy_longs_unaligned(dst, src, n);
+      } else {
+        __copy_longs_rev_unaligned(dst, src, n);
+      }
+    } else {
+      if (!rev) {
+        __copy_longs_aligned(dst, src, n);
+      } else {
+        __copy_longs_rev_aligned(dst, src, n);
+      }
+    }
 
-		#endif
+    MISRA_EXCEPTION_RULE_14_7()
+    return (dst);
+  }
 
-		if (!rev) {
+#endif
 
-			#if !defined(__POWERPC__)
+  if (!rev) {
 
-				p = src; q = dst;
-				for (n++; --n;) {
-					*q++ = *p++;
-				}
+#if !defined(__POWERPC__)
 
-			#else
+    p = src;
+    q = dst;
+    for (n++; --n;) {
+      *q++ = *p++;
+    }
 
-				p = (const char_t *) src - 1;
-				q = (char_t *) dst - 1;
-				for (n++; --n;) {
-					*++q = *++p;
-				}
+#else
 
-			#endif
+    p = (const char_t *)src - 1;
+    q = (char_t *)dst - 1;
+    for (n++; --n;) {
+      *++q = *++p;
+    }
 
-		} else {
-			p = (const char_t *) src + n;
-			q = (char_t *) dst + n;
-			for (n++; --n;) {
-				*--q = *--p;
-			}
-		}
+#endif
 
-	return(dst);
+  } else {
+    p = (const char_t *)src + n;
+    q = (char_t *)dst + n;
+    for (n++; --n;) {
+      *--q = *--p;
+    }
+  }
+
+  return (dst);
 }
 
 #else
 
-void *(memmove)(void * dst, const void * src, size_t n)
-{
-	__move_mem(dst, src, n);
-	return dst;
+void *(memmove)(void *dst, const void *src, size_t n) {
+  __move_mem(dst, src, n);
+  return dst;
 }
 
 #endif /* _EMBEDDED_WARRIOR_MEMFUNCS */
-

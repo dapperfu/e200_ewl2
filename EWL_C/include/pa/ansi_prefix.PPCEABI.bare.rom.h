@@ -15,5 +15,5 @@
 #endif /* __ansi_prefix_PPCEABI_bare_rom__ */
 
 /*  Change Record
- *	020329 MEA Created from previous version 
+ *	020329 MEA Created from previous version
  */

@@ -5,14 +5,13 @@
  * $Revision: 1.1 $
  */
 
-
 #ifndef _DEQUE_H
 #define _DEQUE_H
 
 #include <deque>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::deque;
+using std::deque;
 #endif
 
-#endif  // _DEQUE_H
+#endif // _DEQUE_H

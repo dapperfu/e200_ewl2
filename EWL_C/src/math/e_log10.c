@@ -57,84 +57,84 @@ static const f64_t
 #else
 static f64_t
 #endif
-two54      =  1.80143985094819840000e+16, /* 0x43500000, 0x00000000 */
-ivln10     =  4.34294481903251816668e-01, /* 0x3FDBCB7B, 0x1526E50E */
-log10_2hi  =  3.01029995663611771306e-01, /* 0x3FD34413, 0x509F6000 */
-log10_2lo  =  3.69423907715893078616e-13; /* 0x3D59FEF3, 0x11F12B36 */
+    two54 = 1.80143985094819840000e+16,     /* 0x43500000, 0x00000000 */
+    ivln10 = 4.34294481903251816668e-01,    /* 0x3FDBCB7B, 0x1526E50E */
+    log10_2hi = 3.01029995663611771306e-01, /* 0x3FD34413, 0x509F6000 */
+    log10_2lo = 3.69423907715893078616e-13; /* 0x3D59FEF3, 0x11F12B36 */
 
-static f64_t zero   =  0.0;
+static f64_t zero = 0.0;
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL __ieee754_log10(f64_t x)
+f64_t _EWL_MATH_CDECL __ieee754_log10(f64_t x)
 #else
-	f64_t __ieee754_log10(x)
-	f64_t x;
+f64_t __ieee754_log10(x) f64_t x;
 #endif
 {
-	f64_t y,z;
-	int32_t i,k,hx;
-	uint32_t lx;
+  f64_t y, z;
+  int32_t i, k, hx;
+  uint32_t lx;
 
-	hx = GET_DOUBLE_HI_WORD(x);	/* high word of x */
-	lx = GET_DOUBLE_ULO_WORD(x);	/* low word of x */
+  hx = GET_DOUBLE_HI_WORD(x);  /* high word of x */
+  lx = GET_DOUBLE_ULO_WORD(x); /* low word of x */
 
-    k=0;
-    if (hx < 0x00100000L) {                  /* x < 2**-1022  */
-        if ((((uint32_t)hx&0x7fffffffUL)|lx)==0UL)	/* range error may occur */
-        {
-			#if _EWL_C99
-				MISRA_EXCEPTION_RULE_13_7()
-				if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
-					MISRA_EXCEPTION_RULE_20_5()
-					errno=ERANGE;
-				}
-			#else
-	        	#ifdef __STDC__
-		        	MISRA_EXCEPTION_RULE_20_5()
-		        	errno=ERANGE ;
-	        	#endif
-			#endif
-			MISRA_EXCEPTION_RULE_14_7()
-            return -two54/zero;             /* log(+-0)=-inf */
-        }
-        if (hx<0L)
-        {
-			#if _EWL_C99
-				MISRA_EXCEPTION_RULE_13_7()
-				if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
-					MISRA_EXCEPTION_RULE_20_5()
-					errno=EDOM;
-				}
-				MISRA_EXCEPTION_RULE_13_7()
-				if ((uint_t)math_errhandling & (uint_t)MATH_ERREXCEPT) {
-					MISRA_EXCEPTION_RULE_20_5()
-					feraiseexcept((int_t)FE_INVALID);
-				}
-			#else	
-				#ifdef __STDC__
-		        	MISRA_EXCEPTION_RULE_20_5()
-					errno=EDOM ;
-				#endif
-			#endif
-			MISRA_EXCEPTION_RULE_14_7()
-			return (x-x)/zero;        /* log(-#) = NaN */
-          }
-        k -= 54L; x *= two54; /* subnormal number, scale up x */
-        hx = GET_DOUBLE_HI_WORD(x);                /* high word of x */
+  k = 0;
+  if (hx < 0x00100000L) {                            /* x < 2**-1022  */
+    if ((((uint32_t)hx & 0x7fffffffUL) | lx) == 0UL) /* range error may occur */
+    {
+#if _EWL_C99
+      MISRA_EXCEPTION_RULE_13_7()
+      if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
+        MISRA_EXCEPTION_RULE_20_5()
+        errno = ERANGE;
+      }
+#else
+#ifdef __STDC__
+      MISRA_EXCEPTION_RULE_20_5()
+      errno = ERANGE;
+#endif
+#endif
+      MISRA_EXCEPTION_RULE_14_7()
+      return -two54 / zero; /* log(+-0)=-inf */
     }
-	if (hx >= 0x7ff00000L) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return x+x;
-	}
-	MISRA_EXCEPTION_RULE_12_7()
-	k += (hx>>20)-1023L;
-	i  = (int32_t)(((uint32_t)k&0x80000000UL)!=0UL);
-	MISRA_EXCEPTION_RULE_10_3()
-    hx = (int32_t)(((uint32_t)hx&0x000fffffUL)|((0x3ffUL-(uint32_t)i)<<20));
-    k = k+i;
-    y  = (f64_t)k;
-    GET_DOUBLE_HI_WORD(x) = hx;
-	z  = (y*log10_2lo) + (ivln10*log(x));
-	return  z+(y*log10_2hi);
+    if (hx < 0L) {
+#if _EWL_C99
+      MISRA_EXCEPTION_RULE_13_7()
+      if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
+        MISRA_EXCEPTION_RULE_20_5()
+        errno = EDOM;
+      }
+      MISRA_EXCEPTION_RULE_13_7()
+      if ((uint_t)math_errhandling & (uint_t)MATH_ERREXCEPT) {
+        MISRA_EXCEPTION_RULE_20_5()
+        feraiseexcept((int_t)FE_INVALID);
+      }
+#else
+#ifdef __STDC__
+      MISRA_EXCEPTION_RULE_20_5()
+      errno = EDOM;
+#endif
+#endif
+      MISRA_EXCEPTION_RULE_14_7()
+      return (x - x) / zero; /* log(-#) = NaN */
+    }
+    k -= 54L;
+    x *= two54;                 /* subnormal number, scale up x */
+    hx = GET_DOUBLE_HI_WORD(x); /* high word of x */
+  }
+  if (hx >= 0x7ff00000L) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return x + x;
+  }
+  MISRA_EXCEPTION_RULE_12_7()
+  k += (hx >> 20) - 1023L;
+  i = (int32_t)(((uint32_t)k & 0x80000000UL) != 0UL);
+  MISRA_EXCEPTION_RULE_10_3()
+  hx = (int32_t)(((uint32_t)hx & 0x000fffffUL) |
+                 ((0x3ffUL - (uint32_t)i) << 20));
+  k = k + i;
+  y = (f64_t)k;
+  GET_DOUBLE_HI_WORD(x) = hx;
+  z = (y * log10_2lo) + (ivln10 * log(x));
+  return z + (y * log10_2hi);
 }
 #endif /* _EWL_FLOATING_POINT  */

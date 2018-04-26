@@ -46,73 +46,72 @@ static f64_t one = 1.0, big = 1e300;
 static f64_t zero = 0.0;
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL __ieee754_atanh(f64_t x)
+f64_t _EWL_MATH_CDECL __ieee754_atanh(f64_t x)
 #else
-	f64_t __ieee754_atanh(x)
-	f64_t x;
+f64_t __ieee754_atanh(x) f64_t x;
 #endif
 {
-	f64_t t;
-	int32_t hx,ix;
-	uint32_t lx;
-	hx = GET_DOUBLE_HI_WORD(x);		/* high word */
-	lx = GET_DOUBLE_ULO_WORD(x);		/* low word */
-	MISRA_EXCEPTION_RULE_12_7()
-	ix = hx&0x7fffffffL;
-	MISRA_EXCEPTION_RULE_10_3()
-	if (((uint32_t)ix|((lx|(uint32_t)(-(int32_t)lx))>>31))>0x3ff00000UL) /* |x|>1 */
-	{
-		#if _EWL_C99
-			MISRA_EXCEPTION_RULE_13_7()
-			if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
-				MISRA_EXCEPTION_RULE_20_5()
-				errno=EDOM;
-			}
-			MISRA_EXCEPTION_RULE_13_7()
-			if ((uint_t)math_errhandling & (uint_t)MATH_ERREXCEPT) {
-				MISRA_EXCEPTION_RULE_20_5()
-				feraiseexcept((int_t)FE_INVALID);
-			}		
-		#else
-			MISRA_EXCEPTION_RULE_20_5()
-			errno=EDOM;			
-        #endif
-		MISRA_EXCEPTION_RULE_14_7()
-	    return NaN;
-	}
+  f64_t t;
+  int32_t hx, ix;
+  uint32_t lx;
+  hx = GET_DOUBLE_HI_WORD(x);  /* high word */
+  lx = GET_DOUBLE_ULO_WORD(x); /* low word */
+  MISRA_EXCEPTION_RULE_12_7()
+  ix = hx & 0x7fffffffL;
+  MISRA_EXCEPTION_RULE_10_3()
+  if (((uint32_t)ix | ((lx | (uint32_t)(-(int32_t)lx)) >> 31)) >
+      0x3ff00000UL) /* |x|>1 */
+  {
+#if _EWL_C99
+    MISRA_EXCEPTION_RULE_13_7()
+    if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
+      MISRA_EXCEPTION_RULE_20_5()
+      errno = EDOM;
+    }
+    MISRA_EXCEPTION_RULE_13_7()
+    if ((uint_t)math_errhandling & (uint_t)MATH_ERREXCEPT) {
+      MISRA_EXCEPTION_RULE_20_5()
+      feraiseexcept((int_t)FE_INVALID);
+    }
+#else
+    MISRA_EXCEPTION_RULE_20_5()
+    errno = EDOM;
+#endif
+    MISRA_EXCEPTION_RULE_14_7()
+    return NaN;
+  }
 
 #if _EWL_C99
-	if ((x == 1.0) || (x == -1.0)) {	/* range error may occur */
-		MISRA_EXCEPTION_RULE_13_7()	
-		if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
-			MISRA_EXCEPTION_RULE_20_5()
-			errno=ERANGE;
-		}
-	}
+  if ((x == 1.0) || (x == -1.0)) { /* range error may occur */
+    MISRA_EXCEPTION_RULE_13_7()
+    if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
+      MISRA_EXCEPTION_RULE_20_5()
+      errno = ERANGE;
+    }
+  }
 #endif
 
-	if(ix==0x3ff00000L)
-	{
-		MISRA_EXCEPTION_RULE_14_7()
-	    return x/zero;
-	}
-	if((ix<0x3e300000L)&&((big+x)>zero)) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return x;	/* x<2**-28 */
-	}
-	GET_DOUBLE_HI_WORD(x) = ix;		/* x <- |x| */
-	if (ix<0x3fe00000L) {/* x < 0.5 */
-	    t = x+x;
-	    t = 0.5*log1p(t+(t*(x/(one-x))));
-	} else {
-	    t = 0.5*log1p((x+x)/(one-x));
-	}
-	if (hx>=0L) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return t;
-	} else {
-		MISRA_EXCEPTION_RULE_14_7()
-		return -t;
-	}
+  if (ix == 0x3ff00000L) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return x / zero;
+  }
+  if ((ix < 0x3e300000L) && ((big + x) > zero)) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return x; /* x<2**-28 */
+  }
+  GET_DOUBLE_HI_WORD(x) = ix; /* x <- |x| */
+  if (ix < 0x3fe00000L) {     /* x < 0.5 */
+    t = x + x;
+    t = 0.5 * log1p(t + (t * (x / (one - x))));
+  } else {
+    t = 0.5 * log1p((x + x) / (one - x));
+  }
+  if (hx >= 0L) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return t;
+  } else {
+    MISRA_EXCEPTION_RULE_14_7()
+    return -t;
+  }
 }
 #endif /* _EWL_FLOATING_POINT  */

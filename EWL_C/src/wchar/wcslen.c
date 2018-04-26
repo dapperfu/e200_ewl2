@@ -22,8 +22,8 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 MISRA_EXCEPTION_RULE_20_9()
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,29 +35,28 @@ MISRA_ALLOW_POINTER_CASTS()
 #pragma warn_possunwant off
 
 /*
-	This routine returns the length of the wide character string str
+        This routine returns the length of the wide character string str
 */
-size_t _EWL_CDECL (wcslen)(const wchar_t * str)
-{
-	size_t	len = (size_t)-1;
+size_t _EWL_CDECL(wcslen)(const wchar_t *str) {
+  size_t len = (size_t)-1;
 
 #if !defined(__POWERPC__)
 
-	do {
-		len++;
-	} while (*str++);
+  do {
+    len++;
+  } while (*str++);
 
 #else
 
-	wchar_t * p = (wchar_t *) str - 1;
+  wchar_t *p = (wchar_t *)str - 1;
 
-	do {
-		len++;
-	} while (*++p);
+  do {
+    len++;
+  } while (*++p);
 
 #endif
 
-	return(len);
+  return (len);
 }
 
 #endif /* #if _EWL_WIDE_CHAR */

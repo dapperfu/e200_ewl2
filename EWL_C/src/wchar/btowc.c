@@ -18,6 +18,8 @@
 
 #include <wchar.h>
 
-	wint_t _EWL_CDECL 	btowc(int_t c)  { return(((uint_t)c & 0x8000u) ? WEOF : (wint_t)c);}
+wint_t _EWL_CDECL btowc(int_t c) {
+  return (((uint_t)c & 0x8000u) ? WEOF : (wint_t)c);
+}
 
 #endif /* _EWL_WIDE_CHAR */

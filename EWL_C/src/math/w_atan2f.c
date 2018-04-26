@@ -29,23 +29,25 @@ __RCSID("$NetBSD: w_atan2f.c,v 1.4 1997/10/09 11:34:10 lukem Exp $");
  */
 
 #ifdef __STDC__
-	f32_t atan2f(f32_t y, f32_t x)		/* wrapper atan2f */
+f32_t atan2f(f32_t y, f32_t x) /* wrapper atan2f */
 #else
-	f32_t atan2f(y,x)			/* wrapper atan2 */
-	f32_t y,x;
+f32_t atan2f(y, x) /* wrapper atan2 */
+    f32_t y,
+    x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_atan2f(y,x);
+  return __ieee754_atan2f(y, x);
 #else
-	f32_t z;
-	z = __ieee754_atan2f(y,x);
-	if(_LIB_VERSION == _IEEE_||isnanf(x)||isnanf(y)) return z;
-	if(x==0.0F&&y==0.0F) {
-		/* atan2f(+-0,+-0) */
-	        return (f32_t)__kernel_standard((f64_t)y,(f64_t)x,103);
-	} else
-	    return z;
+  f32_t z;
+  z = __ieee754_atan2f(y, x);
+  if (_LIB_VERSION == _IEEE_ || isnanf(x) || isnanf(y))
+    return z;
+  if (x == 0.0F && y == 0.0F) {
+    /* atan2f(+-0,+-0) */
+    return (f32_t)__kernel_standard((f64_t)y, (f64_t)x, 103);
+  } else
+    return z;
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

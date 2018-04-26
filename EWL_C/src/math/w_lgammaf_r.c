@@ -29,29 +29,30 @@ __RCSID("$NetBSD: w_lgammaf_r.c,v 1.4 1997/10/09 11:35:34 lukem Exp $");
  * wrapper f32_t lgammaf_r(f32_t x, int *signgamp)
  */
 
-
 #ifdef __STDC__
-	f32_t lgammaf_r(f32_t x, int32_t *signgamp) /* wrapper lgammaf_r */
+f32_t lgammaf_r(f32_t x, int32_t *signgamp) /* wrapper lgammaf_r */
 #else
-	f32_t lgammaf_r(x,signgamp)              /* wrapper lgammaf_r */
-        f32_t x; int_t *signgamp;
+f32_t lgammaf_r(x, signgamp) /* wrapper lgammaf_r */
+    f32_t x;
+int_t *signgamp;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_lgammaf_r(x,signgamp);
+  return __ieee754_lgammaf_r(x, signgamp);
 #else
-        f32_t y;
-        y = __ieee754_lgammaf_r(x,signgamp);
-        if(_LIB_VERSION == _IEEE_) return y;
-        if(!finitef(y)&&finitef(x)) {
-            if(floorf(x)==x&&x<=0.0F)
-	        /* lgamma pole */
-                return (f32_t)__kernel_standard((f64_t)x,(f64_t)x,115);
-            else
-	        /* lgamma overflow */
-	        return (f32_t)__kernel_standard((f64_t)x,(f64_t)x,114);
-        } else
-            return y;
+  f32_t y;
+  y = __ieee754_lgammaf_r(x, signgamp);
+  if (_LIB_VERSION == _IEEE_)
+    return y;
+  if (!finitef(y) && finitef(x)) {
+    if (floorf(x) == x && x <= 0.0F)
+      /* lgamma pole */
+      return (f32_t)__kernel_standard((f64_t)x, (f64_t)x, 115);
+    else
+      /* lgamma overflow */
+      return (f32_t)__kernel_standard((f64_t)x, (f64_t)x, 114);
+  } else
+    return y;
 #endif
 }
 #endif /* _REENTRANT */

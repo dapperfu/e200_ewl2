@@ -8,25 +8,25 @@
 #ifndef _IOSTREAM_H
 #define _IOSTREAM_H
 
-#include <iostream>
-#include <ostream.h>
-#include <istream.h>
-#include <streambuf.h>
 #include <ios.h>
+#include <iostream>
+#include <istream.h>
+#include <ostream.h>
+#include <streambuf.h>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
 #ifndef _EWL_NO_IO
-	using std::cin;
-	using std::cout;
-	using std::cerr;
-	using std::clog;
+using std::cerr;
+using std::cin;
+using std::clog;
+using std::cout;
 #ifndef _EWL_NO_WCHART_CPP_SUPPORT
-	using std::wcin;
-	using std::wcout;
-	using std::wcerr;
-	using std::wclog;
-#endif  // _EWL_NO_WCHART_CPP_SUPPORT
-#endif  // _EWL_NO_IO
-#endif  // _EWL_NO_CPP_NAMESPACE  
+using std::wcerr;
+using std::wcin;
+using std::wclog;
+using std::wcout;
+#endif // _EWL_NO_WCHART_CPP_SUPPORT
+#endif // _EWL_NO_IO
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _IOSTREAM_H 
+#endif // _IOSTREAM_H

@@ -24,29 +24,26 @@
 
 #include <ewl_misra_types.h>
 MISRA_EXCEPTION_RULE_20_9()
-#include <stdio.h>
-#include <limits.h>
-#include <stdlib.h>
 #include <ansi_files.h>
-#include <wchar.h>
 #include <critical_regions.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <wchar.h>
 
 /* threadsafety is in fwrite */
-wchar_t	_EWL_CDECL putwchar(wchar_t c)
-{
-	if (fwide(stdout, 1) <= 0) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return WEOF;
-	}
+wchar_t _EWL_CDECL putwchar(wchar_t c) {
+  if (fwide(stdout, 1) <= 0) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return WEOF;
+  }
 
-	MISRA_EXCEPTION_RULE_11_4()
-	if (fwrite((char_t *)&c, sizeof(c), (size_t)1, stdout) == (uint_t)WEOF)
-	{
-		MISRA_EXCEPTION_RULE_14_7()
-		return WEOF;
-	}
-	return(c);
+  MISRA_EXCEPTION_RULE_11_4()
+  if (fwrite((char_t *)&c, sizeof(c), (size_t)1, stdout) == (uint_t)WEOF) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return WEOF;
+  }
+  return (c);
 }
-
 
 #endif /* _EWL_WIDE_CHAR */

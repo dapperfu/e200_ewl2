@@ -29,23 +29,25 @@ __RCSID("$NetBSD: w_hypotf.c,v 1.4 1997/10/09 11:35:04 lukem Exp $");
  */
 
 #ifdef __STDC__
-	f32_t hypotf(f32_t x, f32_t y)	/* wrapper hypotf */
+f32_t hypotf(f32_t x, f32_t y) /* wrapper hypotf */
 #else
-	f32_t hypotf(x,y)		/* wrapper hypotf */
-	f32_t x,y;
+f32_t hypotf(x, y) /* wrapper hypotf */
+    f32_t x,
+    y;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_hypotf(x,y);
+  return __ieee754_hypotf(x, y);
 #else
-	f32_t z;
-	z = __ieee754_hypotf(x,y);
-	if(_LIB_VERSION == _IEEE_) return z;
-	if((!finitef(z))&&finitef(x)&&finitef(y))
-	    /* hypot overflow */
-	    return (f32_t)__kernel_standard((f64_t)x,(f64_t)y,104);
-	else
-	    return z;
+  f32_t z;
+  z = __ieee754_hypotf(x, y);
+  if (_LIB_VERSION == _IEEE_)
+    return z;
+  if ((!finitef(z)) && finitef(x) && finitef(y))
+    /* hypot overflow */
+    return (f32_t)__kernel_standard((f64_t)x, (f64_t)y, 104);
+  else
+    return z;
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

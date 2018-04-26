@@ -32,34 +32,35 @@ static const f64_t
 #else
 static f64_t
 #endif
-two54 =  1.80143985094819840000e+16; /* 0x43500000, 0x00000000 */
+    two54 = 1.80143985094819840000e+16; /* 0x43500000, 0x00000000 */
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL frexp(f64_t x, int_t *eptr)
+f64_t _EWL_MATH_CDECL frexp(f64_t x, int_t *eptr)
 #else
-	f64_t frexp(x, eptr)
-	f64_t x; int *eptr;
+f64_t frexp(x, eptr) f64_t x;
+int *eptr;
 #endif
 {
-	int32_t  hx;
-	uint32_t ix;
+  int32_t hx;
+  uint32_t ix;
 
-	hx = GET_DOUBLE_HI_WORD(x);
-	ix = 0x7fffffffuL&(uint32_t)hx;
-	*eptr = 0;
-	if((ix>=0x7ff00000uL)||((ix|GET_DOUBLE_ULO_WORD(x))==0uL)) {		/* 0,inf,nan */
-		MISRA_EXCEPTION_RULE_14_7()
-		return x;
-	}
-	if (ix<0x00100000uL) {		/* subnormal */
-	    x *= two54;
-	    hx = GET_DOUBLE_HI_WORD(x);
-	    ix = (uint32_t)hx&0x7fffffffuL;
-	    *eptr = -54;
-	}
-	MISRA_EXCEPTION_RULE_10_3()
-	*eptr += (int_t)((ix>>20)-1022uL);
-	ix = ((uint32_t)hx&0x800fffffuL)|0x3fe00000uL;
-	GET_DOUBLE_UHI_WORD(x) = ix;
-	return x;
+  hx = GET_DOUBLE_HI_WORD(x);
+  ix = 0x7fffffffuL & (uint32_t)hx;
+  *eptr = 0;
+  if ((ix >= 0x7ff00000uL) ||
+      ((ix | GET_DOUBLE_ULO_WORD(x)) == 0uL)) { /* 0,inf,nan */
+    MISRA_EXCEPTION_RULE_14_7()
+    return x;
+  }
+  if (ix < 0x00100000uL) { /* subnormal */
+    x *= two54;
+    hx = GET_DOUBLE_HI_WORD(x);
+    ix = (uint32_t)hx & 0x7fffffffuL;
+    *eptr = -54;
+  }
+  MISRA_EXCEPTION_RULE_10_3()
+  *eptr += (int_t)((ix >> 20) - 1022uL);
+  ix = ((uint32_t)hx & 0x800fffffuL) | 0x3fe00000uL;
+  GET_DOUBLE_UHI_WORD(x) = ix;
+  return x;
 }
 #endif /* _EWL_FLOATING_POINT  */

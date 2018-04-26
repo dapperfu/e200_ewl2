@@ -5,18 +5,21 @@
  * $Revision: 1.1.2.1 $
  */
 
-#ifndef	_EWL_UNISTD_API_H
-#define	_EWL_UNISTD_API_H
+#ifndef _EWL_UNISTD_API_H
+#define _EWL_UNISTD_API_H
 
 #include <ansi_parms.h>
 
 _EWL_BEGIN_EXTERN_C
 
-#if	(__dest_os	== __win32_os || __dest_os == __mac_os)
-	int _EWL_CDECL __msl_vspawnl(int,const char *prog, va_list va) _EWL_CANT_THROW;
-	int	_EWL_CDECL __msl_vspawnle(int,const char *prog, va_list va) _EWL_CANT_THROW;
-	int	_EWL_CDECL __msl_vspawnlp(int,const char *prog, va_list va) _EWL_CANT_THROW;
-	int	_EWL_CDECL __msl_vspawnlpe(int,const char *prog, va_list va) _EWL_CANT_THROW;
+#if (__dest_os == __win32_os || __dest_os == __mac_os)
+int _EWL_CDECL __msl_vspawnl(int, const char *prog, va_list va) _EWL_CANT_THROW;
+int _EWL_CDECL __msl_vspawnle(int, const char *prog,
+                              va_list va) _EWL_CANT_THROW;
+int _EWL_CDECL __msl_vspawnlp(int, const char *prog,
+                              va_list va) _EWL_CANT_THROW;
+int _EWL_CDECL __msl_vspawnlpe(int, const char *prog,
+                               va_list va) _EWL_CANT_THROW;
 #endif
 
 _EWL_END_EXTERN_C

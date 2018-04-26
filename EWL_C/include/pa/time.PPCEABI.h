@@ -10,8 +10,8 @@
 
 #if _EWL_CLOCK_T_AVAILABLE
 #if defined(_Generic_PPC_EABI_OS)
-	#define _EWL_CLOCKS_PER_SEC 60
-	#define _EWL_CLOCK_T unsigned long
+#define _EWL_CLOCKS_PER_SEC 60
+#define _EWL_CLOCK_T unsigned long
 #endif
 #endif
 

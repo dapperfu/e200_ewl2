@@ -18,26 +18,25 @@
 #include <ewl_misra_types.h>
 
 MISRA_QUIET_MACRO_FUNCDEF()
-int_t _EWL_CDECL (getc)(FILE * _file)
-{
-	MISRA_EXCEPTION_RULE_11_4()
-	struct _FILE *file = (struct _FILE *)_file;
-	int_t retval;
-	MISRA_QUIET_UNUSED_SYMBOL()
-	critical_regions crtrgn;
+int_t _EWL_CDECL(getc)(FILE *_file) {
+  MISRA_EXCEPTION_RULE_11_4()
+  struct _FILE *file = (struct _FILE *)_file;
+  int_t retval;
+  MISRA_QUIET_UNUSED_SYMBOL()
+  critical_regions crtrgn;
 
-	if (_file == stdin) {
-		crtrgn = stdin_access;
-	} else if (_file == stdout) {
-		crtrgn = stdout_access;
-	} else if (_file == stderr) {
-		crtrgn = stderr_access;
-	} else {
-		crtrgn = files_access;
-	}
-  	__begin_critical_region(crtrgn);
-	retval = __getc(file);
-  	__end_critical_region(crtrgn);
+  if (_file == stdin) {
+    crtrgn = stdin_access;
+  } else if (_file == stdout) {
+    crtrgn = stdout_access;
+  } else if (_file == stderr) {
+    crtrgn = stderr_access;
+  } else {
+    crtrgn = files_access;
+  }
+  __begin_critical_region(crtrgn);
+  retval = __getc(file);
+  __end_critical_region(crtrgn);
 
-  	return(retval);
+  return (retval);
 }

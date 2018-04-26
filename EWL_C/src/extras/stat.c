@@ -7,7 +7,7 @@
 
 #include <extras/sys/stat.h>
 
-#if _EWL_OS_DISK_FILE_SUPPORT 
+#if _EWL_OS_DISK_FILE_SUPPORT
 
 _EWL_POSIX_PARAMS __new_umask = 0;
 
@@ -16,16 +16,15 @@ _EWL_POSIX_PARAMS __new_umask = 0;
  *		_EWL_POSIX_PARAMS _umask( _EWL_POSIX_PARAMS __pmode )
  *
  *		Sets the file permission mask so that all future
- *      files will be created to the mode specified by __pmode 
+ *      files will be created to the mode specified by __pmode
  */
 
-_EWL_POSIX_PARAMS _EWL_CDECL umask(_EWL_POSIX_PARAMS __pmode) _EWL_CANT_THROW
-{
-	_EWL_POSIX_PARAMS __oldmask = __new_umask;
-	
-	__new_umask = __pmode;
-	
-	return __oldmask;
+_EWL_POSIX_PARAMS _EWL_CDECL umask(_EWL_POSIX_PARAMS __pmode) _EWL_CANT_THROW {
+  _EWL_POSIX_PARAMS __oldmask = __new_umask;
+
+  __new_umask = __pmode;
+
+  return __oldmask;
 }
 
-#endif //_EWL_OS_DISK_FILE_SUPPORT 
+#endif //_EWL_OS_DISK_FILE_SUPPORT

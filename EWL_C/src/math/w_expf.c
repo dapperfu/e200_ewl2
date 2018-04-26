@@ -27,39 +27,39 @@ __RCSID("$NetBSD: w_expf.c,v 1.4 1997/10/09 11:34:39 lukem Exp $");
  * wrapper expf(x)
  */
 
-
 #ifndef _IEEE_LIBM
 #ifdef __STDC__
 static const f32_t
 #else
 static f32_t
 #endif
-o_threshold=  8.8721679688e+01F,  /* 0x42b17180 */
-u_threshold= -1.0397208405e+02F;  /* 0xc2cff1b5 */
+    o_threshold = 8.8721679688e+01F,  /* 0x42b17180 */
+    u_threshold = -1.0397208405e+02F; /* 0xc2cff1b5 */
 #endif
 
 #ifdef __STDC__
-	f32_t expf(f32_t x)		/* wrapper expf */
+f32_t expf(f32_t x) /* wrapper expf */
 #else
-	f32_t expf(x)			/* wrapper expf */
-	f32_t x;
+f32_t expf(x) /* wrapper expf */
+    f32_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_expf(x);
+  return __ieee754_expf(x);
 #else
-	f32_t z;
-	z = __ieee754_expf(x);
-	if(_LIB_VERSION == _IEEE_) return z;
-	if(finitef(x)) {
-	    if(x>o_threshold)
-	        /* exp overflow */
-	        return (f32_t)__kernel_standard((f64_t)x,(f64_t)x,106);
-	    else if(x<u_threshold)
-	        /* exp underflow */
-	        return (f32_t)__kernel_standard((f64_t)x,(f64_t)x,107);
-	}
-	return z;
+  f32_t z;
+  z = __ieee754_expf(x);
+  if (_LIB_VERSION == _IEEE_)
+    return z;
+  if (finitef(x)) {
+    if (x > o_threshold)
+      /* exp overflow */
+      return (f32_t)__kernel_standard((f64_t)x, (f64_t)x, 106);
+    else if (x < u_threshold)
+      /* exp underflow */
+      return (f32_t)__kernel_standard((f64_t)x, (f64_t)x, 107);
+  }
+  return z;
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

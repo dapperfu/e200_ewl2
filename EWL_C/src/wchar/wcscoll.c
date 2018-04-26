@@ -32,8 +32,8 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 MISRA_EXCEPTION_RULE_20_9()
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,9 +42,8 @@ MISRA_EXCEPTION_RULE_20_9()
 
 MISRA_ALLOW_POINTER_CASTS()
 
-int_t _EWL_CDECL wcscoll(const wchar_t *str1, const wchar_t * str2)
-{
-	return(wcscmp(str1, str2));
+int_t _EWL_CDECL wcscoll(const wchar_t *str1, const wchar_t *str2) {
+  return (wcscmp(str1, str2));
 }
 
 #endif /* #if _EWL_WIDE_CHAR */

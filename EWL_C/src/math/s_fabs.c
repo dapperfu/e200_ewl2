@@ -26,14 +26,13 @@
 #ifndef __USING_INTRINSIC_FABS__
 
 #ifdef __STDC__
-	 f64_t   _EWL_MATH_CDECL fabs(f64_t x)	/* wrapper pow */
+f64_t _EWL_MATH_CDECL fabs(f64_t x) /* wrapper pow */
 #else
-	f64_t fabs(x)
-	f64_t x;
+f64_t fabs(x) f64_t x;
 #endif
 {
-	GET_DOUBLE_UHI_WORD(x) &= 0x7fffffffuL;
-    return x;
+  GET_DOUBLE_UHI_WORD(x) &= 0x7fffffffuL;
+  return x;
 }
 
 #endif /* __USING_INTRINSIC_FABS__	*/

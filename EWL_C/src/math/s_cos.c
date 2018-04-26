@@ -49,49 +49,51 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	 f64_t   _EWL_MATH_CDECL cos(f64_t x)	/* wrapper pow */
+f64_t _EWL_MATH_CDECL cos(f64_t x) /* wrapper pow */
 #else
-	f64_t cos(x)
-	f64_t x;
+f64_t cos(x) f64_t x;
 #endif
 {
-	f64_t    y[2],z=0.0;
-	int32_t	 n;
-	uint32_t ix;
-	uint32_t iz;
+  f64_t y[2], z = 0.0;
+  int32_t n;
+  uint32_t ix;
+  uint32_t iz;
 
-    /* High word of x. */
-	ix = GET_DOUBLE_UHI_WORD(x);
+  /* High word of x. */
+  ix = GET_DOUBLE_UHI_WORD(x);
 
-    /* |x| ~< pi/4 */
-	ix &= 0x7fffffffuL;  /* cos even don't need sign */
-	if(ix <= 0x3fe921fbuL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return __kernel_cos(x,z);
+  /* |x| ~< pi/4 */
+  ix &= 0x7fffffffuL; /* cos even don't need sign */
+  if (ix <= 0x3fe921fbuL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return __kernel_cos(x, z);
 
     /* cos(Inf or NaN) is NaN */
-	} else if (ix>=0x7ff00000uL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return x-x;
+  } else if (ix >= 0x7ff00000uL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return x - x;
 
     /* argument reduction needed */
-	} else {
-	    n = __ieee754_rem_pio2(x,y);
-	    if((uint32_t)n&1uL) {
-			z =  __kernel_sin(y[0],y[1],1L);
-	    	if(!((uint32_t)n&2uL)) { z = -z; }
-	    }
-	    else {
-			z =  __kernel_cos(y[0],y[1]);
-	    	if(((uint32_t)n&2uL)) { z = -z; }
-	    }
-		iz = GET_DOUBLE_UHI_WORD(z)&0x7fffffffUL;	/* iz = |z|'s high word */
-		if((iz<0x3e700000UL) && ((int32_t)z==0L)) {
-			MISRA_EXCEPTION_RULE_14_7()
-			return 0.0;		/* if z < 2**-24 */
-		}
-		MISRA_EXCEPTION_RULE_14_7()
-		return z;			
-	}
+  } else {
+    n = __ieee754_rem_pio2(x, y);
+    if ((uint32_t)n & 1uL) {
+      z = __kernel_sin(y[0], y[1], 1L);
+      if (!((uint32_t)n & 2uL)) {
+        z = -z;
+      }
+    } else {
+      z = __kernel_cos(y[0], y[1]);
+      if (((uint32_t)n & 2uL)) {
+        z = -z;
+      }
+    }
+    iz = GET_DOUBLE_UHI_WORD(z) & 0x7fffffffUL; /* iz = |z|'s high word */
+    if ((iz < 0x3e700000UL) && ((int32_t)z == 0L)) {
+      MISRA_EXCEPTION_RULE_14_7()
+      return 0.0; /* if z < 2**-24 */
+    }
+    MISRA_EXCEPTION_RULE_14_7()
+    return z;
+  }
 }
 #endif /* _EWL_FLOATING_POINT  */

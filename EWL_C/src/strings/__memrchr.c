@@ -21,22 +21,20 @@ _MISRA_RESTORE()
 #define __STDC_WANT_LIB_EXT1__ 1
 
 #include <ewl_misra_types.h>
-#include <string.h>
 #include <mem_funcs.h>
+#include <string.h>
 
-void * __memrchr(const void * src, int_t val, size_t n)
-{
-	const uchar_t *	p;
-	uchar_t	v = (uchar_t)val;
+void *__memrchr(const void *src, int_t val, size_t n) {
+  const uchar_t *p;
+  uchar_t v = (uchar_t)val;
 
-	p = (uchar_t *)src + n;
-	for (n++; --n;) {
-		if (*--p == v) {
-			MISRA_EXCEPTION_RULE_14_7()
-			return((void *) p);
-		}
-	}
+  p = (uchar_t *)src + n;
+  for (n++; --n;) {
+    if (*--p == v) {
+      MISRA_EXCEPTION_RULE_14_7()
+      return ((void *)p);
+    }
+  }
 
-	return(NULL);
+  return (NULL);
 }
-

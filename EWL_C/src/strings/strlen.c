@@ -27,13 +27,13 @@ MISRA_ALLOW_POINTER_CASTS()
 
 #pragma warn_possunwant off
 
-size_t (strlen)(const char_t * str)
-{
-	uchar_t * p = (uchar_t *) str - 1;
+size_t(strlen)(const char_t *str) {
+  uchar_t *p = (uchar_t *)str - 1;
 
-	while (*++p);
+  while (*++p)
+    ;
 
-	return(p-(uchar_t *)str);
+  return (p - (uchar_t *)str);
 }
 
 #pragma warn_possunwant reset

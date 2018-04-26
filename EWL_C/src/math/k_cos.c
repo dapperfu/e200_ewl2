@@ -58,46 +58,45 @@ static const f64_t
 #else
 static f64_t
 #endif
-one =  1.00000000000000000000e+00, /* 0x3FF00000, 0x00000000 */
-C1  =  4.16666666666666019037e-02, /* 0x3FA55555, 0x5555554C */
-C2  = -1.38888888888741095749e-03, /* 0xBF56C16C, 0x16C15177 */
-C3  =  2.48015872894767294178e-05, /* 0x3EFA01A0, 0x19CB1590 */
-C4  = -2.75573143513906633035e-07, /* 0xBE927E4F, 0x809C52AD */
-C5  =  2.08757232129817482790e-09, /* 0x3E21EE9E, 0xBDB4B1C4 */
-C6  = -1.13596475577881948265e-11; /* 0xBDA8FAE9, 0xBE8838D4 */
+    one = 1.00000000000000000000e+00, /* 0x3FF00000, 0x00000000 */
+    C1 = 4.16666666666666019037e-02,  /* 0x3FA55555, 0x5555554C */
+    C2 = -1.38888888888741095749e-03, /* 0xBF56C16C, 0x16C15177 */
+    C3 = 2.48015872894767294178e-05,  /* 0x3EFA01A0, 0x19CB1590 */
+    C4 = -2.75573143513906633035e-07, /* 0xBE927E4F, 0x809C52AD */
+    C5 = 2.08757232129817482790e-09,  /* 0x3E21EE9E, 0xBDB4B1C4 */
+    C6 = -1.13596475577881948265e-11; /* 0xBDA8FAE9, 0xBE8838D4 */
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL __kernel_cos(f64_t x, f64_t y)
+f64_t _EWL_MATH_CDECL __kernel_cos(f64_t x, f64_t y)
 #else
-	f64_t __kernel_cos(x, y)
-	f64_t x,y;
+f64_t __kernel_cos(x, y) f64_t x, y;
 #endif
 {
-	f64_t a,hz,z,r,qx;
-	uint32_t ix;
-	ix = GET_DOUBLE_UHI_WORD(x)&0x7fffffffUL;	/* ix = |x|'s high word*/
-	if(ix<0x3e400000UL) {			/* if x < 2**27 */
-	    if(((int32_t)x)==0L) {		/* generate inexact */
-			MISRA_EXCEPTION_RULE_14_7()
-			return one;
-		}	
-	}
-	z  = x*x;
-	r  = z*(C1+(z*(C2+(z*(C3+(z*(C4+(z*(C5+(z*C6))))))))));
-	if(ix < 0x3FD33333UL) {			/* if |x| < 0.3 */
-		MISRA_EXCEPTION_RULE_14_7()
-	    return one - ((0.5*z) - ((z*r) - (x*y)));
-	} else {
-	    if(ix > 0x3fe90000UL) {		/* x > 0.78125 */
-			qx = 0.28125;
-	    } else {
-	        GET_DOUBLE_UHI_WORD(qx) = ix-0x00200000UL;	/* x/4 */
-	        GET_DOUBLE_LO_WORD(qx)  = 0L;
-	    }
-	    hz = (0.5*z)-qx;
-	    a  = one-qx;
-		MISRA_EXCEPTION_RULE_14_7()
-	    return a - (hz - ((z*r)-(x*y)));
-	}
+  f64_t a, hz, z, r, qx;
+  uint32_t ix;
+  ix = GET_DOUBLE_UHI_WORD(x) & 0x7fffffffUL; /* ix = |x|'s high word*/
+  if (ix < 0x3e400000UL) {                    /* if x < 2**27 */
+    if (((int32_t)x) == 0L) {                 /* generate inexact */
+      MISRA_EXCEPTION_RULE_14_7()
+      return one;
+    }
+  }
+  z = x * x;
+  r = z * (C1 + (z * (C2 + (z * (C3 + (z * (C4 + (z * (C5 + (z * C6))))))))));
+  if (ix < 0x3FD33333UL) { /* if |x| < 0.3 */
+    MISRA_EXCEPTION_RULE_14_7()
+    return one - ((0.5 * z) - ((z * r) - (x * y)));
+  } else {
+    if (ix > 0x3fe90000UL) { /* x > 0.78125 */
+      qx = 0.28125;
+    } else {
+      GET_DOUBLE_UHI_WORD(qx) = ix - 0x00200000UL; /* x/4 */
+      GET_DOUBLE_LO_WORD(qx) = 0L;
+    }
+    hz = (0.5 * z) - qx;
+    a = one - qx;
+    MISRA_EXCEPTION_RULE_14_7()
+    return a - (hz - ((z * r) - (x * y)));
+  }
 }
 #endif /* _EWL_FLOATING_POINT  */

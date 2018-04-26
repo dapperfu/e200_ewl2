@@ -5,13 +5,13 @@
  * $Revision: 1.1 $
  */
 
-#ifndef _STACK_H 
+#ifndef _STACK_H
 #define _STACK_H
 
 #include <stack>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-     	using std::stack;
+using std::stack;
 #endif
 
-#endif  // _STACK_H 
+#endif // _STACK_H

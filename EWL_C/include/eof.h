@@ -6,5 +6,5 @@
  */
 
 #ifndef EOF
-	#define EOF -1L
+#define EOF -1L
 #endif /* EOF */

@@ -5,26 +5,25 @@
  * $Revision: 1.1 $
  */
 
-#include <ansi_parms.h>
 #include <abort_exit.h>
+#include <ansi_parms.h>
 #include <critical_regions.h>
-#include <misc_io.h>
-#include <signal.h>
-#include <setjmp.h>
-#include <stdlib.h>
 #include <ewl_thread_local_data.h>
+#include <misc_io.h>
+#include <setjmp.h>
+#include <signal.h>
+#include <stdlib.h>
 
 #include <ewl_misra_types.h>
 
-int_t _EWL_CDECL atexit(void (_EWL_CDECL *func)(void))
-{
-    int_t result;
+int_t _EWL_CDECL atexit(void(_EWL_CDECL *func)(void)) {
+  int_t result;
 
-    __begin_critical_region(atexit_funcs_access);
+  __begin_critical_region(atexit_funcs_access);
 
-    result = __register_atexit(func);
+  result = __register_atexit(func);
 
-    __end_critical_region(atexit_funcs_access);
+  __end_critical_region(atexit_funcs_access);
 
-    return result;
+  return result;
 }

@@ -12,7 +12,7 @@
 
 /*
 #if (__dest_os == __win32_os || __dest_os == __wince_os)
-	#include <extras/x86/extras_time_win32.h>
+        #include <extras/x86/extras_time_win32.h>
 #endif
 */
 
@@ -20,11 +20,15 @@ _EWL_BEGIN_EXTERN_C
 
 #if _EWL_OS_TIME_SUPPORT
 
-_EWL_IMP_EXP_C char * _EWL_CDECL				asctime_r(const struct __std(tm) *, char *) _EWL_CANT_THROW;
-_EWL_IMP_EXP_C char * _EWL_CDECL				ctime_r(const __std(time_t) *, char *) _EWL_CANT_THROW;
-_EWL_IMP_EXP_C struct __std(tm) * _EWL_CDECL	localtime_r(const __std(time_t) *, struct __std(tm) *) _EWL_CANT_THROW;
-_EWL_IMP_EXP_C char * _EWL_CDECL				strdate(char *) _EWL_CANT_THROW;
-_EWL_IMP_EXP_C struct __std(tm) * _EWL_CDECL	gmtime_r(const __std(time_t) *, struct __std(tm) *) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C char *_EWL_CDECL asctime_r(const struct __std(tm) *,
+                                          char *) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C char *_EWL_CDECL ctime_r(const __std(time_t) *,
+                                        char *) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C struct __std(tm) * _EWL_CDECL
+    localtime_r(const __std(time_t) *, struct __std(tm) *) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C char *_EWL_CDECL strdate(char *) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C struct __std(tm) * _EWL_CDECL
+    gmtime_r(const __std(time_t) *, struct __std(tm) *) _EWL_CANT_THROW;
 
 #endif /* _EWL_OS_TIME_SUPPORT */
 

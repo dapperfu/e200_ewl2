@@ -10,18 +10,18 @@
 
 #include <istream>
 
-#ifndef _EWL_NO_CPP_NAMESPACE 
+#ifndef _EWL_NO_CPP_NAMESPACE
 #ifndef _EWL_NO_IO
-	using std::basic_istream;
-	using std::istream;
-	using std::basic_iostream;
-	using std::iostream;
+using std::basic_iostream;
+using std::basic_istream;
+using std::iostream;
+using std::istream;
 #ifndef _EWL_NO_WCHART_CPP_SUPPORT
-	using std::wistream;
-	using std::wiostream;
-	using std::ws;
-#endif  // _EWL_NO_WCHART_CPP_SUPPORT
-#endif  // _EWL_NO_IO
-#endif  // _EWL_NO_CPP_NAMESPACE 
+using std::wiostream;
+using std::wistream;
+using std::ws;
+#endif // _EWL_NO_WCHART_CPP_SUPPORT
+#endif // _EWL_NO_IO
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _ISTREAM_H
+#endif // _ISTREAM_H

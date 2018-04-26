@@ -20,16 +20,15 @@
 #undef _EWL_USE_INLINE
 #endif
 
-#include <wctype.h>
 #include <wchar.h>
+#include <wctype.h>
 
 wint_t _EWL_CDECL _EWL_CANT_THROW towlower(wint_t c) {
-int_t res = c;
-	if ((uint_t)c < (uint_t)__ewl_wcmap_size) {
-		res = (wint_t)(_EWL_CWLOWER_ACCESS[c]);
-	}
-	return res;
+  int_t res = c;
+  if ((uint_t)c < (uint_t)__ewl_wcmap_size) {
+    res = (wint_t)(_EWL_CWLOWER_ACCESS[c]);
+  }
+  return res;
 }
 
 #endif /* _EWL_WIDE_CHAR */
-

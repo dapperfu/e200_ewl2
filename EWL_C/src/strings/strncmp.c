@@ -27,43 +27,46 @@ MISRA_ALLOW_POINTER_CASTS()
 
 #pragma warn_possunwant off
 
-int_t strncmp(const char_t * str1, const char_t * str2, size_t n)
-{
-	#if defined(__PPC_EABI__)
+int_t strncmp(const char_t *str1, const char_t *str2, size_t n) {
+#if defined(__PPC_EABI__)
 
-		const	uchar_t * p1 = (uchar_t *) str1 - 1;
-		const	uchar_t * p2 = (uchar_t *) str2 - 1;
-				uint32_t		c1, c2;
+  const uchar_t *p1 = (uchar_t *)str1 - 1;
+  const uchar_t *p2 = (uchar_t *)str2 - 1;
+  uint32_t c1, c2;
 
-		n++;
-		while (--n) {
-			MISRA_EXCEPTION_RULE_1_2b()
-			if ((c1 = *++p1) != (c2 = *++p2)) {
-				MISRA_EXCEPTION_RULE_14_7()
-				return ((int_t)c1 - (int_t)c2);
-			} else { if (!c1) {
-				break;
-			}}
-		}
+  n++;
+  while (--n) {
+    MISRA_EXCEPTION_RULE_1_2b() if ((c1 = *++p1) != (c2 = *++p2)) {
+      MISRA_EXCEPTION_RULE_14_7()
+      return ((int_t)c1 - (int_t)c2);
+    }
+    else {
+      if (!c1) {
+        break;
+      }
+    }
+  }
 
-	#else
+#else
 
-		const	uchar_t * p1 = (uchar_t *) str1;
-		const	uchar_t * p2 = (uchar_t *) str2;
-				uchar_t		c1, c2;
+  const uchar_t *p1 = (uchar_t *)str1;
+  const uchar_t *p2 = (uchar_t *)str2;
+  uchar_t c1, c2;
 
-		n++;
-		while (--n) {
-			MISRA_EXCEPTION_RULE_1_2b()
-			if ((c1 = *p1++) != (c2 = *p2++)) {
-				MISRA_EXCEPTION_RULE_14_7()
-				return ((int_t)c1 - (int_t)c2);
-			} else {if (!c1) {
-				break;
-			}}
-		}
+  n++;
+  while (--n) {
+    MISRA_EXCEPTION_RULE_1_2b() if ((c1 = *p1++) != (c2 = *p2++)) {
+      MISRA_EXCEPTION_RULE_14_7()
+      return ((int_t)c1 - (int_t)c2);
+    }
+    else {
+      if (!c1) {
+        break;
+      }
+    }
+  }
 
-	#endif
+#endif
 
-	return(0);
+  return (0);
 }

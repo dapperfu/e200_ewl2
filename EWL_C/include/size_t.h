@@ -13,14 +13,14 @@
 _EWL_BEGIN_NAMESPACE_STD
 _EWL_BEGIN_EXTERN_C
 
-	#ifndef _EWL_SIZE_T_TYPE
-		#define _EWL_SIZE_T_TYPE __typeof__(sizeof(0))
-	#endif
+#ifndef _EWL_SIZE_T_TYPE
+#define _EWL_SIZE_T_TYPE __typeof__(sizeof(0))
+#endif
 
-	#ifndef _EWL_SIZE_T_DEFINED
-		#define _EWL_SIZE_T_DEFINED
-		typedef _EWL_SIZE_T_TYPE size_t;
-	#endif
+#ifndef _EWL_SIZE_T_DEFINED
+#define _EWL_SIZE_T_DEFINED
+typedef _EWL_SIZE_T_TYPE size_t;
+#endif
 
 _EWL_END_EXTERN_C
 _EWL_END_NAMESPACE_STD
@@ -30,4 +30,3 @@ using std::size_t;
 #endif
 
 #endif /* _EWL_SIZE_T_H */
-

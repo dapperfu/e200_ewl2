@@ -21,15 +21,11 @@ _MISRA_RESTORE()
 #define __STDC_WANT_LIB_EXT1__ 1
 
 #include <ewl_misra_types.h>
-#include <string.h>
 #include <mem_funcs.h>
+#include <string.h>
 
+void *memset(void *dst, int_t val, size_t n) {
+  __fill_mem(dst, val, (uint32_t)n);
 
-void * memset(void * dst, int_t val, size_t n)
-{
-	__fill_mem(dst, val, (uint32_t)n);
-
-	return(dst);
+  return (dst);
 }
-
-

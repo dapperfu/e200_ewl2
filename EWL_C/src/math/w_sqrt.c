@@ -25,27 +25,29 @@
 #if (!defined(__USING_OPTIMISED_SQRT__) && !defined(__USING_INTRINSIC_SQRT__))
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL sqrt(f64_t x)		/* wrapper sqrt */
+f64_t _EWL_MATH_CDECL sqrt(f64_t x) /* wrapper sqrt */
 #else
-	f64_t sqrt(x)			/* wrapper sqrt */
-	f64_t x;
+f64_t sqrt(x) /* wrapper sqrt */
+    f64_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_sqrt(x);
+  return __ieee754_sqrt(x);
 #else
-	f64_t z;
-	z = __ieee754_sqrt(x);
-	if(_LIB_VERSION == _IEEE_ || isnan(x)) return z;
-	if(x<0.0) {
-	    #ifdef __STDC__
-		errno=EDOM;  /* mf-- added to conform to old ANSI standard */
-        #endif
-	    return __kernel_standard(x,x,26); /* sqrt(negative) */
-	} else
-	    return z;
+  f64_t z;
+  z = __ieee754_sqrt(x);
+  if (_LIB_VERSION == _IEEE_ || isnan(x))
+    return z;
+  if (x < 0.0) {
+#ifdef __STDC__
+    errno = EDOM; /* mf-- added to conform to old ANSI standard */
+#endif
+    return __kernel_standard(x, x, 26); /* sqrt(negative) */
+  } else
+    return z;
 #endif
 }
-#endif /* !defined(__USING_OPTIMISED_SQRT__) && !defined(__USING_INTRINSIC_SQRT__)	*/
+#endif /* !defined(__USING_OPTIMISED_SQRT__) &&                                \
+          !defined(__USING_INTRINSIC_SQRT__)	*/
 #endif /* !defined(__COLDFIRE_HW_FPU__) || !__COLDFIRE_HW_FPU__ */
 #endif /* _EWL_FLOATING_POINT && _EWL_USES_SUN_DP_MATH_LIB	*/

@@ -22,22 +22,20 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
-wchar_t * _EWL_CDECL (wmemset)(wchar_t * dst, wchar_t val, size_t n)
-{
-	wchar_t *save = dst;
+wchar_t *_EWL_CDECL(wmemset)(wchar_t *dst, wchar_t val, size_t n) {
+  wchar_t *save = dst;
 
-	while (n) {
-		*dst++ = val;
-		n--;
-	}
+  while (n) {
+    *dst++ = val;
+    n--;
+  }
 
-	return(save);
+  return (save);
 }
 
 #endif /* #if _EWL_WIDE_CHAR */
-

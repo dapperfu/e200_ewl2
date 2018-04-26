@@ -18,6 +18,8 @@
 
 #include <wchar.h>
 
-	int_t _EWL_CDECL 	wctob(wint_t c) { return(((uint_t)c & 0xFF00u) ? (int_t)EOF : (int_t)c);}
+int_t _EWL_CDECL wctob(wint_t c) {
+  return (((uint_t)c & 0xFF00u) ? (int_t)EOF : (int_t)c);
+}
 
 #endif /* _EWL_WIDE_CHAR */

@@ -28,66 +28,62 @@ _MISRA_RESTORE()
 #include <stdarg.h>
 #include <stddef.h>
 MISRA_EXCEPTION_RULE_20_9()
+#include <critical_regions.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 #include <wctype.h>
-#include <critical_regions.h>
 
 MISRA_ALLOW_POINTER_CASTS()
 
 #if _EWL_C99_PRINTF_SCANF
 #if _EWL_FLOATING_POINT_PRINTF_SCANF
-	#include <math.h>
+#include <math.h>
 #endif /* _EWL_FLOATING_POINT_PRINTF_SCANF */
 #endif /* _EWL_C99_PRINTF_SCANF */
 
 int_t __wsformatter(wint_t (*wReadProc)(void *a, wint_t b, int_t c),
-							void * wReadProcArg,
-							const wchar_t * format_str,
-							va_list arg,
-							int_t is_secure);
+                    void *wReadProcArg, const wchar_t *format_str, va_list arg,
+                    int_t is_secure);
 
-wint_t __wStringRead(void * isc, wint_t ch, int_t Action);
+wint_t __wStringRead(void *isc, wint_t ch, int_t Action);
 
 /*
-	vswscanf
+        vswscanf
 
-	Description
+        Description
 
-	The vswscanf function is equivalent to swscanf with the
-	variable argument list replaced by arg, which shall have
-	been initialized by the va_start macro (and possibly
-	subsequent va_arg calls). The vwscanf function does not
-	invoke the va_end macro
+        The vswscanf function is equivalent to swscanf with the
+        variable argument list replaced by arg, which shall have
+        been initialized by the va_start macro (and possibly
+        subsequent va_arg calls). The vwscanf function does not
+        invoke the va_end macro
 
-	Returns
+        Returns
 
-	The vswscanf function returns the value of the macro EOF
-	if an input failure occurs before any conversion. Otherwise,
-	the wscanf function returns the number of iniput items
-	assigned, whcih can be fewer than provided for, or even
-	zero, in the event of an early matching failure.
+        The vswscanf function returns the value of the macro EOF
+        if an input failure occurs before any conversion. Otherwise,
+        the wscanf function returns the number of iniput items
+        assigned, whcih can be fewer than provided for, or even
+        zero, in the event of an early matching failure.
 */
 
-int_t _EWL_CDECL vswscanf_s(const wchar_t * _EWL_RESTRICT s, const wchar_t * _EWL_RESTRICT format, va_list arg)
-{
-	__wInStrCtrl wisc;
+int_t _EWL_CDECL vswscanf_s(const wchar_t *_EWL_RESTRICT s,
+                            const wchar_t *_EWL_RESTRICT format, va_list arg) {
+  __wInStrCtrl wisc;
 
-	if ((s == NULL) || (format == NULL))
-	{
-		__ewl_runtime_constraint_violation_s(NULL, NULL, -1);
-		MISRA_EXCEPTION_RULE_14_7()
-		return(EOF);
-	}
+  if ((s == NULL) || (format == NULL)) {
+    __ewl_runtime_constraint_violation_s(NULL, NULL, -1);
+    MISRA_EXCEPTION_RULE_14_7()
+    return (EOF);
+  }
 
-	wisc.wNextChar         = (wchar_t *)s;
-	wisc.wNullCharDetected = (*wisc.wNextChar == L'\0');
+  wisc.wNextChar = (wchar_t *)s;
+  wisc.wNullCharDetected = (*wisc.wNextChar == L'\0');
 
-	return(__wsformatter(__wStringRead, (void *)&wisc, format, arg, 1));
+  return (__wsformatter(__wStringRead, (void *)&wisc, format, arg, 1));
 }
 
 #endif /* _EWL_C99 */
 #endif /* _EWL_WIDE_CHAR */
-

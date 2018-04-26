@@ -5,7 +5,7 @@
  * $Revision: 1.1 $
  */
 
-#ifndef _EWL_CPP_STD_INTTYPES_H 
+#ifndef _EWL_CPP_STD_INTTYPES_H
 #define _EWL_CPP_STD_INTTYPES_H
 
 #if _EWL_C99
@@ -16,14 +16,14 @@
 
 namespace std {
 
-	using ::imaxdiv_t;
-	using ::imaxabs;
-	using ::imaxdiv;
-	using ::strtoimax;
-	using ::strtoumax;
+using ::imaxabs;
+using ::imaxdiv;
+using ::imaxdiv_t;
+using ::strtoimax;
+using ::strtoumax;
 #if _EWL_WIDE_CHAR
-	using ::wcstoimax;
-	using ::wcstoumax;
+using ::wcstoimax;
+using ::wcstoumax;
 #endif /* _EWL_WIDE_CHAR */
 
 } /* namespace std */
@@ -35,4 +35,3 @@ namespace std {
 #endif /* _EWL_C99 */
 
 #endif /* _EWL_CPP_STD_INTTYPES_H */
-

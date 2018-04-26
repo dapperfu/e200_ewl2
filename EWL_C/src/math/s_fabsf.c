@@ -27,16 +27,15 @@ __RCSID("$NetBSD: s_fabsf.c,v 1.5 1997/10/09 11:31:51 lukem Exp $");
  */
 
 #ifdef __STDC__
-	f32_t fabsf(f32_t x)
+f32_t fabsf(f32_t x)
 #else
-	f32_t fabsf(x)
-	f32_t x;
+f32_t fabsf(x) f32_t x;
 #endif
 {
-	uint32_t ix;
-	GET_FLOAT_UWORD(ix, x);
-	SET_FLOAT_UWORD(x, ix & 0x7fffffffU);
+  uint32_t ix;
+  GET_FLOAT_UWORD(ix, x);
+  SET_FLOAT_UWORD(x, ix & 0x7fffffffU);
 
-    return x;
+  return x;
 }
 #endif /* _EWL_FLOATING_POINT  */

@@ -37,12 +37,12 @@
 #include <functional_ext>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::select1st;
-	using std::select2nd;
-	using std::unary_compose;
-	using std::compose1;
-	using std::binary_compose;
-	using std::compose2;
-#endif  // _EWL_NO_CPP_NAMESPACE
+using std::binary_compose;
+using std::compose1;
+using std::compose2;
+using std::select1st;
+using std::select2nd;
+using std::unary_compose;
+#endif // _EWL_NO_CPP_NAMESPACE
 
 #endif // _FUNCTIONAL_EXT_H

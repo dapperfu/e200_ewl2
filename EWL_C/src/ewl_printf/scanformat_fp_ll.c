@@ -4,7 +4,7 @@
 #undef __STDC_WANT_LIB_EXT1__
 #endif
 
-#define __STDC_WANT_LIB_EXT1__ 0    // securelib
+#define __STDC_WANT_LIB_EXT1__ 0 // securelib
 
 #if !defined(__m56800E__) || __option(slld)
 #define _EWL_FLOATING_POINT_PRINTF_SCANF 1

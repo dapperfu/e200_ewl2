@@ -24,11 +24,11 @@ _MISRA_RESTORE()
 #if _EWL_WIDE_CHAR
 #if _EWL_C99
 
-#include <ewl_misra_types.h>
 #include <critical_regions.h>
-#include <wctype.h>
+#include <ewl_misra_types.h>
 #include <stdarg.h>
 #include <stddef.h>
+#include <wctype.h>
 MISRA_EXCEPTION_RULE_20_9()
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,41 +37,40 @@ MISRA_EXCEPTION_RULE_20_9()
 
 #if _EWL_C99_PRINTF_SCANF
 #if _EWL_FLOATING_POINT_PRINTF_SCANF
-	#include <ansi_fp.h>
-	#include <float.h>
-	#include <lconv.h>
-	#include <limits.h>
-	#include <locale.h>
+#include <ansi_fp.h>
+#include <float.h>
+#include <lconv.h>
+#include <limits.h>
+#include <locale.h>
 #endif /* _EWL_FLOATING_POINT_PRINTF_SCANF */
 #endif /* _EWL_C99_PRINTF_SCANF */
 
 MISRA_ALLOW_POINTER_CASTS()
 
 #ifndef __CWCC__
-	#define _EWL_COMPILE_FOR_SPEED 1
+#define _EWL_COMPILE_FOR_SPEED 1
 #else
-	#if __option(optimize_for_size)
-		#define _EWL_COMPILE_FOR_SPEED 0
-	#else
-		#define _EWL_COMPILE_FOR_SPEED 1
-	#endif
+#if __option(optimize_for_size)
+#define _EWL_COMPILE_FOR_SPEED 0
+#else
+#define _EWL_COMPILE_FOR_SPEED 1
+#endif
 #endif /* __CWCC__ */
 
-
 /*
-	swprintf
+        swprintf
 
-	Description
+        Description
 
-	The swprintf function is equivalent to fwprintf, except
-	that the argument s specifies an array of wide character
-	into which the generated output is to be written, rather
-	than written to a stream. No more that n wide characters are
-	written, including a terminating null wide character, which
-	is always added (unless n is zero)
+        The swprintf function is equivalent to fwprintf, except
+        that the argument s specifies an array of wide character
+        into which the generated output is to be written, rather
+        than written to a stream. No more that n wide characters are
+        written, including a terminating null wide character, which
+        is always added (unless n is zero)
 
 
-	Returns
+        Returns
 
       [#3]  The  swprintf  function  returns  the  number  of wide
        characters  written  in  the   array,   not   counting   the
@@ -82,15 +81,13 @@ MISRA_ALLOW_POINTER_CASTS()
 */
 
 MISRA_EXCEPTION_RULE_16_1()
-int_t _EWL_CDECL swprintf(wchar_t * _EWL_RESTRICT s, size_t n, const wchar_t * _EWL_RESTRICT format, ...)
-{
-	va_list args;
+int_t _EWL_CDECL swprintf(wchar_t *_EWL_RESTRICT s, size_t n,
+                          const wchar_t *_EWL_RESTRICT format, ...) {
+  va_list args;
 
-	va_start( args, format );
-	return(vswprintf(s, n, format, args));
+  va_start(args, format);
+  return (vswprintf(s, n, format, args));
 }
-
 
 #endif /* _EWL_C99 */
 #endif /* _EWL_WIDE_CHAR */
-

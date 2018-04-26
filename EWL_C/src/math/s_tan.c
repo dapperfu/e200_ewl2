@@ -49,37 +49,37 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL tan(f64_t x)
+f64_t _EWL_MATH_CDECL tan(f64_t x)
 #else
-	f64_t tan(x)
-	f64_t x;
+f64_t tan(x) f64_t x;
 #endif
 {
-	f64_t    y[2],z=0.0;
-	int32_t  n;
-	uint32_t ix;
+  f64_t y[2], z = 0.0;
+  int32_t n;
+  uint32_t ix;
 
-    /* High word of x. */
-	ix = GET_DOUBLE_UHI_WORD(x);
+  /* High word of x. */
+  ix = GET_DOUBLE_UHI_WORD(x);
 
-    /* |x| ~< pi/4 */
-	ix &= 0x7fffffffuL;
-	if(ix <= 0x3fe921fbuL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return __kernel_tan(x,z,1L);
+  /* |x| ~< pi/4 */
+  ix &= 0x7fffffffuL;
+  if (ix <= 0x3fe921fbuL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return __kernel_tan(x, z, 1L);
 
     /* tan(Inf or NaN) is NaN */
-	} else if (ix>=0x7ff00000uL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return x-x;		/* NaN */
+  } else if (ix >= 0x7ff00000uL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return x - x; /* NaN */
 
     /* argument reduction needed */
-	}else {
-	    n = __ieee754_rem_pio2(x,y);
-	    MISRA_EXCEPTION_RULE_10_3()
-		MISRA_EXCEPTION_RULE_14_7()
-	    return __kernel_tan(y[0],y[1], 1 - (int32_t)(((uint32_t)n&1uL) << 1)); /*   1 -- n even
-							-1 -- n odd */
-	}
+  } else {
+    n = __ieee754_rem_pio2(x, y);
+    MISRA_EXCEPTION_RULE_10_3()
+    MISRA_EXCEPTION_RULE_14_7()
+    return __kernel_tan(
+        y[0], y[1], 1 - (int32_t)(((uint32_t)n & 1uL) << 1)); /*   1 -- n even
+                                   -1 -- n odd */
+  }
 }
 #endif /* _EWL_FLOATING_POINT  */

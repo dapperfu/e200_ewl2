@@ -23,8 +23,8 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 MISRA_EXCEPTION_RULE_20_9()
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,46 +33,45 @@ MISRA_EXCEPTION_RULE_20_9()
 
 MISRA_ALLOW_POINTER_CASTS()
 
-
-wchar_t * _EWL_CDECL wcsncpy(wchar_t * _EWL_RESTRICT dst, const wchar_t * _EWL_RESTRICT src, size_t n)
-{
+wchar_t *_EWL_CDECL wcsncpy(wchar_t *_EWL_RESTRICT dst,
+                            const wchar_t *_EWL_RESTRICT src, size_t n) {
 #if !defined(__POWERPC__)
 
-	const	wchar_t * p = src;
-			wchar_t * q = dst;
+  const wchar_t *p = src;
+  wchar_t *q = dst;
 
-	n++;
+  n++;
 
-	while (--n) {
-		MISRA_EXCEPTION_RULE_13_1()
-		if (!(*q++ = *p++)) {
-			while (--n) {
-				*q++ = (wchar_t)0;
-			}
-			break;
-		}
-	}
+  while (--n) {
+    MISRA_EXCEPTION_RULE_13_1()
+    if (!(*q++ = *p++)) {
+      while (--n) {
+        *q++ = (wchar_t)0;
+      }
+      break;
+    }
+  }
 
 #else
 
-	const	wchar_t * p		= (const wchar_t *) src - 1;
-			wchar_t * q		= (wchar_t *) dst - 1;
+  const wchar_t *p = (const wchar_t *)src - 1;
+  wchar_t *q = (wchar_t *)dst - 1;
 
-	n++;
+  n++;
 
-	while (--n) {
-		MISRA_EXCEPTION_RULE_13_1()
-		if (!(*++q = *++p)) {
-			while (--n) {
-				*++q = (wchar_t)0;
-			}
-			break;
-		}
-	}
+  while (--n) {
+    MISRA_EXCEPTION_RULE_13_1()
+    if (!(*++q = *++p)) {
+      while (--n) {
+        *++q = (wchar_t)0;
+      }
+      break;
+    }
+  }
 
 #endif
 
-	return(dst);
+  return (dst);
 }
 
 #endif /* #if _EWL_WIDE_CHAR */

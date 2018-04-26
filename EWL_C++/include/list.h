@@ -11,7 +11,7 @@
 #include <list>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::list;
+using std::list;
 #endif
 
-#endif  // _LIST_H
+#endif // _LIST_H

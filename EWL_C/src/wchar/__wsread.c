@@ -28,60 +28,56 @@ _MISRA_RESTORE()
 #include <stdarg.h>
 #include <stddef.h>
 MISRA_EXCEPTION_RULE_20_9()
+#include <critical_regions.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 #include <wctype.h>
-#include <critical_regions.h>
 
 MISRA_ALLOW_POINTER_CASTS()
 
 #if _EWL_C99_PRINTF_SCANF
 #if _EWL_FLOATING_POINT_PRINTF_SCANF
-	#include <math.h>
+#include <math.h>
 #endif /* _EWL_FLOATING_POINT_PRINTF_SCANF */
 #endif /* _EWL_C99_PRINTF_SCANF */
 
-wint_t __wStringRead(void * isc, wint_t ch, int_t Action)
-{
-	wchar_t RetVal;
-	__wInStrCtrl * Iscp = (__wInStrCtrl*)isc;
+wint_t __wStringRead(void *isc, wint_t ch, int_t Action) {
+  wchar_t RetVal;
+  __wInStrCtrl *Iscp = (__wInStrCtrl *)isc;
 
-	switch(Action)
-	{
-		case __GetAwChar:
-			RetVal = *(Iscp->wNextChar);
-			if (RetVal == L'\0') {
-				Iscp->wNullCharDetected = 1;
-				MISRA_EXCEPTION_RULE_14_7()
-				return (WEOF);
-			} else {
-				Iscp->wNextChar++;
-				MISRA_EXCEPTION_RULE_14_7()
-				return(RetVal);
-			}
+  switch (Action) {
+  case __GetAwChar:
+    RetVal = *(Iscp->wNextChar);
+    if (RetVal == L'\0') {
+      Iscp->wNullCharDetected = 1;
+      MISRA_EXCEPTION_RULE_14_7()
+      return (WEOF);
+    } else {
+      Iscp->wNextChar++;
+      MISRA_EXCEPTION_RULE_14_7()
+      return (RetVal);
+    }
 
-		case __UngetAwChar:
-			if (!Iscp->wNullCharDetected) {
-				Iscp->wNextChar--;
-			} else {
-				Iscp->wNullCharDetected = 0;
-			}
-			MISRA_EXCEPTION_RULE_14_7()
-			return(ch);
+  case __UngetAwChar:
+    if (!Iscp->wNullCharDetected) {
+      Iscp->wNextChar--;
+    } else {
+      Iscp->wNullCharDetected = 0;
+    }
+    MISRA_EXCEPTION_RULE_14_7()
+    return (ch);
 
-		case __TestForwcsError:
-			MISRA_EXCEPTION_RULE_14_7()
-			return (wint_t)(Iscp->wNullCharDetected);
+  case __TestForwcsError:
+    MISRA_EXCEPTION_RULE_14_7()
+    return (wint_t)(Iscp->wNullCharDetected);
 
-		default:
-			MISRA_EXCEPTION_RULE_14_7()
-			return (wint_t)0;
-	}
+  default:
+    MISRA_EXCEPTION_RULE_14_7()
+    return (wint_t)0;
+  }
 }
-
 
 #endif /* _EWL_C99 */
 #endif /* _EWL_WIDE_CHAR */
-

@@ -4,7 +4,7 @@
  * $Date: 2012/06/01 15:39:38 $
  * $Revision: 1.1 $
  */
- 
+
 #ifndef _EWL_CPP_STD_STDDEF_H
 #define _EWL_CPP_STD_STDDEF_H
 
@@ -12,8 +12,8 @@
 
 namespace std {
 
-	using ::ptrdiff_t;
-	using ::size_t;
+using ::ptrdiff_t;
+using ::size_t;
 
 } /* namespace std */
 

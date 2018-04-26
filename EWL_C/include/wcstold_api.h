@@ -14,15 +14,12 @@
 _EWL_BEGIN_EXTERN_C
 
 #if _EWL_WIDE_CHAR
-	extern long double _EWL_CDECL __wcstold(int	max_width,
-									__std(wint_t) (*ReadProc)(void *, __std(wint_t), int),
-									void * ReadProcArg,
-									int	* chars_scanned,
-									int	* overflow) _EWL_CANT_THROW;
+extern long double _EWL_CDECL
+__wcstold(int max_width, __std(wint_t) (*ReadProc)(void *, __std(wint_t), int),
+          void *ReadProcArg, int *chars_scanned, int *overflow) _EWL_CANT_THROW;
 
 #endif
 
 _EWL_END_EXTERN_C
-
 
 #endif /* _EWL_WCSTOLD_H */

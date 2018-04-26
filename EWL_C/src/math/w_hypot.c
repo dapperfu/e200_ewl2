@@ -22,23 +22,25 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL hypot(f64_t x, f64_t y)/* wrapper hypot */
+f64_t _EWL_MATH_CDECL hypot(f64_t x, f64_t y) /* wrapper hypot */
 #else
-	f64_t hypot(x,y)		/* wrapper hypot */
-	f64_t x,y;
+f64_t hypot(x, y) /* wrapper hypot */
+    f64_t x,
+    y;
 #endif
 {
 #ifdef _IEEE_LIBM
-	/* range error may occur; not specified */
-	return __ieee754_hypot(x,y);
+  /* range error may occur; not specified */
+  return __ieee754_hypot(x, y);
 #else
-	f64_t z;
-	z = __ieee754_hypot(x,y);
-	if(_LIB_VERSION == _IEEE_) return z;
-	if((!isfinite(z))&&isfinite(x)&&isfinite(y))
-	    return __kernel_standard(x,y,4); /* hypot overflow */
-	else
-	    return z;
+  f64_t z;
+  z = __ieee754_hypot(x, y);
+  if (_LIB_VERSION == _IEEE_)
+    return z;
+  if ((!isfinite(z)) && isfinite(x) && isfinite(y))
+    return __kernel_standard(x, y, 4); /* hypot overflow */
+  else
+    return z;
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

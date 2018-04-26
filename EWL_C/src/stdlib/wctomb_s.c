@@ -22,63 +22,66 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 
+#include <ewl_thread_local_data.h>
 #include <locale_api.h>
 #include <mbstring.h>
-#include <ewl_thread_local_data.h>
 
 MISRA_ALLOW_POINTER_CASTS()
 
-int_t _EWL_CDECL wctomb_s(int_t * _EWL_RESTRICT status, char_t * _EWL_RESTRICT s, rsize_t smax, wchar_t wchar)
-{
-	int_t newstatus;
-	int_t len;
-	char_t wc[MB_CUR_MAX];
+int_t _EWL_CDECL wctomb_s(int_t *_EWL_RESTRICT status, char_t *_EWL_RESTRICT s,
+                          rsize_t smax, wchar_t wchar) {
+  int_t newstatus;
+  int_t len;
+  char_t wc[MB_CUR_MAX];
 
-	if (((s == NULL) && (smax != 0U)) || (smax > (rsize_t)RSIZE_MAX) || (status == NULL)) {
-		__ewl_runtime_constraint_violation_s(NULL, NULL, ERANGE);
-		MISRA_EXCEPTION_RULE_14_7()
-		return ERANGE;
-	}
+  if (((s == NULL) && (smax != 0U)) || (smax > (rsize_t)RSIZE_MAX) ||
+      (status == NULL)) {
+    __ewl_runtime_constraint_violation_s(NULL, NULL, ERANGE);
+    MISRA_EXCEPTION_RULE_14_7()
+    return ERANGE;
+  }
 
-	if (s == NULL) {
+  if (s == NULL) {
 #if defined(_EMBEDDED_WARRIOR_HAS_NO_LOCALE) && _EMBEDDED_WARRIOR_HAS_NO_LOCALE
-		*status = 0;	/* no state-dependent encoding for noconv encoder */
+    *status = 0; /* no state-dependent encoding for noconv encoder */
 #else
-		if (_EWL_LOCALDATA(_current_locale).ctype_cmpt_ptr->encode_wc == __wctomb_noconv) {
-			*status = 0;	/* no state-dependent encoding for noconv encoder */
-		} else {
-			*status = 1;	/* assume state-dependent encoding for all other encoders */
-		}
+    if (_EWL_LOCALDATA(_current_locale).ctype_cmpt_ptr->encode_wc ==
+        __wctomb_noconv) {
+      *status = 0; /* no state-dependent encoding for noconv encoder */
+    } else {
+      *status = 1; /* assume state-dependent encoding for all other encoders */
+    }
 #endif
-		MISRA_EXCEPTION_RULE_14_7()
-		return ENOERR;
-	}
+    MISRA_EXCEPTION_RULE_14_7()
+    return ENOERR;
+  }
 
 #if defined(_EMBEDDED_WARRIOR_HAS_NO_LOCALE) && _EMBEDDED_WARRIOR_HAS_NO_LOCALE
-	newstatus = __wctomb_noconv(wc, wchar);
+  newstatus = __wctomb_noconv(wc, wchar);
 #else
-	newstatus = _EWL_LOCALDATA(_current_locale).ctype_cmpt_ptr->encode_wc(wc, wchar);
+  newstatus =
+      _EWL_LOCALDATA(_current_locale).ctype_cmpt_ptr->encode_wc(wc, wchar);
 #endif /* _EMBEDDED_WARRIOR_HAS_NO_LOCALE*/
 
-	len = mblen(wc, sizeof(wc));
+  len = mblen(wc, sizeof(wc));
 
-	if ((rsize_t)len > smax) {
-		__ewl_runtime_constraint_violation_s(NULL, NULL, ERANGE);
-		MISRA_EXCEPTION_RULE_14_7()
-		return ERANGE;
-	}
+  if ((rsize_t)len > smax) {
+    __ewl_runtime_constraint_violation_s(NULL, NULL, ERANGE);
+    MISRA_EXCEPTION_RULE_14_7()
+    return ERANGE;
+  }
 
-	*status = newstatus;
-	memcpy(s, wc, (uint_t)len);
+  *status = newstatus;
+  memcpy(s, wc, (uint_t)len);
 
-	return ENOERR;
+  return ENOERR;
 }
 
-#endif  /*  _EWL_WIDE_CHAR  */
+#endif /*  _EWL_WIDE_CHAR  */

@@ -25,47 +25,50 @@ _MISRA_RESTORE()
 
 MISRA_ALLOW_POINTER_CASTS()
 
-char_t * strncat(char_t * _EWL_RESTRICT dst, const char_t * _EWL_RESTRICT src, size_t n)
-{
-	#if !defined(__PPC_EABI__) || defined(__PPC_VLE__)
+char_t *strncat(char_t *_EWL_RESTRICT dst, const char_t *_EWL_RESTRICT src,
+                size_t n) {
+#if !defined(__PPC_EABI__) || defined(__PPC_VLE__)
 
-		const	uchar_t * p = (uchar_t *)src;
-				uchar_t * q = (uchar_t *)dst;
+  const uchar_t *p = (uchar_t *)src;
+  uchar_t *q = (uchar_t *)dst;
 
-		while (*q++) {}
+  while (*q++) {
+  }
 
-		q--; 
+  q--;
 
-		while (n--) {
-			MISRA_EXCEPTION_RULE_13_1()
-			if (!(*q++ = *p++)) {
-				q--;
-				break;
-			}
-		}
+  while (n--) {
+    MISRA_EXCEPTION_RULE_13_1()
+    if (!(*q++ = *p++)) {
+      q--;
+      break;
+    }
+  }
 
-		*q = 0;
+  *q = 0;
 
-	#else
+#else
 
-		const	uchar_t * p = (uchar_t *) src - 1;
-				uchar_t * q = (uchar_t *) dst - 1;
+  const uchar_t *p = (uchar_t *)src - 1;
+  uchar_t *q = (uchar_t *)dst - 1;
 
-		while (*++q) {}
+  while (*++q) {
+  }
 
-		q--; n++;
+  q--;
+  n++;
 
-		while (--n) {
-			MISRA_EXCEPTION_RULE_13_1()
-			if (!(*++q = *++p)) {
-				q--;
-				break;
-			}
-		}
+  while (--n) {
+    MISRA_EXCEPTION_RULE_13_1()
+    if (!(*++q = *++p)) {
+      q--;
+      break;
+    }
+  }
 
-		*++q = 0u;
+  *++q = 0u;
 
-	#endif
+#endif
 
-	return(dst);
+  return (dst);
 }

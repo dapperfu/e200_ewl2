@@ -18,14 +18,14 @@
 
 #ifndef _EWL_NO_CPP_NAMESPACE
 
-	using std::allocator;
-	using std::char_traits;
-	using std::basic_string;
-	using std::string;
+using std::allocator;
+using std::basic_string;
+using std::char_traits;
+using std::string;
 #ifndef _EWL_NO_WCHART_CPP_SUPPORT
-	using std::wstring;
+using std::wstring;
 #endif
 
-#endif  // _EWL_NO_CPP_NAMESPACE
+#endif // _EWL_NO_CPP_NAMESPACE
 
 #endif // _STRINGFWD_H

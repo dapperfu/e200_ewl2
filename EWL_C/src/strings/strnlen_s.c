@@ -25,25 +25,24 @@ _MISRA_RESTORE()
 
 MISRA_ALLOW_POINTER_CASTS()
 
-size_t (strnlen_s)(const char_t * str, size_t maxsize)
-{
-	uchar_t *end;
-	uchar_t *p;
-	size_t len = (size_t)-1; /* overflows to zero */
+size_t(strnlen_s)(const char_t *str, size_t maxsize) {
+  uchar_t *end;
+  uchar_t *p;
+  size_t len = (size_t)-1; /* overflows to zero */
 
-	if ((maxsize == 0U) || (str == NULL)) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return 0u;
-	}
+  if ((maxsize == 0U) || (str == NULL)) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return 0u;
+  }
 
-	end = (uchar_t *) &(str[maxsize - 1U]);
-	p = (uchar_t *) str - 1;
+  end = (uchar_t *)&(str[maxsize - 1U]);
+  p = (uchar_t *)str - 1;
 
-	MISRA_EXCEPTION_RULE_12_4()
-	MISRA_EXCEPTION_RULE_17_3()
-	do {
-		len++;
-	} while ((end > p) && *++p);
+  MISRA_EXCEPTION_RULE_12_4()
+  MISRA_EXCEPTION_RULE_17_3()
+  do {
+    len++;
+  } while ((end > p) && *++p);
 
-	return len;
+  return len;
 }

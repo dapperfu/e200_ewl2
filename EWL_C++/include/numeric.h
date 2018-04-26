@@ -5,16 +5,16 @@
  * $Revision: 1.1 $
  */
 
-#ifndef _NUMERIC_H  
+#ifndef _NUMERIC_H
 #define _NUMERIC_H
 
 #include <numeric>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::accumulate;
-	using std::inner_product;
-	using std::partial_sum;
-	using std::adjacent_difference;
-#endif  // _EWL_NO_CPP_NAMESPACE      
+using std::accumulate;
+using std::adjacent_difference;
+using std::inner_product;
+using std::partial_sum;
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _NUMERIC_H  
+#endif // _NUMERIC_H

@@ -13,7 +13,7 @@
 _EWL_BEGIN_NAMESPACE_STD
 _EWL_BEGIN_EXTERN_C
 
-	extern struct lconv __lconv;
+extern struct lconv __lconv;
 
 _EWL_END_EXTERN_C
 _EWL_END_NAMESPACE_STD

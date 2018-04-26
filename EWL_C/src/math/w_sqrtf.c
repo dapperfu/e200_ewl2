@@ -28,26 +28,26 @@ __RCSID("$NetBSD: w_sqrtf.c,v 1.4 1997/10/09 11:36:14 lukem Exp $");
  * wrapper sqrtf(x)
  */
 
-
 #ifdef __STDC__
-	f32_t sqrtf(f32_t x)		/* wrapper sqrtf */
+f32_t sqrtf(f32_t x) /* wrapper sqrtf */
 #else
-	f32_t sqrt(x)			/* wrapper sqrtf */
-	f32_t x;
+f32_t sqrt(x) /* wrapper sqrtf */
+    f32_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_sqrtf(x);
+  return __ieee754_sqrtf(x);
 #else
-	f32_t z;
-	z = __ieee754_sqrtf(x);
-	if(_LIB_VERSION == _IEEE_ || isnanf(x)) return z;
-	if(x<(f32_t)0.0F) {
-	    /* sqrtf(negative) */
-	    return (f32_t)__kernel_standard((f64_t)x,(f64_t)x,126);
-	} else
-	    return z;
+  f32_t z;
+  z = __ieee754_sqrtf(x);
+  if (_LIB_VERSION == _IEEE_ || isnanf(x))
+    return z;
+  if (x < (f32_t)0.0F) {
+    /* sqrtf(negative) */
+    return (f32_t)__kernel_standard((f64_t)x, (f64_t)x, 126);
+  } else
+    return z;
 #endif
 }
 
-#endif  /* _EWL_FLOATING_POINT  */
+#endif /* _EWL_FLOATING_POINT  */

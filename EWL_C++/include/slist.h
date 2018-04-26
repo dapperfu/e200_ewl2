@@ -11,7 +11,7 @@
 #include <slist>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using CodeWarrior::slist;
+using CodeWarrior::slist;
 #endif
 
 #endif // _SLIST_H

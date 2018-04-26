@@ -15,14 +15,14 @@
 _EWL_BEGIN_NAMESPACE_STD
 _EWL_BEGIN_EXTERN_C
 
-	#ifndef _EWL_RSIZE_T_TYPE
-		#define _EWL_RSIZE_T_TYPE size_t
-	#endif
+#ifndef _EWL_RSIZE_T_TYPE
+#define _EWL_RSIZE_T_TYPE size_t
+#endif
 
-	#ifndef _EWL_RSIZE_T_DEFINED
-		#define _EWL_RSIZE_T_DEFINED
-		typedef _EWL_RSIZE_T_TYPE rsize_t;
-	#endif
+#ifndef _EWL_RSIZE_T_DEFINED
+#define _EWL_RSIZE_T_DEFINED
+typedef _EWL_RSIZE_T_TYPE rsize_t;
+#endif
 
 _EWL_END_EXTERN_C
 _EWL_END_NAMESPACE_STD

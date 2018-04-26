@@ -23,45 +23,44 @@
 extern __signal_func_ptr signal_funcs[__ewl_signal_max];
 
 MISRA_EXCEPTION_RULE_16_2()
-/** The raise function carries out the actions described in 7.14.1.1 for the signal sig. If a
- *	signal handler is called, the raise function shall not return until after the signal handler
- *	does.
- *	Returns zero if successful, nonzero if unsuccessful.
+/** The raise function carries out the actions described in 7.14.1.1 for the
+ *signal sig. If a signal handler is called, the raise function shall not return
+ *until after the signal handler does. Returns zero if successful, nonzero if
+ *unsuccessful.
  */
-int_t _EWL_CDECL raise(int_t sig)
-{
-	__signal_func_ptr	signal_func;
+int_t _EWL_CDECL raise(int_t sig) {
+  __signal_func_ptr signal_func;
 
-	if ((sig < 1) || (sig > __ewl_signal_max)) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return(-1);
-	}
+  if ((sig < 1) || (sig > __ewl_signal_max)) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (-1);
+  }
 
-	__begin_critical_region(signal_funcs_access);
+  __begin_critical_region(signal_funcs_access);
 
-	signal_func = signal_funcs[sig-1];
+  signal_func = signal_funcs[sig - 1];
 
-	MISRA_EXCEPTION_RULE_11_3()
-	if (signal_func != SIG_IGN) {
-		signal_funcs[sig-1] = SIG_DFL;
-	}
+  MISRA_EXCEPTION_RULE_11_3()
+  if (signal_func != SIG_IGN) {
+    signal_funcs[sig - 1] = SIG_DFL;
+  }
 
-	__end_critical_region(signal_funcs_access);
+  __end_critical_region(signal_funcs_access);
 
-	MISRA_EXCEPTION_RULE_11_3()
-	if ((signal_func == SIG_IGN) || ((signal_func == SIG_DFL) && (sig == SIGABRT))) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return(0);
-	}
+  MISRA_EXCEPTION_RULE_11_3()
+  if ((signal_func == SIG_IGN) ||
+      ((signal_func == SIG_DFL) && (sig == SIGABRT))) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (0);
+  }
 
-	MISRA_EXCEPTION_RULE_13_7()
-	if ((signal_func == SIG_DFL) || (signal_func == NULL)) {
-		MISRA_EXCEPTION_RULE_20_11()
-		exit(0);
-	}
+  MISRA_EXCEPTION_RULE_13_7()
+  if ((signal_func == SIG_DFL) || (signal_func == NULL)) {
+    MISRA_EXCEPTION_RULE_20_11()
+    exit(0);
+  }
 
-	(*signal_func)(sig);
+  (*signal_func)(sig);
 
-	return(0);
+  return (0);
 }
-

@@ -24,11 +24,9 @@
 
 #include <ewl_misra_types.h>
 
-void _EWL_CDECL clearerr(FILE * _file)
-{
-	MISRA_EXCEPTION_RULE_11_4()
-	struct _FILE * file = (struct _FILE *)_file;
-	file->state.eof   = 0u;
-	file->state.error = 0u;
+void _EWL_CDECL clearerr(FILE *_file) {
+  MISRA_EXCEPTION_RULE_11_4()
+  struct _FILE *file = (struct _FILE *)_file;
+  file->state.eof = 0u;
+  file->state.error = 0u;
 }
-

@@ -19,29 +19,25 @@
 
 #include <ewl_misra_types.h>
 
-int_t _EWL_CDECL puts(const char_t * s)
-{
-	int_t	c;
-	int_t   retval = 0;
-	FILE *	file = stdout;
+int_t _EWL_CDECL puts(const char_t *s) {
+  int_t c;
+  int_t retval = 0;
+  FILE *file = stdout;
 
-  	__begin_critical_region(stdout_access);
-	while ((c = *s++) != 0)
-	{
-		MISRA_EXCEPTION_RULE_11_4()
-		if (__putc(c, (struct _FILE *)file) == EOF)
-		{
-			retval = EOF;
-			break;
-		}
-	}
+  __begin_critical_region(stdout_access);
+  while ((c = *s++) != 0) {
+    MISRA_EXCEPTION_RULE_11_4()
+    if (__putc(c, (struct _FILE *)file) == EOF) {
+      retval = EOF;
+      break;
+    }
+  }
 
-	if (retval != (int_t)EOF)
-	{
-		MISRA_EXCEPTION_RULE_11_4()
-		retval = __putc('\n', (struct _FILE *)file);
-	}
+  if (retval != (int_t)EOF) {
+    MISRA_EXCEPTION_RULE_11_4()
+    retval = __putc('\n', (struct _FILE *)file);
+  }
 
-  	__end_critical_region(stdout_access);
-	return(retval);
+  __end_critical_region(stdout_access);
+  return (retval);
 }

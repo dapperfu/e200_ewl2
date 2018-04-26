@@ -11,15 +11,15 @@
 #include <stdexcept>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::logic_error;
-	using std::domain_error;
-	using std::invalid_argument;
-	using std::length_error;
-	using std::out_of_range;
-	using std::runtime_error;
-	using std::range_error;
-	using std::overflow_error;
-	using std::underflow_error;
-#endif  // _EWL_NO_CPP_NAMESPACE
+using std::domain_error;
+using std::invalid_argument;
+using std::length_error;
+using std::logic_error;
+using std::out_of_range;
+using std::overflow_error;
+using std::range_error;
+using std::runtime_error;
+using std::underflow_error;
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _STDEXCEPT_H
+#endif // _STDEXCEPT_H

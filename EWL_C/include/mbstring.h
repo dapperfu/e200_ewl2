@@ -9,12 +9,15 @@
 #define _EWL_MBSTRING_H
 
 #include <ansi_parms.h>
-#include <wchar_t.h>
 #include <size_t.h>
+#include <wchar_t.h>
 
-_EWL_IMP_EXP_C  int __utf8_to_unicode(wchar_t *, const char *, __std(size_t)) _EWL_CANT_THROW;
-_EWL_IMP_EXP_C  int __unicode_to_UTF8(char * _EWL_RESTRICT, wchar_t) _EWL_CANT_THROW;
-_EWL_IMP_EXP_C  int __mbtowc_noconv(wchar_t *, const char *, __std(size_t)) _EWL_CANT_THROW;
-_EWL_IMP_EXP_C  int __wctomb_noconv(char *, wchar_t wchar) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C int __utf8_to_unicode(wchar_t *, const char *,
+                                     __std(size_t)) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C int __unicode_to_UTF8(char *_EWL_RESTRICT,
+                                     wchar_t) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C int __mbtowc_noconv(wchar_t *, const char *,
+                                   __std(size_t)) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C int __wctomb_noconv(char *, wchar_t wchar) _EWL_CANT_THROW;
 
 #endif /* _EWL_MBSTRING_H */

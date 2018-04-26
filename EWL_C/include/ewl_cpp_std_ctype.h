@@ -4,7 +4,7 @@
  * $Date: 2012/06/01 15:39:38 $
  * $Revision: 1.1 $
  */
- 
+
 #ifndef _EWL_CPP_STD_CTYPE_H
 #define _EWL_CPP_STD_CTYPE_H
 
@@ -13,23 +13,23 @@
 namespace std {
 
 #if _EWL_OS_X_VERSION > 1
-	using ::isalnum;
-	using ::isalpha;
+using ::isalnum;
+using ::isalpha;
 #if _EWL_C99
-	using ::isblank;
+using ::isblank;
 #endif /* _EWL_C99 */
-	using ::iscntrl;
-	using ::isdigit;
-	using ::isgraph;
-	using ::islower;
-	using ::isprint;
-	using ::ispunct;
-	using ::isspace;
-	using ::isupper;
-	using ::isxdigit;
+using ::iscntrl;
+using ::isdigit;
+using ::isgraph;
+using ::islower;
+using ::isprint;
+using ::ispunct;
+using ::isspace;
+using ::isupper;
+using ::isxdigit;
 #endif /* _EWL_OS_X_VERSION > 1 */
-	using ::tolower;
-	using ::toupper;
+using ::tolower;
+using ::toupper;
 
 } /* namespace std */
 

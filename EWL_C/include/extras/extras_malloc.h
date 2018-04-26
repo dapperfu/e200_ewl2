@@ -12,7 +12,7 @@
 
 _EWL_BEGIN_EXTERN_C
 
-	_EWL_IMP_EXP_C  int _EWL_CDECL heapmin(void) _EWL_CANT_THROW;
+_EWL_IMP_EXP_C int _EWL_CDECL heapmin(void) _EWL_CANT_THROW;
 
 _EWL_END_EXTERN_C
 

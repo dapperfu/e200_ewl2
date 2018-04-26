@@ -40,77 +40,74 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-static const f64_t one = 1.0, half=0.5, big = 1.0e300;
+static const f64_t one = 1.0, half = 0.5, big = 1.0e300;
 #else
-static f64_t one = 1.0, half=0.5, big = 1.0e300;
+static f64_t one = 1.0, half = 0.5, big = 1.0e300;
 #endif
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL __ieee754_cosh(f64_t x)
+f64_t _EWL_MATH_CDECL __ieee754_cosh(f64_t x)
 #else
-	f64_t __ieee754_cosh(x)
-	f64_t x;
+f64_t __ieee754_cosh(x) f64_t x;
 #endif
 {
-	f64_t t,w;
-	uint32_t ix;
-	uint32_t lx;
+  f64_t t, w;
+  uint32_t ix;
+  uint32_t lx;
 
-    /* High word of |x|. */
-	ix = GET_DOUBLE_UHI_WORD(x);
-	ix &= 0x7fffffffUL;
-		
-    /* x is INF or NaN */
-	if(ix>=0x7ff00000UL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return x*x;
-	}
+  /* High word of |x|. */
+  ix = GET_DOUBLE_UHI_WORD(x);
+  ix &= 0x7fffffffUL;
 
-    /* |x| in [0,0.5*ln2], return 1+expm1(|x|)^2/(2*exp(|x|)) */
-	if(ix<0x3fd62e43UL) {
-	    t = expm1(fabs(x));
-	    w = one+t;
-	    if (ix<0x3c800000UL) {
-			MISRA_EXCEPTION_RULE_14_7()
-	    	return w;	/* cosh(tiny) = 1 */
-	    }
-		MISRA_EXCEPTION_RULE_14_7()
-	    return one+((t*t)/(w+w));
-	}
+  /* x is INF or NaN */
+  if (ix >= 0x7ff00000UL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return x * x;
+  }
 
-    /* |x| in [0.5*ln2,22], return (exp(|x|)+1/exp(|x|)/2; */
-	if (ix < 0x40360000UL) {
-		t = exp(fabs(x));
-		MISRA_EXCEPTION_RULE_14_7()
-		return (half*t)+(half/t);
-	}
+  /* |x| in [0,0.5*ln2], return 1+expm1(|x|)^2/(2*exp(|x|)) */
+  if (ix < 0x3fd62e43UL) {
+    t = expm1(fabs(x));
+    w = one + t;
+    if (ix < 0x3c800000UL) {
+      MISRA_EXCEPTION_RULE_14_7()
+      return w; /* cosh(tiny) = 1 */
+    }
+    MISRA_EXCEPTION_RULE_14_7()
+    return one + ((t * t) / (w + w));
+  }
 
-    /* |x| in [22, log(maxdouble)] return half*exp(|x|) */
-	if (ix < 0x40862E42UL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return half*exp(fabs(x));
-	}
+  /* |x| in [0.5*ln2,22], return (exp(|x|)+1/exp(|x|)/2; */
+  if (ix < 0x40360000UL) {
+    t = exp(fabs(x));
+    MISRA_EXCEPTION_RULE_14_7()
+    return (half * t) + (half / t);
+  }
 
-    /* |x| in [log(maxdouble), overflowthresold] */
-	MISRA_EXCEPTION_RULE_1_2c()
-	MISRA_EXCEPTION_RULE_11_4()
-	lx = *((((*(uint32_t*)&one)>>29)) + (uint32_t*)&x);
-	if ((ix<0x408633CEUL) ||
-	      ((ix==0x408633ceUL)&&(lx<=0x8fb9f87dUL))) {
-	    w = exp(half*fabs(x));
-	    t = half*w;
-		MISRA_EXCEPTION_RULE_14_7()
-	    return t*w;
-	}
+  /* |x| in [22, log(maxdouble)] return half*exp(|x|) */
+  if (ix < 0x40862E42UL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return half * exp(fabs(x));
+  }
 
-    /* |x| > overflowthresold, cosh(x) overflow */	
+  /* |x| in [log(maxdouble), overflowthresold] */
+  MISRA_EXCEPTION_RULE_1_2c() MISRA_EXCEPTION_RULE_11_4() lx =
+      *((((*(uint32_t *)&one) >> 29)) + (uint32_t *)&x);
+  if ((ix < 0x408633CEUL) || ((ix == 0x408633ceUL) && (lx <= 0x8fb9f87dUL))) {
+    w = exp(half * fabs(x));
+    t = half * w;
+    MISRA_EXCEPTION_RULE_14_7()
+    return t * w;
+  }
+
+    /* |x| > overflowthresold, cosh(x) overflow */
 #if _EWL_C99
-	MISRA_EXCEPTION_RULE_13_7()
-	if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
-		MISRA_EXCEPTION_RULE_20_5()
-		errno = ERANGE;
-	}
-#endif	
-	return big*big;
+  MISRA_EXCEPTION_RULE_13_7()
+  if ((uint_t)math_errhandling & (uint_t)MATH_ERRNO) {
+    MISRA_EXCEPTION_RULE_20_5()
+    errno = ERANGE;
+  }
+#endif
+  return big * big;
 }
 #endif /* _EWL_FLOATING_POINT  */

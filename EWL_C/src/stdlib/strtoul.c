@@ -16,50 +16,51 @@
 
 #include <ctype.h>
 #include <errno.h>
-#include <limits.h>
 #include <ewl_misra_types.h>
+#include <limits.h>
 MISRA_EXCEPTION_RULE_20_9()
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <inttypes.h>
 #include <strtoul_api.h>
 
-uint32_t _EWL_CDECL strtoul(const char_t * _EWL_RESTRICT str, char_t ** _EWL_RESTRICT end, int_t base)
-{
-	uint32_t	value;
-	int_t		count, negative, overflow;
-	__InStrCtrl isc;
+uint32_t _EWL_CDECL strtoul(const char_t *_EWL_RESTRICT str,
+                            char_t **_EWL_RESTRICT end, int_t base) {
+  uint32_t value;
+  int_t count, negative, overflow;
+  __InStrCtrl isc;
 
-	isc.NextChar         = (char_t *)str;
-	isc.NullCharDetected = 0;
+  isc.NextChar = (char_t *)str;
+  isc.NullCharDetected = 0;
 
-	value = __strtoul(base, INT_MAX, __StringRead, (void *)&isc, &count, &negative, &overflow);
+  value = __strtoul(base, INT_MAX, __StringRead, (void *)&isc, &count,
+                    &negative, &overflow);
 
-	if (end) {
-		*end = (char_t *) str + count;
-	}
+  if (end) {
+    *end = (char_t *)str + count;
+  }
 
-	if (overflow) {
+  if (overflow) {
 #if _EWL_LONGLONG
-		value = (uint64_t)ULONG_MAX;
+    value = (uint64_t)ULONG_MAX;
 #else
-		value = ULONG_MAX;
+    value = ULONG_MAX;
 #endif
-		MISRA_EXCEPTION_RULE_20_5()
-		errno = ERANGE;
-	} else {
-		if (negative) {
-			MISRA_EXCEPTION_RULE_10_3()			
-			if (value != 0x80000000UL) {
+    MISRA_EXCEPTION_RULE_20_5()
+    errno = ERANGE;
+  } else {
+    if (negative) {
+      MISRA_EXCEPTION_RULE_10_3()
+      if (value != 0x80000000UL) {
 #if _EWL_LONGLONG
-				value = (uint64_t)-(int64_t)value;
+        value = (uint64_t) - (int64_t)value;
 #else
-				value = -value;
+        value = -value;
 #endif
-			} 
-		}
-	}
+      }
+    }
+  }
 
-	return(value);
+  return (value);
 }

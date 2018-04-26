@@ -11,9 +11,9 @@
 #include <typeinfo>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::type_info;
-	using std::bad_cast;
-	using std::bad_typeid;
-#endif  // _EWL_NO_CPP_NAMESPACE
+using std::bad_cast;
+using std::bad_typeid;
+using std::type_info;
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _TYPEINFO_H
+#endif // _TYPEINFO_H

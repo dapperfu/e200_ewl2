@@ -26,33 +26,36 @@ _MISRA_RESTORE()
 
 MISRA_ALLOW_POINTER_CASTS()
 
-char_t * strcat(char_t * _EWL_RESTRICT dst, const char_t * _EWL_RESTRICT src)
-{
+char_t *strcat(char_t *_EWL_RESTRICT dst, const char_t *_EWL_RESTRICT src) {
 #if !defined(__PPC_EABI__)
 
-	const	char_t * p = src;
-			char_t * q = dst;
+  const char_t *p = src;
+  char_t *q = dst;
 
-	while (*q++) {}
+  while (*q++) {
+  }
 
-	q--;
+  q--;
 
-	MISRA_EXCEPTION_RULE_13_1()
-	while ((*q++ = *p++)) {}
+  MISRA_EXCEPTION_RULE_13_1()
+  while ((*q++ = *p++)) {
+  }
 
 #else
 
-	const	uchar_t * p = (uchar_t *) src - 1;
-			uchar_t * q = (uchar_t *) dst - 1;
+  const uchar_t *p = (uchar_t *)src - 1;
+  uchar_t *q = (uchar_t *)dst - 1;
 
-	while (*++q) {}
+  while (*++q) {
+  }
 
-	q--;
+  q--;
 
-	MISRA_EXCEPTION_RULE_13_1()
-	while ((*++q = *++p)) {}
+  MISRA_EXCEPTION_RULE_13_1()
+  while ((*++q = *++p)) {
+  }
 
 #endif
 
-	return(dst);
+  return (dst);
 }

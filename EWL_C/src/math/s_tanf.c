@@ -24,38 +24,38 @@
 __RCSID("$NetBSD: s_tanf.c,v 1.5 1997/10/09 11:33:38 lukem Exp $");
 #endif
 
-
 #ifdef __STDC__
-	f32_t tanf(f32_t x)
+f32_t tanf(f32_t x)
 #else
-	f32_t tanf(x)
-	f32_t x;
+f32_t tanf(x) f32_t x;
 #endif
 {
-	f32_t y[2],z=0.0F;
-	int32_t n;
-	uint32_t ix;
+  f32_t y[2], z = 0.0F;
+  int32_t n;
+  uint32_t ix;
 
-	GET_FLOAT_UWORD(ix,x);
+  GET_FLOAT_UWORD(ix, x);
 
-    /* |x| ~< pi/4 */
-	ix &= 0x7fffffffUL;
-	if(ix <= 0x3f490fdaUL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return __kernel_tanf(x,z,1);
+  /* |x| ~< pi/4 */
+  ix &= 0x7fffffffUL;
+  if (ix <= 0x3f490fdaUL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return __kernel_tanf(x, z, 1);
 
     /* tan(Inf or NaN) is NaN */
-	} else if (ix>=0x7f800000UL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return x-x;		/* NaN */
+  } else if (ix >= 0x7f800000UL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return x - x; /* NaN */
 
     /* argument reduction needed */
-	} else {
-	    n = __ieee754_rem_pio2f(x,y);
-	    MISRA_EXCEPTION_RULE_10_3()
-		MISRA_EXCEPTION_RULE_14_7()
-	    return __kernel_tanf(y[0],y[1],(int32_t)(1-(((uint32_t)n&1UL)<<1L))); /*   1 -- n even
-							      -1 -- n odd */
-	}
+  } else {
+    n = __ieee754_rem_pio2f(x, y);
+    MISRA_EXCEPTION_RULE_10_3()
+    MISRA_EXCEPTION_RULE_14_7()
+    return __kernel_tanf(
+        y[0], y[1],
+        (int32_t)(1 - (((uint32_t)n & 1UL) << 1L))); /*   1 -- n even
+                                 -1 -- n odd */
+  }
 }
 #endif /* _EWL_FLOATING_POINT  */

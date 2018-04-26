@@ -4,7 +4,7 @@
  * $Date: 2012/06/01 15:39:38 $
  * $Revision: 1.1 $
  */
- 
+
 #ifndef _EWL_ISO646_H
 #define _EWL_ISO646_H
 
@@ -13,9 +13,9 @@
 #if _EWL_C99
 
 #if !_EWL_USING_CW_C_HEADERS_
-	#if !__MACH__
-	#error You must have the non-EWL C header file access path before the EWL access path
-	#endif
+#if !__MACH__
+#error You must have the non-EWL C header file access path before the EWL access path
+#endif
 #else
 
 #include <ciso646>

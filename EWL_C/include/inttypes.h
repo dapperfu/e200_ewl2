@@ -11,7 +11,7 @@
 #include <ansi_parms.h>
 
 #if !_EWL_USING_CW_C_HEADERS_
-	#error You must have the non-EWL C header file access path before the EWL access path
+#error You must have the non-EWL C header file access path before the EWL access path
 #else
 
 #include <cinttypes>
@@ -20,15 +20,15 @@
 #if _EWL_C99
 
 #if defined(__cplusplus) && defined(_EWL_USING_NAMESPACE)
-	using std::imaxdiv_t;
-	using std::imaxabs;
-	using std::imaxdiv;
-	using std::strtoimax;
-	using std::strtoumax;
-	#if _EWL_WIDE_CHAR
-		using std::wcstoimax;
-		using std::wcstoumax;
-	#endif
+using std::imaxabs;
+using std::imaxdiv;
+using std::imaxdiv_t;
+using std::strtoimax;
+using std::strtoumax;
+#if _EWL_WIDE_CHAR
+using std::wcstoimax;
+using std::wcstoumax;
+#endif
 #endif
 
 #endif /* _EWL_C99 */

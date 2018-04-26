@@ -18,9 +18,9 @@ _MISRA_EXCEPTION_RULE_19_6()
 _MISRA_RESTORE()
 #define __STDC_WANT_LIB_EXT1__ 1
 
-#include <ewl_misra_types.h>
 #include <critical_regions.h>
 #include <ctype.h>
+#include <ewl_misra_types.h>
 #include <limits.h>
 #include <stdarg.h>
 #include <stddef.h>
@@ -32,10 +32,10 @@ _MISRA_RESTORE()
 #include <console_io.h>
 
 MISRA_EXCEPTION_RULE_16_1()
-int_t _EWL_CDECL sprintf_s(char_t * _EWL_RESTRICT s, rsize_t n, const char_t * _EWL_RESTRICT format, ...)
-{
-    va_list args;
+int_t _EWL_CDECL sprintf_s(char_t *_EWL_RESTRICT s, rsize_t n,
+                           const char_t *_EWL_RESTRICT format, ...) {
+  va_list args;
 
-    va_start( args, format );
-    return(vsprintf_s(s, n, format, args));
+  va_start(args, format);
+  return (vsprintf_s(s, n, format, args));
 }

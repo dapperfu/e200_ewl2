@@ -12,9 +12,9 @@
 
 namespace std {
 
-	using ::sig_atomic_t;
-	using ::raise;
-	using ::signal;
+using ::raise;
+using ::sig_atomic_t;
+using ::signal;
 
 } /* namespace std */
 

@@ -28,28 +28,24 @@ _MISRA_RESTORE()
 #include <stdarg.h>
 #include <stddef.h>
 MISRA_EXCEPTION_RULE_20_9()
+#include <critical_regions.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 #include <wctype.h>
-#include <critical_regions.h>
 
 MISRA_ALLOW_POINTER_CASTS()
 
 #if _EWL_C99_PRINTF_SCANF
 #if _EWL_FLOATING_POINT_PRINTF_SCANF
-	#include <math.h>
+#include <math.h>
 #endif /* _EWL_FLOATING_POINT_PRINTF_SCANF */
 #endif /* _EWL_C99_PRINTF_SCANF */
 
-
-
 int_t __wsformatter(wint_t (*wReadProc)(void *a, wint_t b, int_t c),
-							void * wReadProcArg,
-							const wchar_t * format_str,
-							va_list arg,
-							int_t is_secure);
+                    void *wReadProcArg, const wchar_t *format_str, va_list arg,
+                    int_t is_secure);
 
 wint_t __wFileRead(void *File, wint_t ch, int_t Action);
 
@@ -72,31 +68,30 @@ wint_t __wFileRead(void *File, wint_t ch, int_t Action);
        even zero, in the event of an early matching failure.
 */
 
-int_t _EWL_CDECL vfwscanf(FILE * _EWL_RESTRICT stream, const wchar_t * _EWL_RESTRICT format, va_list arg)
-{
-	int_t retval;
-	MISRA_QUIET_UNUSED_SYMBOL()
-	critical_regions crtrgn;
-	
-	if (stream == NULL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return(EOF);
-	}
-	if (fwide(stream, 1) <= 0) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return(EOF);
-	}
-	if (stream == stdin) {
-		crtrgn = stdin_access;
-	} else {
-		crtrgn = files_access;
-	}
-  	__begin_critical_region(crtrgn);
-	retval = __wsformatter(__wFileRead, (void *)stream, format, arg, 0);
-  	__end_critical_region(crtrgn);
-	return(retval);
+int_t _EWL_CDECL vfwscanf(FILE *_EWL_RESTRICT stream,
+                          const wchar_t *_EWL_RESTRICT format, va_list arg) {
+  int_t retval;
+  MISRA_QUIET_UNUSED_SYMBOL()
+  critical_regions crtrgn;
+
+  if (stream == NULL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (EOF);
+  }
+  if (fwide(stream, 1) <= 0) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (EOF);
+  }
+  if (stream == stdin) {
+    crtrgn = stdin_access;
+  } else {
+    crtrgn = files_access;
+  }
+  __begin_critical_region(crtrgn);
+  retval = __wsformatter(__wFileRead, (void *)stream, format, arg, 0);
+  __end_critical_region(crtrgn);
+  return (retval);
 }
 
 #endif /* _EWL_C99 */
 #endif /* _EWL_WIDE_CHAR */
-

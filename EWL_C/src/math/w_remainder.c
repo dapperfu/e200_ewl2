@@ -22,22 +22,24 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL remainder(f64_t x, f64_t y)	/* wrapper remainder */
+f64_t _EWL_MATH_CDECL remainder(f64_t x, f64_t y) /* wrapper remainder */
 #else
-	f64_t remainder(x,y)			/* wrapper remainder */
-	f64_t x,y;
+f64_t remainder(x, y) /* wrapper remainder */
+    f64_t x,
+    y;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_remainder(x,y);
+  return __ieee754_remainder(x, y);
 #else
-	f64_t z;
-	z = __ieee754_remainder(x,y);
-	if(_LIB_VERSION == _IEEE_ || isnan(y)) return z;
-	if(y==0.0)
-	    return __kernel_standard(x,y,28); /* remainder(x,0) */
-	else
-	    return z;
+  f64_t z;
+  z = __ieee754_remainder(x, y);
+  if (_LIB_VERSION == _IEEE_ || isnan(y))
+    return z;
+  if (y == 0.0)
+    return __kernel_standard(x, y, 28); /* remainder(x,0) */
+  else
+    return z;
 #endif
 }
 

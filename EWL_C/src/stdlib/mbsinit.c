@@ -22,36 +22,35 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 
+#include <ewl_thread_local_data.h>
 #include <locale_api.h>
 #include <mbstring.h>
-#include <ewl_thread_local_data.h>
 
 MISRA_ALLOW_POINTER_CASTS()
 
 #if _EWL_C99
-int_t _EWL_CDECL mbsinit(const mbstate_t * ps)
-{
-	if (ps == NULL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return (-1);
+int_t _EWL_CDECL mbsinit(const mbstate_t *ps) {
+  if (ps == NULL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (-1);
 #if _AEABI_PORTABILITY_LEVEL
-	} else if (ps->state1 == 0 && ps->state2 == 0) {
+  } else if (ps->state1 == 0 && ps->state2 == 0) {
 #else
-	} else if (*ps == 0) {
+  } else if (*ps == 0) {
 #endif
-		MISRA_EXCEPTION_RULE_14_7()
-		return (1);
-	} else {
-		MISRA_EXCEPTION_RULE_14_7()
-		return (0);
-	}
+    MISRA_EXCEPTION_RULE_14_7()
+    return (1);
+  } else {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (0);
+  }
 }
-#endif  /* _EWL_C99 */
-#endif  /*  _EWL_WIDE_CHAR  */
+#endif /* _EWL_C99 */
+#endif /*  _EWL_WIDE_CHAR  */

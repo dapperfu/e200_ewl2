@@ -29,23 +29,24 @@ __RCSID("$NetBSD: w_acosf.c,v 1.4 1997/10/09 11:33:50 lukem Exp $");
  */
 
 #ifdef __STDC__
-	f32_t acosf(f32_t x)		/* wrapper acosf */
+f32_t acosf(f32_t x) /* wrapper acosf */
 #else
-	f32_t acosf(x)			/* wrapper acosf */
-	f32_t x;
+f32_t acosf(x) /* wrapper acosf */
+    f32_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_acosf(x);
+  return __ieee754_acosf(x);
 #else
-	f32_t z;
-	z = __ieee754_acosf(x);
-	if(_LIB_VERSION == _IEEE_ || isnanf(x)) return z;
-	if(fabsf(x)>1.0F) {
-	        /* acosf(|x|>1) */
-	        return (f32_t)__kernel_standard((f64_t)x,(f64_t)x,101);
-	} else
-	    return z;
+  f32_t z;
+  z = __ieee754_acosf(x);
+  if (_LIB_VERSION == _IEEE_ || isnanf(x))
+    return z;
+  if (fabsf(x) > 1.0F) {
+    /* acosf(|x|>1) */
+    return (f32_t)__kernel_standard((f64_t)x, (f64_t)x, 101);
+  } else
+    return z;
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

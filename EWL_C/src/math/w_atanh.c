@@ -21,26 +21,27 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL atanh(f64_t x)		/* wrapper atanh */
+f64_t _EWL_MATH_CDECL atanh(f64_t x) /* wrapper atanh */
 #else
-	f64_t atanh(x)			/* wrapper atanh */
-	f64_t x;
+f64_t atanh(x) /* wrapper atanh */
+    f64_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_atanh(x);
+  return __ieee754_atanh(x);
 #else
-	f64_t z,y;
-	z = __ieee754_atanh(x);
-	if(_LIB_VERSION == _IEEE_ || isnan(x)) return z;
-	y = fabs(x);
-	if(y>=1.0) {
-	    if(y>1.0)
-	        return __kernel_standard(x,x,30); /* atanh(|x|>1) */
-	    else
-	        return __kernel_standard(x,x,31); /* atanh(|x|==1) */
-	} else
-	    return z;
+  f64_t z, y;
+  z = __ieee754_atanh(x);
+  if (_LIB_VERSION == _IEEE_ || isnan(x))
+    return z;
+  y = fabs(x);
+  if (y >= 1.0) {
+    if (y > 1.0)
+      return __kernel_standard(x, x, 30); /* atanh(|x|>1) */
+    else
+      return __kernel_standard(x, x, 31); /* atanh(|x|==1) */
+  } else
+    return z;
 #endif
 }
 

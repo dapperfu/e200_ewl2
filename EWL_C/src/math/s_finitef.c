@@ -29,18 +29,16 @@ __RCSID("$NetBSD: s_finitef.c,v 1.5 1997/10/09 11:31:56 lukem Exp $");
  * no branching!
  */
 
-
 #ifdef __STDC__
-	int32_t finitef(f32_t x)
+int32_t finitef(f32_t x)
 #else
-	int32_t finitef(x)
-	f32_t x;
+int32_t finitef(x) f32_t x;
 #endif
 {
-	uint32_t ix, itmp;
-	GET_FLOAT_UWORD(ix,x);
-	itmp = (ix&0x7fffffffUL)-0x7f800000UL;
-	itmp >>= 31;
-	return (int32_t)itmp;
+  uint32_t ix, itmp;
+  GET_FLOAT_UWORD(ix, x);
+  itmp = (ix & 0x7fffffffUL) - 0x7f800000UL;
+  itmp >>= 31;
+  return (int32_t)itmp;
 }
 #endif /* _EWL_FLOATING_POINT  */

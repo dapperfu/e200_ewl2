@@ -12,13 +12,11 @@
 #error pool_alloc.stub.c cannot be in your project if _EWL_OS_ALLOC_HEAP_SUPPORT is defined.
 #endif
 
-void *	__sys_alloc(__std(size_t) )
-{
+void *__sys_alloc(__std(size_t)) {
 #warning "replace 0 with a call to your OS'es allocator"
-	return 0;
+  return 0;
 }
 
-void	__sys_free(void *)
-{
+void __sys_free(void *) {
 #warning "replace with a call to your OS'es deallocator"
 }

@@ -18,4 +18,3 @@
 int_t errno;
 
 #endif /* _EWL_THREADSAFE */
-

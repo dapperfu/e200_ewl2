@@ -6,23 +6,23 @@
  */
 
 /*
-	WARNING - WARNING - WARNING
+        WARNING - WARNING - WARNING
 
-	This header is NON-STANDARD
+        This header is NON-STANDARD
 
-	The classes herein are offered as extensions to the C++ standard.
-	They are marked as such by the namespace CodeWarrior.
+        The classes herein are offered as extensions to the C++ standard.
+        They are marked as such by the namespace CodeWarrior.
 */
 
 #ifndef _HASH_MAP_H
 #define _HASH_MAP_H
 
-#include <hash_map>
 #include <hash_fun.h>
+#include <hash_map>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using CodeWarrior::hash_map;
-	using CodeWarrior::hash_multimap;
-#endif  // _EWL_NO_CPP_NAMESPACE
+using CodeWarrior::hash_map;
+using CodeWarrior::hash_multimap;
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _HASH_MAP_H
+#endif // _HASH_MAP_H

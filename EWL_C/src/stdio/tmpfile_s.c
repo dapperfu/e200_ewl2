@@ -13,9 +13,9 @@
 
 #include <ansi_parms.h>
 
+#include <ansi_files.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <ansi_files.h>
 
 #include <ewl_misra_types.h>
 
@@ -23,21 +23,20 @@
 
 #if defined(__STDC_WANT_LIB_EXT1__) && __STDC_WANT_LIB_EXT1__
 
-errno_t _EWL_CDECL tmpfile_s(FILE **file)
-{
-	if (file == NULL) {
-		__ewl_runtime_constraint_violation_s(NULL, NULL, ERANGE);
-		return ERANGE;
-	}
+errno_t _EWL_CDECL tmpfile_s(FILE **file) {
+  if (file == NULL) {
+    __ewl_runtime_constraint_violation_s(NULL, NULL, ERANGE);
+    return ERANGE;
+  }
 
-	*file = tmpfile();
+  *file = tmpfile();
 
-	if (*file != NULL) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return ENOERR;
-	} else {
-		return ERANGE;
-	}
+  if (*file != NULL) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return ENOERR;
+  } else {
+    return ERANGE;
+  }
 }
 #endif /* defined(__STDC_WANT_LIB_EXT1__) && __STDC_WANT_LIB_EXT1__ */
 

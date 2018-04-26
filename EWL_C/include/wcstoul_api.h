@@ -16,22 +16,16 @@
 
 _EWL_BEGIN_EXTERN_C
 
-    extern unsigned long _EWL_CDECL		__wcstoul(	int	base,
-										int		max_width,
-										__std(wint_t) (*ReadProc)(void *, __std(wint_t), int),
-										void * ReadProcArg,
-										int	* chars_scanned,
-										int	* negative,
-										int	* overflow) _EWL_CANT_THROW;
+extern unsigned long _EWL_CDECL __wcstoul(
+    int base, int max_width,
+    __std(wint_t) (*ReadProc)(void *, __std(wint_t), int), void *ReadProcArg,
+    int *chars_scanned, int *negative, int *overflow) _EWL_CANT_THROW;
 
 #if _EWL_LONGLONG
-	extern unsigned long long _EWL_CDECL __wcstoull(	int	base,
-										 int		max_width,
-										 __std(wint_t) (*ReadProc)(void *, __std(wint_t), int),
-										 void * ReadProcArg,
-										 int	* chars_scanned,
-										 int	* negative,
-										 int	* overflow) _EWL_CANT_THROW;
+extern unsigned long long _EWL_CDECL __wcstoull(
+    int base, int max_width,
+    __std(wint_t) (*ReadProc)(void *, __std(wint_t), int), void *ReadProcArg,
+    int *chars_scanned, int *negative, int *overflow) _EWL_CANT_THROW;
 #endif /*_EWL_LONGLONG*/
 
 _EWL_END_EXTERN_C

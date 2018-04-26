@@ -22,22 +22,23 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	 f64_t   _EWL_MATH_CDECL log(f64_t x)	/* wrapper pow */
+f64_t _EWL_MATH_CDECL log(f64_t x) /* wrapper pow */
 #else
-	f64_t log(x)			/* wrapper log */
-	f64_t x;
+f64_t log(x) /* wrapper log */
+    f64_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_log(x);
+  return __ieee754_log(x);
 #else
-	f64_t z;
-	z = __ieee754_log(x);
-	if(_LIB_VERSION == _IEEE_ || isnan(x) || x > 0.0) return z;
-	if(x==0.0)
-	    return __kernel_standard(x,x,16); /* log(0) */
-	else
-	    return __kernel_standard(x,x,17); /* log(x<0) */
+  f64_t z;
+  z = __ieee754_log(x);
+  if (_LIB_VERSION == _IEEE_ || isnan(x) || x > 0.0)
+    return z;
+  if (x == 0.0)
+    return __kernel_standard(x, x, 16); /* log(0) */
+  else
+    return __kernel_standard(x, x, 17); /* log(x<0) */
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

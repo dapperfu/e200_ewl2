@@ -11,7 +11,7 @@
 #include <bitset>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::bitset;
+using std::bitset;
 #endif
 
-#endif  // _BITSET_H
+#endif // _BITSET_H

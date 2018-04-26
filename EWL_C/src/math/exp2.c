@@ -13,10 +13,9 @@
 
 #include <math.h>
 
-_EWL_IMP_EXP_C f64_t _EWL_MATH_CDECL _EWL_CANT_THROW exp2(f64_t x) 
-{
-	const f64_t _ln2 = 0.6931471805599453094172321;
-	/* exp sets the range error */
-	return(exp(x * _ln2));
+_EWL_IMP_EXP_C f64_t _EWL_MATH_CDECL _EWL_CANT_THROW exp2(f64_t x) {
+  const f64_t _ln2 = 0.6931471805599453094172321;
+  /* exp sets the range error */
+  return (exp(x * _ln2));
 }
 #endif /* _EWL_USES_SUN_DP_MATH_LIB */

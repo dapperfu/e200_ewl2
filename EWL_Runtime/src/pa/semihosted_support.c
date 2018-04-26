@@ -11,15 +11,11 @@
 
 #define SEMIHOST_DST 0
 
-
 /*
  *	sys_cmdline		-	return the cmd line from the host
  *
  */
-static int sys_cmdline(register void * p)
-{
-
-}
+static int sys_cmdline(register void *p) {}
 
 /*
  * argc_argv 	-	Get argc argv from the host.
@@ -27,126 +23,108 @@ static int sys_cmdline(register void * p)
  * this function immediately before main.
  *
  */
-int __argc_argv ( int max_args,char ** argv )
-{
-	semihost_cmdline_parms cmdline_parms;
-	static char cmdline_storage[SEMIHOST_CMDLINE_MAX];
-	int nargs=0;
-	char *ptok;
-	int rv;
+int __argc_argv(int max_args, char **argv) {
+  semihost_cmdline_parms cmdline_parms;
+  static char cmdline_storage[SEMIHOST_CMDLINE_MAX];
+  int nargs = 0;
+  char *ptok;
+  int rv;
 
-	cmdline_parms.cmdline = cmdline_storage;
-	cmdline_parms.len = SEMIHOST_CMDLINE_MAX;
+  cmdline_parms.cmdline = cmdline_storage;
+  cmdline_parms.len = SEMIHOST_CMDLINE_MAX;
 
-	rv = sys_cmdline((void *)&cmdline_parms);
-	if ( rv < 0 ) {
-		return 0;
-	}
+  rv = sys_cmdline((void *)&cmdline_parms);
+  if (rv < 0) {
+    return 0;
+  }
 
-	ptok = strtok(cmdline_parms.cmdline," ");
+  ptok = strtok(cmdline_parms.cmdline, " ");
 
-	while ( ptok != NULL && (nargs < max_args)) {
-		argv[nargs] = ptok;
-		nargs++;
-		ptok = strtok(NULL," ");
-	}
+  while (ptok != NULL && (nargs < max_args)) {
+    argv[nargs] = ptok;
+    nargs++;
+    ptok = strtok(NULL, " ");
+  }
 
-	return nargs;
+  return nargs;
 }
 
 /*
  *	sys_system		-	execute a system command
  *
  */
-static int sys_system(register void * p)
-{
-
-}
+static int sys_system(register void *p) {}
 
 /*
  *	system	-	system command
  *
  */
-int	system ( char * cmd )
-{
+int system(char *cmd) {
 
-	semihost_system_parms system_parms;
-	int rv;
+  semihost_system_parms system_parms;
+  int rv;
 
-	system_parms.cmd= cmd;
-	system_parms.len = strlen(cmd);
+  system_parms.cmd = cmd;
+  system_parms.len = strlen(cmd);
 
+  rv = sys_system((void *)&system_parms);
 
-	rv = sys_system((void *)&system_parms);
-
-	return rv;
+  return rv;
 }
 
 /*
  * getenv - returns null as expected for bareboard
  *
  */
-char * getenv(const char* name)
-{
+char *getenv(const char *name) {
 #pragma unused(name)
 
-	return NULL;
+  return NULL;
 }
 
 /*
  *	sys_clock		-	execute a clock command
  *
  */
-static int sys_clock()
-{
-
-}
+static int sys_clock() {}
 
 /*
  *	__get_clock	-	clock command interface
  *
  */
-int __get_clock ( )
-{
+int __get_clock() {
 
-	int rv;
+  int rv;
 
-	rv = sys_clock();
+  rv = sys_clock();
 
-	return rv;
+  return rv;
 }
 
 /*
  *	sys_time		-	execute a time command
  *
  */
-static int sys_time()
-{
-
-}
+static int sys_time() {}
 
 /*
  *	__get_time	-	time command interface
  *
  */
-int	__get_time ( )
-{
+int __get_time() {
 
-	int rv;
+  int rv;
 
-	rv = sys_time();
+  rv = sys_time();
 
-	return rv;
+  return rv;
 }
 
 /*
  * __isdst - get DST setting from host
  *
  */
-int __isdst()
-{
-    return SEMIHOST_DST;
-}
+int __isdst() { return SEMIHOST_DST; }
 
 /*
  * __to_gm_time - converted to GM time, not supported
@@ -155,7 +133,4 @@ int __isdst()
 #if !_EWL_TIME_T_AVAILABLE
 typedef long time_t;
 #endif
-int __to_gm_time (time_t *lt)
-{
-    return -1;
-}
+int __to_gm_time(time_t *lt) { return -1; }

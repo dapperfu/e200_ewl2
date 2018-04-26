@@ -12,8 +12,8 @@
 
 namespace std {
 
-	using ::jmp_buf;
-	using ::longjmp;
+using ::jmp_buf;
+using ::longjmp;
 
 } /* namespace std */
 

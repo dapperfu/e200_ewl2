@@ -4,7 +4,7 @@
  * $Date: 2012/06/01 15:39:38 $
  * $Revision: 1.1 $
  */
- 
+
 #ifndef _EWL_CPP_STD_LOCALE_H
 #define _EWL_CPP_STD_LOCALE_H
 
@@ -12,9 +12,9 @@
 
 namespace std {
 
-	using ::lconv;
-	using ::localeconv;
-	using ::setlocale;
+using ::lconv;
+using ::localeconv;
+using ::setlocale;
 
 } /* namespace std */
 

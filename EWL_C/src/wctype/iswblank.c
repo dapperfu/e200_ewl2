@@ -20,16 +20,15 @@
 #undef _EWL_USE_INLINE
 #endif
 
-#include <wctype.h>
 #include <wchar.h>
+#include <wctype.h>
 
 int_t _EWL_CDECL _EWL_CANT_THROW iswblank(wint_t c) {
-int_t res = 0;
-	if ((uint_t)c < (uint_t)__ewl_wcmap_size) {
-		res = (int_t) (_EWL_CWMAP_ACCESS[c] & __ewl_wblank);
-	}
-	return res;
+  int_t res = 0;
+  if ((uint_t)c < (uint_t)__ewl_wcmap_size) {
+    res = (int_t)(_EWL_CWMAP_ACCESS[c] & __ewl_wblank);
+  }
+  return res;
 }
 
 #endif /* _EWL_WIDE_CHAR */
-

@@ -16,14 +16,15 @@
 
 #include <ewl_misra_types.h>
 
-void _EWL_CDECL rewind(FILE * file)
-{
-	MISRA_EXCEPTION_RULE_11_4()
-	((struct _FILE *)file)->state.error = 0U;				/* give the seek some hope of success */
-	(void)fseek(file, 0L, SEEK_SET);
-	MISRA_EXCEPTION_RULE_11_4()
-	((struct _FILE *)file)->state.error = 0U;				/* the standard says we have to do this
-										 * even if the seek fails (though it's
-										 * admittedly not likely to
-										 */
+void _EWL_CDECL rewind(FILE *file) {
+  MISRA_EXCEPTION_RULE_11_4()
+  ((struct _FILE *)file)->state.error =
+      0U; /* give the seek some hope of success */
+  (void)fseek(file, 0L, SEEK_SET);
+  MISRA_EXCEPTION_RULE_11_4()
+  ((struct _FILE *)file)->state.error =
+      0U; /* the standard says we have to do this
+           * even if the seek fails (though it's
+           * admittedly not likely to
+           */
 }

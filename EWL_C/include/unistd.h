@@ -8,8 +8,6 @@
 #ifndef EWL_C_INCLUDE_UNISTD_H_
 #define EWL_C_INCLUDE_UNISTD_H_
 
-
 #include <sys/unistd.h>
-
 
 #endif /* EWL_C_INCLUDE_UNISTD_H_ */

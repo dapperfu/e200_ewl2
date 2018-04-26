@@ -19,19 +19,17 @@
 
 #if _EWL_OS_DISK_FILE_SUPPORT
 #include <abort_exit.h>
-#include <string.h>
 #include <ansi_files.h>
+#include <string.h>
 #endif
 
 #include <ewl_misra_types.h>
 
 MISRA_QUIET_MACRO_FUNCDEF()
-int_t _EWL_CDECL (ferror)(FILE * file)
-{
-	MISRA_EXCEPTION_RULE_11_4()
-	int_t res = (int_t)ferror((struct _FILE *)file);
-	return res;
+int_t _EWL_CDECL(ferror)(FILE *file) {
+  MISRA_EXCEPTION_RULE_11_4()
+  int_t res = (int_t)ferror((struct _FILE *)file);
+  return res;
 
-	MISRA_EXCEPTION_RULE_16_7()
+  MISRA_EXCEPTION_RULE_16_7()
 }
-

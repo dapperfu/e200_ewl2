@@ -11,7 +11,7 @@
 #include <vector>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::vector;
+using std::vector;
 #endif
 
-#endif  // _VECTOR_H
+#endif // _VECTOR_H

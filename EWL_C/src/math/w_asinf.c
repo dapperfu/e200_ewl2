@@ -29,23 +29,24 @@ __RCSID("$NetBSD: w_asinf.c,v 1.4 1997/10/09 11:34:04 lukem Exp $");
  */
 
 #ifdef __STDC__
-	f32_t asinf(f32_t x)		/* wrapper asinf */
+f32_t asinf(f32_t x) /* wrapper asinf */
 #else
-	f32_t asinf(x)			/* wrapper asinf */
-	f32_t x;
+f32_t asinf(x) /* wrapper asinf */
+    f32_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_asinf(x);
+  return __ieee754_asinf(x);
 #else
-	f32_t z;
-	z = __ieee754_asinf(x);
-	if(_LIB_VERSION == _IEEE_ || isnanf(x)) return z;
-	if(fabsf(x)>1.0F) {
-	    /* asinf(|x|>1) */
-	    return (f32_t)__kernel_standard((f64_t)x,(f64_t)x,102);
-	} else
-	    return z;
+  f32_t z;
+  z = __ieee754_asinf(x);
+  if (_LIB_VERSION == _IEEE_ || isnanf(x))
+    return z;
+  if (fabsf(x) > 1.0F) {
+    /* asinf(|x|>1) */
+    return (f32_t)__kernel_standard((f64_t)x, (f64_t)x, 102);
+  } else
+    return z;
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

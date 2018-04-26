@@ -34,7 +34,7 @@
 #include <cdeque>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using CodeWarrior::cdeque;
+using CodeWarrior::cdeque;
 #endif
 
 #endif // _CDEQUE_H

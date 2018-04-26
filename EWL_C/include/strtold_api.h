@@ -13,12 +13,9 @@
 
 _EWL_BEGIN_EXTERN_C
 
-
-extern long double _EWL_CDECL __strtold(int max_width,
-							 int (_EWL_CDECL *ReadProc)(void *, int, int),
-							 void * ReadProcArg,
-							 int	* chars_scanned,
-							 int	* overflow) _EWL_CANT_THROW;
+extern long double _EWL_CDECL
+__strtold(int max_width, int(_EWL_CDECL *ReadProc)(void *, int, int),
+          void *ReadProcArg, int *chars_scanned, int *overflow) _EWL_CANT_THROW;
 
 _EWL_END_EXTERN_C
 

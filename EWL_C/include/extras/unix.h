@@ -5,8 +5,8 @@
  * $Revision: 1.1.2.1 $
  */
 
-#ifndef	_EWL_UNIX_H
-#define	_EWL_UNIX_H
+#ifndef _EWL_UNIX_H
+#define _EWL_UNIX_H
 
 #include <ansi_parms.h>
 #include <extras/sys/stat.h>

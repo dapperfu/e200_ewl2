@@ -10,17 +10,14 @@
 
 #include <stddef.h>
 
-extern void *__clear(void *ptr,size_t size);
-extern void *__clear(void *ptr,size_t size)
-{
-	char *cptr;
+extern void *__clear(void *ptr, size_t size);
+extern void *__clear(void *ptr, size_t size) {
+  char *cptr;
 
-	if((cptr=(char *)ptr)!=NULL)
-	{
-		for(; size!=0; --size, ++cptr)
-		{
-			*cptr=0;
-		}
-	}
-	return ptr;
+  if ((cptr = (char *)ptr) != NULL) {
+    for (; size != 0; --size, ++cptr) {
+      *cptr = 0;
+    }
+  }
+  return ptr;
 }

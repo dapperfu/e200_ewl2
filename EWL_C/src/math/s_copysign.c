@@ -24,14 +24,14 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL copysign(f64_t x, f64_t y)
+f64_t _EWL_MATH_CDECL copysign(f64_t x, f64_t y)
 #else
-	f64_t __copysign(x,y)
-	f64_t x,y;
+f64_t __copysign(x, y) f64_t x, y;
 #endif
 {
-	MISRA_EXCEPTION_RULE_12_7()
-	GET_DOUBLE_HI_WORD(x) = (GET_DOUBLE_HI_WORD(x)&0x7fffffffL)|(GET_DOUBLE_HI_WORD(y)&(int32_t)0x80000000L);
-    return x;
+  MISRA_EXCEPTION_RULE_12_7()
+  GET_DOUBLE_HI_WORD(x) = (GET_DOUBLE_HI_WORD(x) & 0x7fffffffL) |
+                          (GET_DOUBLE_HI_WORD(y) & (int32_t)0x80000000L);
+  return x;
 }
 #endif /* _EWL_FLOATING_POINT  */

@@ -13,263 +13,251 @@
 
 _EWL_BEGIN_EXTERN_C
 
-	extern float * __rt_cplx_neg_f(float * result, float * op);
-	extern f64_t * __rt_cplx_neg_d(f64_t * result, f64_t * op);
-	extern long double * __rt_cplx_neg_ld(long double * result, long double * op);
+extern float *__rt_cplx_neg_f(float *result, float *op);
+extern f64_t *__rt_cplx_neg_d(f64_t *result, f64_t *op);
+extern long double *__rt_cplx_neg_ld(long double *result, long double *op);
 
-	extern float* __rt_cplx_mul_f(float* result, float* lhs, float* rhs);
-	extern f64_t* __rt_cplx_mul_d(f64_t* result, f64_t* lhs, f64_t* rhs);
-	extern long double* __rt_cplx_mul_ld(long double* result, long double* lhs, long double* rhs);
+extern float *__rt_cplx_mul_f(float *result, float *lhs, float *rhs);
+extern f64_t *__rt_cplx_mul_d(f64_t *result, f64_t *lhs, f64_t *rhs);
+extern long double *__rt_cplx_mul_ld(long double *result, long double *lhs,
+                                     long double *rhs);
 
-	extern float* __rt_cplx_div_f(float* result, float* lhs, float* rhs);
-	extern f64_t* __rt_cplx_div_d(f64_t* result, f64_t* lhs, f64_t* rhs);
-	extern long double* __rt_cplx_div_ld(long double* result, long double* lhs, long double* rhs);
+extern float *__rt_cplx_div_f(float *result, float *lhs, float *rhs);
+extern f64_t *__rt_cplx_div_d(f64_t *result, f64_t *lhs, f64_t *rhs);
+extern long double *__rt_cplx_div_ld(long double *result, long double *lhs,
+                                     long double *rhs);
 
-	extern float * __rt_cplx_add_f(float * result, float * lhs, float * rhs);
-	extern f64_t * __rt_cplx_add_d(f64_t * result, f64_t * lhs, f64_t * rhs);
-	extern long double * __rt_cplx_add_ld(long double * result, long double * lhs, long double * rhs);
+extern float *__rt_cplx_add_f(float *result, float *lhs, float *rhs);
+extern f64_t *__rt_cplx_add_d(f64_t *result, f64_t *lhs, f64_t *rhs);
+extern long double *__rt_cplx_add_ld(long double *result, long double *lhs,
+                                     long double *rhs);
 
-	extern float* __rt_cplx_sub_f(float* result, float* lhs, float* rhs);
-	extern f64_t* __rt_cplx_sub_d(f64_t* result, f64_t* lhs, f64_t* rhs);
-	extern long double* __rt_cplx_sub_ld(long double* result, long double* lhs, long double* rhs);
+extern float *__rt_cplx_sub_f(float *result, float *lhs, float *rhs);
+extern f64_t *__rt_cplx_sub_d(f64_t *result, f64_t *lhs, f64_t *rhs);
+extern long double *__rt_cplx_sub_ld(long double *result, long double *lhs,
+                                     long double *rhs);
 
 _EWL_END_EXTERN_C
 
-static void complex_mul_templ(f64_t * result, f64_t * rhs)
-{
-	f64_t a = result[0];
-	f64_t b = result[1];
-	f64_t c = rhs[0];
-	f64_t d = rhs[1];
-	f64_t ac = a * c;
-	f64_t bd = b * d;
-	f64_t ad = a * d;
-	f64_t bc = b * c;
-	int recalc;
-	result[0] = ac - bd;
-	result[1] = ad + bc;
+static void complex_mul_templ(f64_t *result, f64_t *rhs) {
+  f64_t a = result[0];
+  f64_t b = result[1];
+  f64_t c = rhs[0];
+  f64_t d = rhs[1];
+  f64_t ac = a * c;
+  f64_t bd = b * d;
+  f64_t ad = a * d;
+  f64_t bc = b * c;
+  int recalc;
+  result[0] = ac - bd;
+  result[1] = ad + bc;
 
-	// Recover infinities that computed as NaN+iNaN ...
-	if (isnan(result[0]) && isnan(result[1]))
-	{
-		recalc = 0;
-		if ( isinf(a) || isinf(b) ) // z is infinite
-		{
-			// "Box" the infinity ...
-			a = copysign(isinf(a) ? 1.0 : 0.0, a);
-			b = copysign(isinf(b) ? 1.0 : 0.0, b);
-			// Change NaNs in the other factor to 0 ...
-			if (isnan(c))
-				c = copysign(0.0, c);
-			if (isnan(d))
-				d = copysign(0.0, d);
-			recalc = 1;
-		}
-		if ( isinf(c) || isinf(d) ) // w is infinite
-		{
-			// "Box" the infinity ...
-			c = copysign(isinf(c) ? 1.0 : 0.0, c);
-			d = copysign(isinf(d) ? 1.0 : 0.0, d);
-			// Change NaNs in the other factor to 0 ...
-			if (isnan(a))
-				a = copysign(0.0, a);
-			if (isnan(b))
-				b = copysign(0.0, b);
-			recalc = 1;
-		}
-		if (!recalc) {
-			// Recover infinities from overflow cases ...
-			if (isinf(ac) || isinf(bd) || isinf(ad) || isinf(bc))
-			{
-				// Change all NaNs to 0 ...
-				if (isnan(a))
-					a = copysign(0.0, a);
-				if (isnan(b))
-					b = copysign(0.0, b);
-				if (isnan(c))
-					c = copysign(0.0, c);
-				if (isnan(d))
-					d = copysign(0.0, d);
-				recalc = 1;
-			}
-		}
-		if (recalc)
-		{
-			result[0] = copysign((HUGE_VAL), ( a * c - b * d ));
-			result[1] = copysign((HUGE_VAL), ( a * d + b * c ));
-		}
-	}
+  // Recover infinities that computed as NaN+iNaN ...
+  if (isnan(result[0]) && isnan(result[1])) {
+    recalc = 0;
+    if (isinf(a) || isinf(b)) // z is infinite
+    {
+      // "Box" the infinity ...
+      a = copysign(isinf(a) ? 1.0 : 0.0, a);
+      b = copysign(isinf(b) ? 1.0 : 0.0, b);
+      // Change NaNs in the other factor to 0 ...
+      if (isnan(c))
+        c = copysign(0.0, c);
+      if (isnan(d))
+        d = copysign(0.0, d);
+      recalc = 1;
+    }
+    if (isinf(c) || isinf(d)) // w is infinite
+    {
+      // "Box" the infinity ...
+      c = copysign(isinf(c) ? 1.0 : 0.0, c);
+      d = copysign(isinf(d) ? 1.0 : 0.0, d);
+      // Change NaNs in the other factor to 0 ...
+      if (isnan(a))
+        a = copysign(0.0, a);
+      if (isnan(b))
+        b = copysign(0.0, b);
+      recalc = 1;
+    }
+    if (!recalc) {
+      // Recover infinities from overflow cases ...
+      if (isinf(ac) || isinf(bd) || isinf(ad) || isinf(bc)) {
+        // Change all NaNs to 0 ...
+        if (isnan(a))
+          a = copysign(0.0, a);
+        if (isnan(b))
+          b = copysign(0.0, b);
+        if (isnan(c))
+          c = copysign(0.0, c);
+        if (isnan(d))
+          d = copysign(0.0, d);
+        recalc = 1;
+      }
+    }
+    if (recalc) {
+      result[0] = copysign((HUGE_VAL), (a * c - b * d));
+      result[1] = copysign((HUGE_VAL), (a * d + b * c));
+    }
+  }
 }
 
-static void complex_div_templ(f64_t * result, f64_t * rhs)
-{
-	int ilogbw = 0;
-	f64_t a = result[0];
-	f64_t b = result[1];
-	f64_t c = rhs[0];
-	f64_t d = rhs[1];
-	f64_t logbw = logb(fmax(fabs(c), fabs(d)));
-	f64_t denom;
-	if (isfinite(logbw))
-	{
-		ilogbw = (int)logbw;
-		c = scalbn(c, -ilogbw);
-		d = scalbn(d, -ilogbw);
-	}
-	denom = c * c + d * d;
-	result[0] = scalbn((a * c + b * d) / denom, -ilogbw);
-	result[1] = scalbn((b * c - a * d) / denom, -ilogbw);
+static void complex_div_templ(f64_t *result, f64_t *rhs) {
+  int ilogbw = 0;
+  f64_t a = result[0];
+  f64_t b = result[1];
+  f64_t c = rhs[0];
+  f64_t d = rhs[1];
+  f64_t logbw = logb(fmax(fabs(c), fabs(d)));
+  f64_t denom;
+  if (isfinite(logbw)) {
+    ilogbw = (int)logbw;
+    c = scalbn(c, -ilogbw);
+    d = scalbn(d, -ilogbw);
+  }
+  denom = c * c + d * d;
+  result[0] = scalbn((a * c + b * d) / denom, -ilogbw);
+  result[1] = scalbn((b * c - a * d) / denom, -ilogbw);
 
-	// Recover infinities and zeros that computed
-	// as NaN+iNaN; the only cases are non-zero/zero,
-	// infinite/finite, and finite/infinite, ...
+  // Recover infinities and zeros that computed
+  // as NaN+iNaN; the only cases are non-zero/zero,
+  // infinite/finite, and finite/infinite, ...
 
-	if (isnan(result[0]) && isnan(result[1]))
-	{
-		if ((denom == 0) && (!isnan(a) || !isnan(b)))
-		{
-			result[0] = copysign(HUGE_VAL, c) * a;
-			result[1] = copysign(HUGE_VAL, c) * b;
-		}
-		else if ((isinf(a) || isinf(b)) && isfinite(c) && isfinite(d))
-		{
-			a = copysign(isinf(a) ? 1.0 : 0.0, a);
-			b = copysign(isinf(b) ? 1.0 : 0.0, b);
-			result[0] = copysign(HUGE_VAL, ( a * c + b * d ));
-			result[1] = copysign(HUGE_VAL, ( b * c - a * d ));
-		}
-		else if (isinf(logbw) && isfinite(a) && isfinite(b))
-		{
-			c = copysign(isinf(c) ? 1.0 : 0.0, c);
-			d = copysign(isinf(d) ? 1.0 : 0.0, d);
-			result[0] = 0 * ( a * c + b * d );
-			result[1] = 0 * ( b * c - a * d );
-		}
-	}
+  if (isnan(result[0]) && isnan(result[1])) {
+    if ((denom == 0) && (!isnan(a) || !isnan(b))) {
+      result[0] = copysign(HUGE_VAL, c) * a;
+      result[1] = copysign(HUGE_VAL, c) * b;
+    } else if ((isinf(a) || isinf(b)) && isfinite(c) && isfinite(d)) {
+      a = copysign(isinf(a) ? 1.0 : 0.0, a);
+      b = copysign(isinf(b) ? 1.0 : 0.0, b);
+      result[0] = copysign(HUGE_VAL, (a * c + b * d));
+      result[1] = copysign(HUGE_VAL, (b * c - a * d));
+    } else if (isinf(logbw) && isfinite(a) && isfinite(b)) {
+      c = copysign(isinf(c) ? 1.0 : 0.0, c);
+      d = copysign(isinf(d) ? 1.0 : 0.0, d);
+      result[0] = 0 * (a * c + b * d);
+      result[1] = 0 * (b * c - a * d);
+    }
+  }
 }
 
-float * __rt_cplx_neg_f(float* result, float* op)
-{
-	result[0] = -op[0];
-	result[1] = -op[1];
-	return result;
+float *__rt_cplx_neg_f(float *result, float *op) {
+  result[0] = -op[0];
+  result[1] = -op[1];
+  return result;
 }
 
-f64_t * __rt_cplx_neg_d(f64_t * result, f64_t * op)
-{
-	result[0] = -op[0];
-	result[1] = -op[1];
-	return result;
+f64_t *__rt_cplx_neg_d(f64_t *result, f64_t *op) {
+  result[0] = -op[0];
+  result[1] = -op[1];
+  return result;
 }
 
-long double * __rt_cplx_neg_ld(long double * result, long double * op)
-{
-	result[0] = -op[0];
-	result[1] = -op[1];
-	return result;
+long double *__rt_cplx_neg_ld(long double *result, long double *op) {
+  result[0] = -op[0];
+  result[1] = -op[1];
+  return result;
 }
 
-float * __rt_cplx_add_f(float * result, float * lhs, float * rhs)
-{
-	result[0] = lhs[0] + rhs[0];
-	result[1] = lhs[1] + rhs[1];
-	return result;
+float *__rt_cplx_add_f(float *result, float *lhs, float *rhs) {
+  result[0] = lhs[0] + rhs[0];
+  result[1] = lhs[1] + rhs[1];
+  return result;
 }
 
-f64_t * __rt_cplx_add_d(f64_t * result, f64_t * lhs, f64_t * rhs)
-{
-	result[0] = lhs[0] + rhs[0];
-	result[1] = lhs[1] + rhs[1];
-	return result;
+f64_t *__rt_cplx_add_d(f64_t *result, f64_t *lhs, f64_t *rhs) {
+  result[0] = lhs[0] + rhs[0];
+  result[1] = lhs[1] + rhs[1];
+  return result;
 }
 
-long double * __rt_cplx_add_ld(long double * result, long double * lhs, long double * rhs)
-{
-	result[0] = lhs[0] + rhs[0];
-	result[1] = lhs[1] + rhs[1];
-	return result;
+long double *__rt_cplx_add_ld(long double *result, long double *lhs,
+                              long double *rhs) {
+  result[0] = lhs[0] + rhs[0];
+  result[1] = lhs[1] + rhs[1];
+  return result;
 }
 
-float * __rt_cplx_sub_f(float * result, float * lhs, float * rhs)
-{
-	result[0] = lhs[0] - rhs[0];
-	result[1] = lhs[1] - rhs[1];
-	return result;
+float *__rt_cplx_sub_f(float *result, float *lhs, float *rhs) {
+  result[0] = lhs[0] - rhs[0];
+  result[1] = lhs[1] - rhs[1];
+  return result;
 }
 
-f64_t * __rt_cplx_sub_d(f64_t* result, f64_t * lhs, f64_t* rhs)
-{
-	result[0] = lhs[0] - rhs[0];
-	result[1] = lhs[1] - rhs[1];
-	return result;
+f64_t *__rt_cplx_sub_d(f64_t *result, f64_t *lhs, f64_t *rhs) {
+  result[0] = lhs[0] - rhs[0];
+  result[1] = lhs[1] - rhs[1];
+  return result;
 }
 
-long double * __rt_cplx_sub_ld(long double * result, long double * lhs, long double * rhs)
-{
-	result[0] = lhs[0] - rhs[0];
-	result[1] = lhs[1] - rhs[1];
-	return result;
+long double *__rt_cplx_sub_ld(long double *result, long double *lhs,
+                              long double *rhs) {
+  result[0] = lhs[0] - rhs[0];
+  result[1] = lhs[1] - rhs[1];
+  return result;
 }
 
-float * __rt_cplx_mul_f(float * result, float * lhs, float * rhs)
-{
-    f64_t dres[2], drhs[2];
-	dres[0] = (f64_t)lhs[0]; dres[1] = (f64_t)lhs[1];
-	drhs[0] = (f64_t)rhs[0]; drhs[1] = (f64_t)rhs[1];
-	complex_mul_templ(dres, drhs);
-	result[0] = (f32_t)dres[0];
-	result[1] = (f32_t)dres[1];
-	return result;
+float *__rt_cplx_mul_f(float *result, float *lhs, float *rhs) {
+  f64_t dres[2], drhs[2];
+  dres[0] = (f64_t)lhs[0];
+  dres[1] = (f64_t)lhs[1];
+  drhs[0] = (f64_t)rhs[0];
+  drhs[1] = (f64_t)rhs[1];
+  complex_mul_templ(dres, drhs);
+  result[0] = (f32_t)dres[0];
+  result[1] = (f32_t)dres[1];
+  return result;
 }
 
-f64_t * __rt_cplx_mul_d(f64_t * result, f64_t * lhs, f64_t * rhs)
-{
-	result[0] = lhs[0];
-	result[1] = lhs[1];
-	complex_mul_templ(result,rhs);
-	return result;
+f64_t *__rt_cplx_mul_d(f64_t *result, f64_t *lhs, f64_t *rhs) {
+  result[0] = lhs[0];
+  result[1] = lhs[1];
+  complex_mul_templ(result, rhs);
+  return result;
 }
 
-long double * __rt_cplx_mul_ld(long double* result, long double* lhs, long double* rhs)
-{
-    f64_t dres[2], drhs[2];
-	dres[0] = lhs[0]; dres[1] = lhs[1];
-	drhs[0] = rhs[0]; drhs[1] = rhs[1];
-	complex_mul_templ(dres, drhs);
-	result[0] = dres[0];
-	result[1] = dres[1];
-	return (long double *)result;
+long double *__rt_cplx_mul_ld(long double *result, long double *lhs,
+                              long double *rhs) {
+  f64_t dres[2], drhs[2];
+  dres[0] = lhs[0];
+  dres[1] = lhs[1];
+  drhs[0] = rhs[0];
+  drhs[1] = rhs[1];
+  complex_mul_templ(dres, drhs);
+  result[0] = dres[0];
+  result[1] = dres[1];
+  return (long double *)result;
 }
 
-
-float* __rt_cplx_div_f(float* result, float* lhs, float* rhs)
-{
-    f64_t dres[2], drhs[2];
-	dres[0] = (f64_t)lhs[0]; dres[1] = (f64_t)lhs[1];
-	drhs[0] = (f64_t)rhs[0]; drhs[1] = (f64_t)rhs[1];
-	complex_div_templ(dres, drhs);
-	result[0] = (f32_t)dres[0];
-	result[1] = (f32_t)dres[1];
-	return (f32_t *)result;
+float *__rt_cplx_div_f(float *result, float *lhs, float *rhs) {
+  f64_t dres[2], drhs[2];
+  dres[0] = (f64_t)lhs[0];
+  dres[1] = (f64_t)lhs[1];
+  drhs[0] = (f64_t)rhs[0];
+  drhs[1] = (f64_t)rhs[1];
+  complex_div_templ(dres, drhs);
+  result[0] = (f32_t)dres[0];
+  result[1] = (f32_t)dres[1];
+  return (f32_t *)result;
 }
 
-f64_t* __rt_cplx_div_d(f64_t* result, f64_t* lhs, f64_t* rhs)
-{
-	result[0] = lhs[0];
-	result[1] = lhs[1];
-	complex_div_templ(result,rhs);
-	return result;
+f64_t *__rt_cplx_div_d(f64_t *result, f64_t *lhs, f64_t *rhs) {
+  result[0] = lhs[0];
+  result[1] = lhs[1];
+  complex_div_templ(result, rhs);
+  return result;
 }
 
-long double * __rt_cplx_div_ld(long double * result, long double * lhs, long double* rhs)
-{
-    f64_t dres[2], drhs[2];
-	dres[0] = lhs[0]; dres[1] = lhs[1];
-	drhs[0] = rhs[0]; drhs[1] = rhs[1];
-	complex_div_templ(dres, drhs);
-	result[0] = dres[0];
-	result[1] = dres[1];
-	return (long double *)result;
+long double *__rt_cplx_div_ld(long double *result, long double *lhs,
+                              long double *rhs) {
+  f64_t dres[2], drhs[2];
+  dres[0] = lhs[0];
+  dres[1] = lhs[1];
+  drhs[0] = rhs[0];
+  drhs[1] = rhs[1];
+  complex_div_templ(dres, drhs);
+  result[0] = dres[0];
+  result[1] = dres[1];
+  return (long double *)result;
 }
 
 #if 0

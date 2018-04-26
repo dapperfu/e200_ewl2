@@ -36,43 +36,41 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 
+#include <ewl_thread_local_data.h>
 #include <locale_api.h>
 #include <mbstring.h>
-#include <ewl_thread_local_data.h>
 
 MISRA_ALLOW_POINTER_CASTS()
 
-int_t __wctomb_noconv(char_t * s, wchar_t wchar)
-{
-	if (!s) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return(0);
-	}
+int_t __wctomb_noconv(char_t *s, wchar_t wchar) {
+  if (!s) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (0);
+  }
 
-	if (wchar > (wchar_t)255) {
-		MISRA_EXCEPTION_RULE_14_7()
-		return(-1);
-	}
+  if (wchar > (wchar_t)255) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (-1);
+  }
 
-	*s = (char_t)wchar;
+  *s = (char_t)wchar;
 
-	return(1);
+  return (1);
 }
 
-int_t _EWL_CDECL wctomb(char_t * s, wchar_t wchar)
-{
+int_t _EWL_CDECL wctomb(char_t *s, wchar_t wchar) {
 #if defined(_EMBEDDED_WARRIOR_HAS_NO_LOCALE) && _EMBEDDED_WARRIOR_HAS_NO_LOCALE
-	return __wctomb_noconv(s, wchar);
+  return __wctomb_noconv(s, wchar);
 #else
-	return(_EWL_LOCALDATA(_current_locale).ctype_cmpt_ptr->encode_wc(s, wchar));
+  return (_EWL_LOCALDATA(_current_locale).ctype_cmpt_ptr->encode_wc(s, wchar));
 #endif /* _EMBEDDED_WARRIOR_HAS_NO_LOCALE */
 }
 
-#endif  /*  _EWL_WIDE_CHAR  */
+#endif /*  _EWL_WIDE_CHAR  */

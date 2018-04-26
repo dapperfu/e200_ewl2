@@ -24,11 +24,10 @@ _MISRA_RESTORE()
 #include <stdio.h>
 
 MISRA_EXCEPTION_RULE_16_1()
-int_t _EWL_CDECL sscanf(const char_t * _EWL_RESTRICT s, const char_t * _EWL_RESTRICT format, ...)
-{
-	va_list args;
+int_t _EWL_CDECL sscanf(const char_t *_EWL_RESTRICT s,
+                        const char_t *_EWL_RESTRICT format, ...) {
+  va_list args;
 
-	va_start( args, format );
-	return(vsscanf(s, format, args));
+  va_start(args, format);
+  return (vsscanf(s, format, args));
 }
-

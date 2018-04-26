@@ -30,26 +30,27 @@ __RCSID("$NetBSD: w_sinhf.c,v 1.4 1997/10/09 11:36:09 lukem Exp $");
  * wrapper sinhf(x)
  */
 
-
 #ifdef __STDC__
-	f32_t _EWL_MATH_CDECL sinhf(f32_t x)		/* wrapper sinhf */
+f32_t _EWL_MATH_CDECL sinhf(f32_t x) /* wrapper sinhf */
 #else
-	f32_t sinhf(x)			/* wrapper sinhf */
-	f32_t x;
+f32_t sinhf(x) /* wrapper sinhf */
+    f32_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_sinhf(x);
+  return __ieee754_sinhf(x);
 #else
-	f32_t z;
-	z = __ieee754_sinhf(x);
-	if(_LIB_VERSION == _IEEE_) {return z;}
-	if(!finitef(z)&&finitef(x)) {
-	    /* sinhf overflow */
-	    return (f32_t)__kernel_standard((f64_t)x,(f64_t)x,125);
-	} else {
-	    return z;
-	}
+  f32_t z;
+  z = __ieee754_sinhf(x);
+  if (_LIB_VERSION == _IEEE_) {
+    return z;
+  }
+  if (!finitef(z) && finitef(x)) {
+    /* sinhf overflow */
+    return (f32_t)__kernel_standard((f64_t)x, (f64_t)x, 125);
+  } else {
+    return z;
+  }
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

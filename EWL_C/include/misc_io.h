@@ -14,7 +14,7 @@
 
 _EWL_BEGIN_EXTERN_C
 
-	void _EWL_CDECL	__stdio_atexit(void) _EWL_CANT_THROW;
+void _EWL_CDECL __stdio_atexit(void) _EWL_CANT_THROW;
 
 _EWL_END_EXTERN_C
 

@@ -16,19 +16,17 @@
 
 #include <ewl_misra_types.h>
 
-#include <wctype.h>
 #include <wchar.h>
+#include <wctype.h>
 
-int_t _EWL_CDECL iswctype(wint_t wc, wctype_t desc)
-{
-uint16_t res = 0u;
+int_t _EWL_CDECL iswctype(wint_t wc, wctype_t desc) {
+  uint16_t res = 0u;
 
-	if ((uint_t)wc < (uint_t)__ewl_wcmap_size) {
-		res = _EWL_CWMAP_ACCESS[wc] & (uint16_t)desc;
-	}
+  if ((uint_t)wc < (uint_t)__ewl_wcmap_size) {
+    res = _EWL_CWMAP_ACCESS[wc] & (uint16_t)desc;
+  }
 
-	return (int_t)res;
+  return (int_t)res;
 }
 
 #endif /* _EWL_WIDE_CHAR */
-

@@ -22,27 +22,27 @@ _MISRA_RESTORE()
 
 #if _EWL_WIDE_CHAR
 
-#include <ewl_misra_types.h>
 #include <errno.h>
+#include <ewl_misra_types.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 
+#include <ewl_thread_local_data.h>
 #include <locale_api.h>
 #include <mbstring.h>
-#include <ewl_thread_local_data.h>
 
 MISRA_ALLOW_POINTER_CASTS()
 
 #if (_EWL_C99 && _EWL_WIDE_CHAR)
-size_t _EWL_CDECL mbrlen(const char_t * _EWL_RESTRICT s, size_t n, mbstate_t * _EWL_RESTRICT ps)
-{
-	mbstate_t internal;
-	mbstate_t * mbs = ps;
+size_t _EWL_CDECL mbrlen(const char_t *_EWL_RESTRICT s, size_t n,
+                         mbstate_t *_EWL_RESTRICT ps) {
+  mbstate_t internal;
+  mbstate_t *mbs = ps;
 
-	return(mbrtowc(NULL, s, n, (mbs != NULL) ? mbs : &internal));
+  return (mbrtowc(NULL, s, n, (mbs != NULL) ? mbs : &internal));
 }
 
-#endif  /* _EWL_C99 */
-#endif  /*  _EWL_WIDE_CHAR  */
+#endif /* _EWL_C99 */
+#endif /*  _EWL_WIDE_CHAR  */

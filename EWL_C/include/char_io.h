@@ -11,10 +11,10 @@
 #include <ansi_parms.h>
 #include <cstdio>
 
-	_EWL_BEGIN_EXTERN_C
+_EWL_BEGIN_EXTERN_C
 
-		int	_EWL_CDECL __ungotten(const __std(FILE) *) _EWL_CANT_THROW;
+int _EWL_CDECL __ungotten(const __std(FILE) *) _EWL_CANT_THROW;
 
-	_EWL_END_EXTERN_C
+_EWL_END_EXTERN_C
 
 #endif /* _EWL_CHAR_IO_H */

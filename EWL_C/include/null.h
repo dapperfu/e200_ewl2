@@ -6,5 +6,5 @@
  */
 
 #ifndef NULL
-	#define NULL 0L
+#define NULL 0L
 #endif /* NULL */

@@ -11,8 +11,8 @@
 #include <map>
 
 #ifndef _EWL_NO_CPP_NAMESPACE
-	using std::map;
-	using std::multimap;
-#endif  // _EWL_NO_CPP_NAMESPACE 
+using std::map;
+using std::multimap;
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _MAP_H
+#endif // _MAP_H

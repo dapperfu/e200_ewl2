@@ -32,68 +32,74 @@ static const f64_t big = 1.0e300;
 static f64_t big = 1.0e300;
 #endif
 
-	MISRA_EXCEPTION_RULE_12_7()
+MISRA_EXCEPTION_RULE_12_7()
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL floor(f64_t x)
+f64_t _EWL_MATH_CDECL floor(f64_t x)
 #else
-	f64_t floor(x)
-	f64_t x;
+f64_t floor(x) f64_t x;
 #endif
 {
-	int32_t i0,i1,j0;
-	uint32_t i,j;
-	i0 =  GET_DOUBLE_HI_WORD(x);
-	i1 =  GET_DOUBLE_LO_WORD(x);
-	j0 = ((i0>>20)&0x7ffL)-0x3ffL;
-	if(j0<20L) {
-	    if(j0<0L) { 	/* raise inexact if x != 0 */
-			if((big+x)>0.0) {/* return 0*sign(x) if |x|<1 */
-			    if(i0>=0L) {
-			    	i0=(i1=0L);
-			    } else if(((i0&0x7fffffffL)|i1)!=0L) {
-					i0=(int32_t)0xbff00000L;i1=0L;
-				} else {}
-			}
-	    } else {
-			i = (0x000fffffL)>>j0;
-			if(((i0&(int32_t)i)|i1)==0L) {	 /* x is integral */
-				MISRA_EXCEPTION_RULE_14_7()
-				return x;
-			}
-			if((big+x)>0.0) {	/* raise inexact flag */
-			    if(i0<0L) { i0 += (0x00100000L)>>j0;}
-			    i0 &= (int32_t)(~i); i1=0;
-			}
-	    }
-	} else if (j0>51L) {
-	    if(j0==0x400L) {
-			MISRA_EXCEPTION_RULE_14_7()
-	    	return x+x;	/* inf or NaN */
-	    } else {
-			MISRA_EXCEPTION_RULE_14_7()
-	    	return x;		/* x is integral */
-	    }
-	} else {
-	    i = (0xffffffffUL)>>(j0-20L);
-	    if((i1&(int32_t)i)==0L) {		/* x is integral */
-			MISRA_EXCEPTION_RULE_14_7()
-			return x;
-		}
-	    if((big+x)>0.0) { 		/* raise inexact flag */
-			if(i0<0L) {
-			    if(j0==20L) {
-			    	i0+=1L;
-			    } else {
-					j = (uint32_t)(i1+(1L<<(52L-j0)));
-					if(j<(uint32_t)i1) {i0 +=1L;} 	/* got a carry */
-					i1=(int32_t)j;
-			    }
-			}
-			i1 &= (int32_t)(~i);
-	    }
-	}
-	GET_DOUBLE_HI_WORD(x) = i0;
-	GET_DOUBLE_LO_WORD(x) = i1;
-	return x;
+  int32_t i0, i1, j0;
+  uint32_t i, j;
+  i0 = GET_DOUBLE_HI_WORD(x);
+  i1 = GET_DOUBLE_LO_WORD(x);
+  j0 = ((i0 >> 20) & 0x7ffL) - 0x3ffL;
+  if (j0 < 20L) {
+    if (j0 < 0L) {           /* raise inexact if x != 0 */
+      if ((big + x) > 0.0) { /* return 0*sign(x) if |x|<1 */
+        if (i0 >= 0L) {
+          i0 = (i1 = 0L);
+        } else if (((i0 & 0x7fffffffL) | i1) != 0L) {
+          i0 = (int32_t)0xbff00000L;
+          i1 = 0L;
+        } else {
+        }
+      }
+    } else {
+      i = (0x000fffffL) >> j0;
+      if (((i0 & (int32_t)i) | i1) == 0L) { /* x is integral */
+        MISRA_EXCEPTION_RULE_14_7()
+        return x;
+      }
+      if ((big + x) > 0.0) { /* raise inexact flag */
+        if (i0 < 0L) {
+          i0 += (0x00100000L) >> j0;
+        }
+        i0 &= (int32_t)(~i);
+        i1 = 0;
+      }
+    }
+  } else if (j0 > 51L) {
+    if (j0 == 0x400L) {
+      MISRA_EXCEPTION_RULE_14_7()
+      return x + x; /* inf or NaN */
+    } else {
+      MISRA_EXCEPTION_RULE_14_7()
+      return x; /* x is integral */
+    }
+  } else {
+    i = (0xffffffffUL) >> (j0 - 20L);
+    if ((i1 & (int32_t)i) == 0L) { /* x is integral */
+      MISRA_EXCEPTION_RULE_14_7()
+      return x;
+    }
+    if ((big + x) > 0.0) { /* raise inexact flag */
+      if (i0 < 0L) {
+        if (j0 == 20L) {
+          i0 += 1L;
+        } else {
+          j = (uint32_t)(i1 + (1L << (52L - j0)));
+          if (j < (uint32_t)i1) {
+            i0 += 1L;
+          } /* got a carry */
+          i1 = (int32_t)j;
+        }
+      }
+      i1 &= (int32_t)(~i);
+    }
+  }
+  GET_DOUBLE_HI_WORD(x) = i0;
+  GET_DOUBLE_LO_WORD(x) = i1;
+  return x;
 }
 #endif /* _EWL_FLOATING_POINT  */

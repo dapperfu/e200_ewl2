@@ -26,12 +26,11 @@
 #include <fdlibm.h>
 
 #ifdef __STDC__
-	f64_t _EWL_MATH_CDECL __ieee754_gamma(f64_t x)
+f64_t _EWL_MATH_CDECL __ieee754_gamma(f64_t x)
 #else
-	f64_t __ieee754_gamma(x)
-	f64_t x;
+f64_t __ieee754_gamma(x) f64_t x;
 #endif
 {
-	return __ieee754_gamma_r(x,&signgam);
+  return __ieee754_gamma_r(x, &signgam);
 }
 #endif /* _EWL_FLOATING_POINT  */

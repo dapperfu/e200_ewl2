@@ -24,22 +24,21 @@ _MISRA_RESTORE()
 #include <stdio.h>
 #include <stdlib.h>
 
-extern int_t _EWL_CDECL __StringRead(void * isc, int_t ch, int_t Action);
+extern int_t _EWL_CDECL __StringRead(void *isc, int_t ch, int_t Action);
 
-int_t _EWL_CDECL vsscanf_s(const char_t * _EWL_RESTRICT s, const char_t * _EWL_RESTRICT format, va_list arg)
-{
-	__InStrCtrl isc;
+int_t _EWL_CDECL vsscanf_s(const char_t *_EWL_RESTRICT s,
+                           const char_t *_EWL_RESTRICT format, va_list arg) {
+  __InStrCtrl isc;
 
-	if ((s == NULL) || (format == NULL))
-	{
-		__ewl_runtime_constraint_violation_s(NULL, NULL, -1);
-		MISRA_EXCEPTION_RULE_14_7()
-		return(EOF);
-	}
+  if ((s == NULL) || (format == NULL)) {
+    __ewl_runtime_constraint_violation_s(NULL, NULL, -1);
+    MISRA_EXCEPTION_RULE_14_7()
+    return (EOF);
+  }
 
-	MISRA_EXCEPTION_RULE_11_4()
-	isc.NextChar         = (char_t *)s;
-	isc.NullCharDetected = (*isc.NextChar == '\0');
+  MISRA_EXCEPTION_RULE_11_4()
+  isc.NextChar = (char_t *)s;
+  isc.NullCharDetected = (*isc.NextChar == '\0');
 
-	return(__sformatter(__StringRead, (void *)&isc, format, arg, 1));
+  return (__sformatter(__StringRead, (void *)&isc, format, arg, 1));
 }

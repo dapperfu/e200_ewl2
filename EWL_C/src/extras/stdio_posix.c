@@ -7,7 +7,7 @@
 
 #include <ansi_files.h>
 #include <stdio.h>
-#include <stdio.posix.h>	/* need this for fileno */
+#include <stdio.posix.h> /* need this for fileno */
 
 /*
  *	int fileno(FILE *stream)
@@ -15,17 +15,13 @@
  *		Returns the file number associated with a stream.
  */
 
-int _EWL_CDECL fileno(FILE *stream) _EWL_CANT_THROW
-{
-	return (stream->handle);
-}
+int _EWL_CDECL fileno(FILE *stream) _EWL_CANT_THROW { return (stream->handle); }
 
 #if _EWL_OS_DISK_FILE_SUPPORT
 
-int _EWL_CDECL fcloseall(void) _EWL_CANT_THROW
-{
-	__close_all();
-	return 0;
+int _EWL_CDECL fcloseall(void) _EWL_CANT_THROW {
+  __close_all();
+  return 0;
 }
 
 #endif /* _EWL_OS_DISK_FILE_SUPPORT */

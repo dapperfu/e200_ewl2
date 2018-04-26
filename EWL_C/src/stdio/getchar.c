@@ -18,13 +18,11 @@
 #include <ewl_misra_types.h>
 
 MISRA_QUIET_MACRO_FUNCDEF()
-int_t _EWL_CDECL (getchar)(void)
-{
-	int_t retval;
+int_t _EWL_CDECL(getchar)(void) {
+  int_t retval;
 
-  	__begin_critical_region(stdin_access);
-	retval = getchar();
-  	__end_critical_region(stdin_access);
-  	return(retval);
+  __begin_critical_region(stdin_access);
+  retval = getchar();
+  __end_critical_region(stdin_access);
+  return (retval);
 }
-

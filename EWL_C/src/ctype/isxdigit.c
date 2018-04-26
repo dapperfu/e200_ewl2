@@ -27,22 +27,22 @@
 #if _EMBEDDED_WARRIOR_CTYPE
 
 int_t _EWL_CDECL _EWL_CANT_THROW isxdigit(int_t c) {
-int_t res;
-	if ((uint_t)c > _MXC_) {
-		c = -1;
-	}
-	res = (int_t)_EWL_CMAP_ACCESS[c+1] & _HX_;
-	return res;
+  int_t res;
+  if ((uint_t)c > _MXC_) {
+    c = -1;
+  }
+  res = (int_t)_EWL_CMAP_ACCESS[c + 1] & _HX_;
+  return res;
 }
 
 #else
 
 int_t _EWL_CDECL _EWL_CANT_THROW isxdigit(int_t c) {
-int_t res = 0;
-	if ((uint_t)c < (uint_t)__ewl_cmap_size) {
-		res = (int_t) (_EWL_CMAP_ACCESS[c] & __ewl_xdigit);
-	}
-	return res;
+  int_t res = 0;
+  if ((uint_t)c < (uint_t)__ewl_cmap_size) {
+    res = (int_t)(_EWL_CMAP_ACCESS[c] & __ewl_xdigit);
+  }
+  return res;
 }
 
 #endif /* _EMBEDDED_WARRIOR_CTYPE */

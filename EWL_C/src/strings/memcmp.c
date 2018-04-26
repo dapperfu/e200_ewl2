@@ -29,45 +29,42 @@ _MISRA_RESTORE()
 #include <ewl_misra_types.h>
 #include <string.h>
 
-int_t memcmp(const void * src1, const void * src2, size_t n)
-{
-	const uchar_t * p1, * p2;
+int_t memcmp(const void *src1, const void *src2, size_t n) {
+  const uchar_t *p1, *p2;
 
-	#if !defined(__POWERPC__)
+#if !defined(__POWERPC__)
 
-		p1 = (const uchar_t *) src1;
-		p2 = (const uchar_t *) src2;
-		for (n++; --n;) {
-			MISRA_EXCEPTION_RULE_1_2b()
-			if (*p1++ != *p2++) {
-				if (*--p1 < *--p2) {
-					MISRA_EXCEPTION_RULE_14_7()
-					return -1;
-				} else {
-					MISRA_EXCEPTION_RULE_14_7()
-					return 1;
-				}
-			}
-		}
+  p1 = (const uchar_t *)src1;
+  p2 = (const uchar_t *)src2;
+  for (n++; --n;) {
+    MISRA_EXCEPTION_RULE_1_2b() if (*p1++ != *p2++) {
+      if (*--p1 < *--p2) {
+        MISRA_EXCEPTION_RULE_14_7()
+        return -1;
+      } else {
+        MISRA_EXCEPTION_RULE_14_7()
+        return 1;
+      }
+    }
+  }
 
-	#else
+#else
 
-		p1 = (const uchar_t *) src1 - 1;
-		p2 = (const uchar_t *) src2 - 1;
-		for (n++; --n;) {
-			MISRA_EXCEPTION_RULE_1_2b()
-			if (*++p1 != *++p2) {
-				if (*p1 < *p2) {
-					MISRA_EXCEPTION_RULE_14_7()
-					return -1;
-				} else {
-					MISRA_EXCEPTION_RULE_14_7()
-					return 1;
-				}
-			}
-		}
+  p1 = (const uchar_t *)src1 - 1;
+  p2 = (const uchar_t *)src2 - 1;
+  for (n++; --n;) {
+    MISRA_EXCEPTION_RULE_1_2b() if (*++p1 != *++p2) {
+      if (*p1 < *p2) {
+        MISRA_EXCEPTION_RULE_14_7()
+        return -1;
+      } else {
+        MISRA_EXCEPTION_RULE_14_7()
+        return 1;
+      }
+    }
+  }
 
-	#endif
+#endif
 
-	return(0);
+  return (0);
 }

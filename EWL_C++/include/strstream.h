@@ -12,11 +12,11 @@
 
 #ifndef _EWL_NO_CPP_NAMESPACE
 #ifndef _EWL_NO_IO
-	using std::strstreambuf;
-	using std::istrstream;
-	using std::ostrstream;
-	using std::strstream;
-#endif  // _EWL_NO_IO
-#endif  // _EWL_NO_CPP_NAMESPACE
+using std::istrstream;
+using std::ostrstream;
+using std::strstream;
+using std::strstreambuf;
+#endif // _EWL_NO_IO
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _STRSTREAM_H
+#endif // _STRSTREAM_H

@@ -19,9 +19,9 @@ _MISRA_EXCEPTION_RULE_19_6()
 _MISRA_RESTORE()
 #define __STDC_WANT_LIB_EXT1__ 1
 
-#include <ewl_misra_types.h>
 #include <critical_regions.h>
 #include <ctype.h>
+#include <ewl_misra_types.h>
 #include <limits.h>
 #include <stdarg.h>
 #include <stddef.h>
@@ -32,22 +32,20 @@ _MISRA_RESTORE()
 #endif
 #include <console_io.h>
 
-int_t _EWL_CDECL vprintf(const char_t * _EWL_RESTRICT format, va_list arg)
-{
-    int_t retval;
+int_t _EWL_CDECL vprintf(const char_t *_EWL_RESTRICT format, va_list arg) {
+  int_t retval;
 
 #if _EWL_C99_PRINTF_SCANF
 #if _EWL_WIDE_CHAR
-    if (fwide(stdout, -1) >= 0) {
-		MISRA_EXCEPTION_RULE_14_7()
-        return(-1);
-    }
+  if (fwide(stdout, -1) >= 0) {
+    MISRA_EXCEPTION_RULE_14_7()
+    return (-1);
+  }
 #endif /* _EWL_WIDE_CHAR */
 #endif /* _EWL_C99_PRINTF_SCANF */
 
-    __begin_critical_region(stdout_access);
-    retval = __pformatter(__FileWrite, (void *)stdout, format, arg, 0);
-    __end_critical_region(stdout_access);
-    return(retval);
+  __begin_critical_region(stdout_access);
+  retval = __pformatter(__FileWrite, (void *)stdout, format, arg, 0);
+  __end_critical_region(stdout_access);
+  return (retval);
 }
-

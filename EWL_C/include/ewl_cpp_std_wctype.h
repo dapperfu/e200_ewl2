@@ -15,29 +15,29 @@
 namespace std {
 
 #if _EWL_WIDE_CHAR
-	using ::wctrans_t;
-	using ::wctype_t;
-	using ::wint_t;
-	using ::iswalnum;
-	using ::iswalpha;
+using ::iswalnum;
+using ::iswalpha;
+using ::wctrans_t;
+using ::wctype_t;
+using ::wint_t;
 #if _EWL_C99
-	using ::iswblank;
+using ::iswblank;
 #endif /* _EWL_C99 */
-	using ::iswcntrl;
-	using ::iswctype;
-	using ::iswdigit;
-	using ::iswgraph;
-	using ::iswlower;
-	using ::iswprint;
-	using ::iswpunct;
-	using ::iswspace;
-	using ::iswupper;
-	using ::iswxdigit;
-	using ::towctrans;
-	using ::towlower;
-	using ::towupper;
-	using ::wctrans;
-	using ::wctype;
+using ::iswcntrl;
+using ::iswctype;
+using ::iswdigit;
+using ::iswgraph;
+using ::iswlower;
+using ::iswprint;
+using ::iswpunct;
+using ::iswspace;
+using ::iswupper;
+using ::iswxdigit;
+using ::towctrans;
+using ::towlower;
+using ::towupper;
+using ::wctrans;
+using ::wctype;
 #endif /* _EWL_WIDE_CHAR */
 
 } /* namespace std */

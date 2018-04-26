@@ -5,16 +5,15 @@
  * $Revision: 1.1 $
  */
 /********************************************************************************************************************
-*                                                                                                                   *
-* File    : ewl_c_directives_to_gcc.h                                                                               *
-* Author  : SunilG @ Chipwerks                                                                                      *
-* Purpose : MSLC has certain directives specific to CW Toolchain. This header file provides equivalent gcc handling.*
-*                                                                                                                   *
-*********************************************************************************************************************/
+ *                                                                                                                   *
+ * File    : ewl_c_directives_to_gcc.h * Author  : SunilG @ Chipwerks
+ ** Purpose : MSLC has certain directives specific to CW Toolchain. This header
+ *file provides equivalent gcc handling.*
+ *                                                                                                                   *
+ *********************************************************************************************************************/
 
 #ifndef _EWL_C_DIRECTIVES_TO_GCC
 #define _EWL_C_DIRECTIVES_TO_GCC
-
 
 /*
 *
@@ -38,19 +37,18 @@
 
 */
 
-
 /* Handling __Option()*/
 #define __option(x) x
 
 /* Treatment of x above*/
 
-#define ANSI_strict        __STRICT_ANSI__
-#define unsigned_char      __CHAR_UNSIGNED__
-#define optimize_for_size  __OPTIMIZE_SIZE__
-#define sfp_emulation	   _SOFT_FLOAT
-#define dont_inline       __NO_INLINE__
-#define little_endian	   _LITTLE_ENDIAN
-#define C99 			   (__STDC_VERSION__ == 199901L)
+#define ANSI_strict __STRICT_ANSI__
+#define unsigned_char __CHAR_UNSIGNED__
+#define optimize_for_size __OPTIMIZE_SIZE__
+#define sfp_emulation _SOFT_FLOAT
+#define dont_inline __NO_INLINE__
+#define little_endian _LITTLE_ENDIAN
+#define C99 (__STDC_VERSION__ == 199901L)
 
 #ifdef __NOFLOAT__
 #define floatingpoint 0
@@ -70,19 +68,16 @@
 #define longlong 0
 #endif
 
-#define mpwc_newline 			0
-#define bool 					0
-#define k63d 					0
-#define rsqrt					0
-#define e500_floatingpoint 		0
-#define e500v2_floatingpoint 	0
+#define mpwc_newline 0
+#define bool 0
+#define k63d 0
+#define rsqrt 0
+#define e500_floatingpoint 0
+#define e500v2_floatingpoint 0
 
 /* Other directives specific to CodeWarrior Driver */
-#define __supports(x,y)	 		0
-#define __has_feature 			0
-#define __has_intrinsic(x)		0
+#define __supports(x, y) 0
+#define __has_feature 0
+#define __has_intrinsic(x) 0
 
 #endif
-
-
-

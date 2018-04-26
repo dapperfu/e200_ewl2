@@ -27,30 +27,31 @@ static const f64_t
 #else
 static f64_t
 #endif
-o_threshold=  7.09782712893383973096e+02,  /* 0x40862E42, 0xFEFA39EF */
-u_threshold= -7.45133219101941108420e+02;  /* 0xc0874910, 0xD52D3051 */
+    o_threshold = 7.09782712893383973096e+02,  /* 0x40862E42, 0xFEFA39EF */
+    u_threshold = -7.45133219101941108420e+02; /* 0xc0874910, 0xD52D3051 */
 #endif
 
 #ifdef __STDC__
-	 f64_t   _EWL_MATH_CDECL exp(f64_t x)	/* wrapper pow */
+f64_t _EWL_MATH_CDECL exp(f64_t x) /* wrapper pow */
 #else
-	f64_t exp(x)			/* wrapper exp */
-	f64_t x;
+f64_t exp(x) /* wrapper exp */
+    f64_t x;
 #endif
 {
 #ifdef _IEEE_LIBM
-	return __ieee754_exp(x);
+  return __ieee754_exp(x);
 #else
-	f64_t z;
-	z = __ieee754_exp(x);
-	if(_LIB_VERSION == _IEEE_) return z;
-	if(isfinite(x)) {
-	    if(x>o_threshold)
-	        return __kernel_standard(x,x,6); /* exp overflow */
-	    else if(x<u_threshold)
-	        return __kernel_standard(x,x,7); /* exp underflow */
-	}
-	return z;
+  f64_t z;
+  z = __ieee754_exp(x);
+  if (_LIB_VERSION == _IEEE_)
+    return z;
+  if (isfinite(x)) {
+    if (x > o_threshold)
+      return __kernel_standard(x, x, 6); /* exp overflow */
+    else if (x < u_threshold)
+      return __kernel_standard(x, x, 7); /* exp underflow */
+  }
+  return z;
 #endif
 }
 #endif /* _EWL_FLOATING_POINT  */

@@ -19,17 +19,15 @@
 
 #if _EWL_OS_DISK_FILE_SUPPORT
 #include <abort_exit.h>
-#include <string.h>
 #include <ansi_files.h>
+#include <string.h>
 #endif
 
 #include <ewl_misra_types.h>
 
-
 #if _EWL_OS_DISK_FILE_SUPPORT
 
-void _EWL_CDECL __stdio_atexit(void)
-{
-	_EWL_LOCALDATA(__stdio_exit) = __close_all;
+void _EWL_CDECL __stdio_atexit(void) {
+  _EWL_LOCALDATA(__stdio_exit) = __close_all;
 }
 #endif

@@ -20,23 +20,21 @@
 
 #if _EWL_OS_DISK_FILE_SUPPORT
 #include <abort_exit.h>
-#include <string.h>
 #include <ansi_files.h>
+#include <string.h>
 #endif
 
 #include <ewl_misra_types.h>
 
-
 #if _EWL_OS_DISK_FILE_SUPPORT
-void _EWL_CDECL perror(const char_t * s)
-{
-	char_t	errstr[__max_errstr];
+void _EWL_CDECL perror(const char_t *s) {
+  char_t errstr[__max_errstr];
 
-	if (s && *s) {
-		(void)fprintf(stderr, "%s: ", s);
-	}
+  if (s && *s) {
+    (void)fprintf(stderr, "%s: ", s);
+  }
 
-	MISRA_EXCEPTION_RULE_20_5()
-	(void)fprintf(stderr, "%s\n", __strerror(errno, errstr));
+  MISRA_EXCEPTION_RULE_20_5()
+  (void)fprintf(stderr, "%s\n", __strerror(errno, errstr));
 }
 #endif

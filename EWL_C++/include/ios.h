@@ -12,36 +12,36 @@
 
 #ifndef _EWL_NO_CPP_NAMESPACE
 #ifndef _EWL_NO_IO
-	using std::streamoff;
-	using std::streamsize;
-	using std::fpos;
-	using std::ios_base;
-	using std::basic_ios;
-	using std::ios;
+using std::basic_ios;
+using std::fpos;
+using std::ios;
+using std::ios_base;
+using std::streamoff;
+using std::streamsize;
 #ifndef _EWL_NO_WCHART_CPP_SUPPORT
-	using std::wios;
+using std::wios;
 #endif
-	using std::boolalpha;
-	using std::noboolalpha;
-	using std::showbase;
-	using std::noshowbase;
-	using std::showpoint;
-	using std::noshowpoint;
-	using std::showpos;
-	using std::noshowpos;
-	using std::skipws;
-	using std::noskipws;
-	using std::uppercase;
-	using std::nouppercase;
-	using std::internal;
-	using std::left;
-	using std::right;
-	using std::dec;
-	using std::hex;
-	using std::oct;
-	using std::fixed;
-	using std::scientific;
-#endif  // _EWL_NO_IO
-#endif  // _EWL_NO_CPP_NAMESPACE  
+using std::boolalpha;
+using std::dec;
+using std::fixed;
+using std::hex;
+using std::internal;
+using std::left;
+using std::noboolalpha;
+using std::noshowbase;
+using std::noshowpoint;
+using std::noshowpos;
+using std::noskipws;
+using std::nouppercase;
+using std::oct;
+using std::right;
+using std::scientific;
+using std::showbase;
+using std::showpoint;
+using std::showpos;
+using std::skipws;
+using std::uppercase;
+#endif // _EWL_NO_IO
+#endif // _EWL_NO_CPP_NAMESPACE
 
-#endif  // _IOS_H    
+#endif // _IOS_H

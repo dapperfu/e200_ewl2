@@ -8,8 +8,4 @@
 #ifndef EWL_C_INCLUDE_SYS_UNISTD_H_
 #define EWL_C_INCLUDE_SYS_UNISTD_H_
 
-
-
-
-
 #endif /* EWL_C_INCLUDE_SYS_UNISTD_H_ */
