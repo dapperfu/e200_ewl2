@@ -1,3 +1,5 @@
+VENDOR?=GCC
+
 all:
 	"$(MAKE)" -f EWL_C.$(VENDOR).mak -C EWL_C
 	"$(MAKE)" -f EWL_C++.$(VENDOR).mak -C EWL_C++

@@ -749,8 +749,8 @@ settargetvars=$(addprefix $(LIBOUT)/, $(addsuffix $(LIBTYPE),$($1))) : $2FLAGS=$
 #
 # and utimately to rule such as:
 #
-# ../lib/<target>.a	: 	CFLAGS=$(CXFLAGS) $(TC99_1CFLAGS)
-# ../lib/<target>.a	: 	LFLAGS=$(LXFLAGS) $(TC99_1LFLAGS)
+# ../lib/<target>.a	:       CFLAGS=$(CXFLAGS) $(TC99_1CFLAGS)
+# ../lib/<target>.a	:       LFLAGS=$(LXFLAGS) $(TC99_1LFLAGS)
 #
 #
 # This sets the CFLAGS and LFLAGS variables according to the target being built. The CFLAGS

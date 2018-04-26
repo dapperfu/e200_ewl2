@@ -2,6 +2,8 @@
 # Tools definition 
 #
 
+POWERPC_TOOLS?=$(realpath ../../../Cross_Tools/powerpc-eabivle-4_9)
+
 # Reset environment vars you explicitly want to override
 #
 export MWCIncludes=
