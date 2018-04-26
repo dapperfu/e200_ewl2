@@ -1,7 +1,7 @@
 #
 # Tools definition 
 #
-
+PLATFORM?=PA
 # Reset environment vars you explicitly want to override
 #
 export MWCIncludes=
